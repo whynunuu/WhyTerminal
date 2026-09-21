@@ -370,6 +370,8 @@ a { color: var(--cyan); text-decoration: none; }
 .portal-coindesk { background: rgba(178, 136, 255, 0.25); color: #B288FF; border: 1px solid #B288FF; }
 .portal-kontan { background: rgba(63, 167, 163, 0.25); color: #3FA7A3; border: 1px solid #3FA7A3; }
 .portal-forexlive { background: rgba(255, 77, 79, 0.25); color: #FF4D4F; border: 1px solid #FF4D4F; }
+.portal-investing { background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid #38bdf8; }
+.portal-bisnis { background: rgba(234, 179, 8, 0.25); color: #eab308; border: 1px solid #eab308; }
 
 .sentiment-tag {
   font-size: 8.5px; font-weight: 800; padding: 1px 4px; border-radius: 1px;
@@ -555,7 +557,7 @@ a { color: var(--cyan); text-decoration: none; }
   <div class="seg">
     <div class="asset-badge">
       <span class="faint">ACTIVE:</span>
-      <span id="top-active-sym" class="bold">BTC/USD</span>
+      <span id="top-active-sym" class="bold">GC1!</span>
     </div>
   </div>
 
@@ -675,54 +677,57 @@ a { color: var(--cyan); text-decoration: none; }
     depthBTC: { bids: [], asks: [] },
     universe: [
       // 1. PRIMARY ASSETS (GC GOLD · NQ NASDAQ · BTC/USD)
-      { sym: "GC1!", name: "Gold Futures / XAUUSD", cat: "METALS", last: 4403.20, chg: 22.80, chgPct: 0.52, high: 4428.00, low: 4375.50, vol: "240K", rsi: 65.4, signal: "BULLISH", dp: 2 },
-      { sym: "NQ1!", name: "E-Mini Nasdaq 100", cat: "US", last: 30253.50, chg: 336.25, chgPct: 1.12, high: 30340.00, low: 29890.00, vol: "1.4M", rsi: 68.2, signal: "GOLDEN_CROSS", dp: 2 },
-      { sym: "BTC/USD", name: "Bitcoin / US Dollar", cat: "CRYPTO", last: 85053.14, chg: 4520.00, chgPct: 5.63, high: 85299.87, low: 80327.64, vol: "21.4K", rsi: 72.8, signal: "OVERBOUGHT", dp: 2 },
+      { sym: "GC1!", name: "Gold Futures / XAUUSD", cat: "METALS", last: 4405.90, chg: 2.70, chgPct: 0.06, high: 4422.10, low: 4377.50, vol: "245K", rsi: 52.4, signal: "NEUTRAL", dp: 2 },
+      { sym: "NQ1!", name: "E-Mini Nasdaq 100", cat: "US", last: 30264.50, chg: 347.25, chgPct: 1.15, high: 30275.00, low: 29904.00, vol: "1.45M", rsi: 68.4, signal: "GOLDEN_CROSS", dp: 2 },
+      { sym: "BTC/USD", name: "Bitcoin / US Dollar", cat: "CRYPTO", last: 85365.63, chg: 4945.00, chgPct: 6.15, high: 85473.68, low: 80327.64, vol: "21.7K", rsi: 74.2, signal: "OVERBOUGHT", dp: 2 },
       
       // CRYPTO ALTS
-      { sym: "ETH/USD", name: "Ethereum", cat: "CRYPTO", last: 2640.50, chg: 82.30, chgPct: 3.22, high: 2680.00, low: 2550.00, vol: "14.1B", rsi: 58.6, signal: "NEUTRAL", dp: 2 },
-      { sym: "SOL/USD", name: "Solana", cat: "CRYPTO", last: 148.50, chg: 8.15, chgPct: 5.81, high: 152.00, low: 139.80, vol: "4.2B", rsi: 72.4, signal: "OVERBOUGHT", dp: 2 },
+      { sym: "ETH/USD", name: "Ethereum", cat: "CRYPTO", last: 2732.69, chg: 155.30, chgPct: 6.03, high: 2749.98, low: 2571.96, vol: "420K", rsi: 68.1, signal: "VOL_BREAKOUT", dp: 2 },
+      { sym: "SOL/USD", name: "Solana", cat: "CRYPTO", last: 117.02, chg: 8.65, chgPct: 8.00, high: 117.18, low: 107.94, vol: "3.6M", rsi: 76.5, signal: "OVERBOUGHT", dp: 2 },
       
-      // SAHAM INDONESIA (IDX)
-      { sym: "BBCA.JK", name: "Bank Central Asia", cat: "IDX", last: 10450, chg: 125, chgPct: 1.21, high: 10500, low: 10325, vol: "840M", rsi: 62.1, signal: "GOLDEN_CROSS", dp: 0 },
-      { sym: "BBRI.JK", name: "Bank Rakyat Indonesia", cat: "IDX", last: 5275, chg: -50, chgPct: -0.94, high: 5350, low: 5250, vol: "1.1B", rsi: 34.5, signal: "OVERSOLD", dp: 0 },
-      { sym: "BMRI.JK", name: "Bank Mandiri", cat: "IDX", last: 7150, chg: 125, chgPct: 1.78, high: 7200, low: 7025, vol: "720M", rsi: 66.8, signal: "BULLISH", dp: 0 },
-      { sym: "TLKM.JK", name: "Telkom Indonesia", cat: "IDX", last: 3120, chg: 40, chgPct: 1.30, high: 3140, low: 3080, vol: "450M", rsi: 41.2, signal: "NEUTRAL", dp: 0 },
-      { sym: "ASII.JK", name: "Astra International", cat: "IDX", last: 5100, chg: 25, chgPct: 0.49, high: 5150, low: 5075, vol: "310M", rsi: 48.0, signal: "NEUTRAL", dp: 0 },
-      { sym: "AMMN.JK", name: "Amman Mineral", cat: "IDX", last: 9850, chg: 325, chgPct: 3.41, high: 9950, low: 9500, vol: "580M", rsi: 71.0, signal: "OVERBOUGHT", dp: 0 },
-      { sym: "IHSG", name: "IDX Composite", cat: "IDX", last: 7812.50, chg: 34.20, chgPct: 0.44, high: 7830.10, low: 7780.40, vol: "18.4T", rsi: 61.5, signal: "BULLISH", dp: 2 },
+      // SAHAM INDONESIA (IDX - 21 Sept 2026 Closing)
+      { sym: "IHSG", name: "IDX Composite", cat: "IDX", last: 6384.73, chg: -56.70, chgPct: -0.88, high: 6451.33, low: 6381.57, vol: "16.8T", rsi: 34.2, signal: "OVERSOLD", dp: 2 },
+      { sym: "BBCA.JK", name: "Bank Central Asia", cat: "IDX", last: 6225, chg: -75, chgPct: -1.19, high: 6300, low: 6225, vol: "131M", rsi: 38.6, signal: "OVERSOLD", dp: 0 },
+      { sym: "BBRI.JK", name: "Bank Rakyat Indonesia", cat: "IDX", last: 3300, chg: 10, chgPct: 0.30, high: 3310, low: 3270, vol: "185M", rsi: 33.1, signal: "OVERSOLD", dp: 0 },
+      { sym: "BMRI.JK", name: "Bank Mandiri", cat: "IDX", last: 4200, chg: -70, chgPct: -1.64, high: 4270, low: 4200, vol: "140M", rsi: 36.4, signal: "OVERSOLD", dp: 0 },
+      { sym: "TLKM.JK", name: "Telkom Indonesia", cat: "IDX", last: 2500, chg: -20, chgPct: -0.79, high: 2550, low: 2500, vol: "95M", rsi: 41.5, signal: "NEUTRAL", dp: 0 },
+      { sym: "ASII.JK", name: "Astra International", cat: "IDX", last: 4820, chg: 10, chgPct: 0.21, high: 4870, low: 4810, vol: "74M", rsi: 46.2, signal: "NEUTRAL", dp: 0 },
+      { sym: "AMMN.JK", name: "Amman Mineral", cat: "IDX", last: 4660, chg: -190, chgPct: -3.92, high: 4850, low: 4640, vol: "115M", rsi: 42.0, signal: "BEARISH", dp: 0 },
 
-      // US EQUITIES
-      { sym: "NVDA", name: "NVIDIA Corp", cat: "US", last: 118.80, chg: 4.35, chgPct: 3.80, high: 120.40, low: 114.20, vol: "48.2B", rsi: 67.5, signal: "VOL_BREAKOUT", dp: 2 },
-      { sym: "AAPL", name: "Apple Inc", cat: "US", last: 228.40, chg: 1.36, chgPct: 0.60, high: 229.50, low: 226.80, vol: "18.5B", rsi: 52.3, signal: "NEUTRAL", dp: 2 },
-      { sym: "TSLA", name: "Tesla Inc", cat: "US", last: 243.20, chg: 9.60, chgPct: 4.11, high: 247.00, low: 232.50, vol: "22.1B", rsi: 69.2, signal: "GOLDEN_CROSS", dp: 2 },
-      { sym: "MSFT", name: "Microsoft Corp", cat: "US", last: 435.50, chg: 3.45, chgPct: 0.80, high: 438.00, low: 432.10, vol: "15.4B", rsi: 54.1, signal: "NEUTRAL", dp: 2 },
+      // US EQUITIES (Megacaps & AI)
+      { sym: "NVDA", name: "NVIDIA Corp", cat: "US", last: 222.27, chg: 4.15, chgPct: 1.90, high: 222.73, low: 218.04, vol: "38.2B", rsi: 67.2, signal: "GOLDEN_CROSS", dp: 2 },
+      { sym: "AAPL", name: "Apple Inc", cat: "US", last: 336.13, chg: 2.85, chgPct: 0.85, high: 338.49, low: 332.53, vol: "19.4B", rsi: 55.4, signal: "NEUTRAL", dp: 2 },
+      { sym: "TSLA", name: "Tesla Inc", cat: "US", last: 364.27, chg: 7.40, chgPct: 2.07, high: 370.90, low: 360.75, vol: "24.1B", rsi: 69.8, signal: "VOL_BREAKOUT", dp: 2 },
+      { sym: "MSFT", name: "Microsoft Corp", cat: "US", last: 493.78, chg: 3.20, chgPct: 0.65, high: 498.65, low: 491.10, vol: "16.2B", rsi: 58.0, signal: "NEUTRAL", dp: 2 },
 
       // FOREX
-      { sym: "USD/IDR", name: "US Dollar / Rupiah", cat: "FOREX", last: 15180, chg: -45, chgPct: -0.30, high: 15240, low: 15160, vol: "Forex", rsi: 32.0, signal: "OVERSOLD", dp: 0 },
-      { sym: "EUR/USD", name: "Euro / US Dollar", cat: "FOREX", last: 1.1160, chg: 0.0017, chgPct: 0.15, high: 1.1180, low: 1.1130, vol: "Forex", rsi: 56.4, signal: "NEUTRAL", dp: 4 },
-      { sym: "GBP/USD", name: "British Pound / USD", cat: "FOREX", last: 1.3280, chg: 0.0029, chgPct: 0.22, high: 1.3310, low: 1.3240, vol: "Forex", rsi: 61.2, signal: "BULLISH", dp: 4 },
+      { sym: "USD/IDR", name: "US Dollar / Rupiah", cat: "FOREX", last: 17847, chg: 95, chgPct: 0.54, high: 17855, low: 17735, vol: "Forex", rsi: 78.4, signal: "OVERBOUGHT", dp: 0 },
+      { sym: "EUR/USD", name: "Euro / US Dollar", cat: "FOREX", last: 1.1493, chg: 0.0012, chgPct: 0.10, high: 1.1498, low: 1.1474, vol: "Forex", rsi: 52.1, signal: "NEUTRAL", dp: 4 },
+      { sym: "GBP/USD", name: "British Pound / USD", cat: "FOREX", last: 1.3415, chg: 0.0022, chgPct: 0.16, high: 1.3440, low: 1.3385, vol: "Forex", rsi: 58.3, signal: "NEUTRAL", dp: 4 },
 
       // COMMODITIES
-      { sym: "XAU/USD", name: "Gold Spot", cat: "METALS", last: 2622.50, chg: 16.20, chgPct: 0.62, high: 2628.90, low: 2605.10, vol: "Metal", rsi: 74.8, signal: "OVERBOUGHT", dp: 2 },
-      { sym: "XAG/USD", name: "Silver Spot", cat: "METALS", last: 31.15, chg: 0.43, chgPct: 1.40, high: 31.45, low: 30.65, vol: "Metal", rsi: 68.0, signal: "BULLISH", dp: 2 },
-      { sym: "BRENT", name: "Brent Crude Oil", cat: "METALS", last: 74.85, chg: -0.65, chgPct: -0.86, high: 75.90, low: 74.30, vol: "Energy", rsi: 38.4, signal: "BEARISH", dp: 2 }
+      { sym: "XAU/USD", name: "Gold Spot (London)", cat: "METALS", last: 4359.14, chg: -2.40, chgPct: -0.06, high: 4375.00, low: 4338.00, vol: "Metal", rsi: 51.5, signal: "NEUTRAL", dp: 2 },
+      { sym: "SI=F", name: "Silver Futures", cat: "METALS", last: 67.09, chg: 0.85, chgPct: 1.28, high: 67.55, low: 66.20, vol: "Metal", rsi: 64.2, signal: "BULLISH", dp: 2 },
+      { sym: "BRENT", name: "WTI/Brent Crude Oil", cat: "METALS", last: 93.36, chg: -1.45, chgPct: -1.53, high: 97.22, low: 92.70, vol: "Energy", rsi: 44.0, signal: "BEARISH", dp: 2 }
     ],
     news: [
-      { id: "n1", portal: "BLOOMBERG", time: "18:52", tag: "MACRO", sentiment: "BULLISH", title: "Federal Reserve memproyeksikan pelonggaran moneter lanjutan usai tren inflasi PCE mendingin sesuai target.", impact: "Yield obligasi AS turun, aset berisiko (Equities & Crypto) menguat.", tickers: ["BTC/USD", "NVDA", "IHSG"] },
-      { id: "n2", portal: "COINDESK", time: "18:45", tag: "CRYPTO", sentiment: "BULLISH", title: "Arus modal masuk mingguan Spot Bitcoin ETF melampaui $1,2 Miliar dipimpin BlackRock IBIT.", impact: "Likuiditas institusional menyerap pasokan exchange, BTC menguji level $85.000.", tickers: ["BTC/USD", "ETH/USD", "SOL/USD"] },
-      { id: "n3", portal: "KONTAN", time: "18:30", tag: "IDX", sentiment: "BULLISH", title: "Bank Central Asia (BBCA) dan BMRI pimpin penguatan IHSG dengan aksi beli bersih asing tembus Rp 1,4 Triliun.", impact: "Indeks IHSG stabil di atas level psikologis 7.800.", tickers: ["BBCA.JK", "BMRI.JK", "IHSG"] },
-      { id: "n4", portal: "REUTERS", time: "18:12", tag: "US TECH", sentiment: "BULLISH", title: "NVIDIA umumkan percepatan arsitektur chip AI generasi terbaru dengan pesanan penuh hingga 2027.", impact: "Valuasi saham semikonduktor naik, target harga konsensus analis dinaikkan.", tickers: ["NVDA", "TSLA", "MSFT"] },
-      { id: "n5", portal: "CNBC", time: "17:55", tag: "METALS", sentiment: "BULLISH", title: "Harga emas dunia tembus level rekor tertinggi baru di $4.403 per troy ounce terdorong eskalasi safe-haven global.", impact: "Penguatan berkelanjutan GC1! Gold dan saham tambang emas.", tickers: ["GC1!", "AMMN.JK"] },
-      { id: "n6", portal: "FOREXLIVE", time: "17:35", tag: "FOREX", sentiment: "NEUTRAL", title: "Rupiah bertahan di kisaran Rp 15.180 per Dolar AS didukung cadangan devisa kuat Bank Indonesia.", impact: "Volatilitas USD/IDR stabil, ekspektasi BI-Rate tetap akomodatif.", tickers: ["USD/IDR"] },
-      { id: "n7", portal: "REUTERS", time: "17:05", tag: "ENERGY", sentiment: "BEARISH", title: "Minyak mentah Brent tertekan di kisaran $74,8 per barel seiring pemulihan bertahap pasokan OPEC+.", impact: "Tekanan jangka pendek pada emiten energi.", tickers: ["BRENT"] },
-      { id: "n8", portal: "KONTAN", time: "16:40", tag: "IDX", sentiment: "NEUTRAL", title: "Bank Rakyat Indonesia (BBRI) konsolidasikan kredit mikro, rasio NPL terjaga di bawah 3,0%.", impact: "Peluang akumulasi bertahap di area oversold.", tickers: ["BBRI.JK"] }
+      { id: "n1", portal: "COINDESK", time: "19:15", tag: "CRYPTO", sentiment: "BULLISH", title: "Bitcoin melonjak menembus $85.365 didorong arus modal masuk masif Spot ETF; analis pantau resisten kunci $85.500.", impact: "Risk-on appetite kembali menguasai pasar kripto, likuiditas berputar cepat ke Ethereum dan Solana.", tickers: ["BTC/USD", "ETH/USD", "SOL/USD"] },
+      { id: "n2", portal: "BLOOMBERG", time: "18:50", tag: "US TECH", sentiment: "BULLISH", title: "Wall Street reli dipimpin saham kecerdasan buatan (Nvidia, Tesla, Microsoft); pelonggaran harga minyak dinginkan yield obligasi.", impact: "E-Mini Nasdaq 100 melaju ke level 30.264, indeks S&P 500 cetak rekor performa kuartalan.", tickers: ["NQ1!", "NVDA", "TSLA", "MSFT"] },
+      { id: "n3", portal: "KONTAN", time: "18:30", tag: "IDX", sentiment: "BEARISH", title: "IHSG ditutup melemah 0,88% ke 6.384 di tengah aksi jual bersih asing Rp 510 Miliar dan pelemahan Rupiah ke Rp 17.847 per Dolar AS.", impact: "Saham perbankan (BBCA, BMRI) masuk zona oversold teknikal jelang rilis pengumuman RDG Bank Indonesia.", tickers: ["IHSG", "BBCA.JK", "BMRI.JK", "USD/IDR"] },
+      { id: "n4", portal: "REUTERS", time: "18:05", tag: "METALS", sentiment: "NEUTRAL", title: "Harga emas dunia stabil di level $4.359 - $4.405 per troy ounce; pelaku pasar cermati pidato 8 pejabat Federal Reserve pekan ini.", impact: "Aset safe-haven terkonsolidasi sehat setelah mencatatkan kenaikan lebih dari 16% Year-on-Year.", tickers: ["GC1!", "XAU/USD", "SI=F"] },
+      { id: "n5", portal: "CNBC", time: "17:40", tag: "MACRO", sentiment: "NEUTRAL", title: "Pasar global antisipasi rilis data PMI Manufaktur & Jasa AS (23 Sept) dan KTT Bilateral AS-China Trump-Xi (24 Sept).", impact: "Volatilitas aset risiko diproyeksikan meningkat menjelang agenda geopolitik dan tarif dagang dunia.", tickers: ["NQ1!", "IHSG", "BRENT"] },
+      { id: "n6", portal: "FOREXLIVE", time: "17:15", tag: "FOREX", sentiment: "BEARISH", title: "Dolar AS perkasa 8 hari berturut-turut menekan mata uang berkembang; Rupiah menyentuh Rp 17.847 per USD, pasar nantikan sinyal BI-Rate.", impact: "Intervensi Bank Indonesia di pasar spot dan DNDF diharapkan menstabilkan volatilitas nilai tukar.", tickers: ["USD/IDR", "EUR/USD", "GBP/USD"] },
+      { id: "n7", portal: "KONTAN", time: "16:45", tag: "IDX", sentiment: "BULLISH", title: "Bank Rakyat Indonesia (BBRI) konsolidasi di level Rp 3.300; analis nilai insentif KLM BI buka ruang likuiditas ekspansi kredit.", impact: "RSI indikator harian BBRI berada di level 33.1 (area jenuh jual), terbuka peluang technical rebound.", tickers: ["BBRI.JK"] },
+      { id: "n8", portal: "COINDESK", time: "16:10", tag: "CRYPTO", sentiment: "BULLISH", title: "Solana (+8,0%) dan Ethereum (+6,0%) cetak lonjakan volume breakout harian terdorong ekspansi aktivitas DeFi.", impact: "Arus likuiditas terdesentralisasi melesat, memicu reli altcoin berkapitalisasi besar.", tickers: ["SOL/USD", "ETH/USD"] },
+      { id: "n9", portal: "INVESTING", time: "15:35", tag: "COMMODITIES", sentiment: "BEARISH", title: "Minyak mentah Brent melandai ke $93,36 per barel di tengah normalisasi pasokan energi; pasar nantikan rilis persediaan minyak EIA.", impact: "Pelemahan harga minyak mentah mengurangi beban biaya logistik dan inflasi industri global.", tickers: ["BRENT"] },
+      { id: "n10", portal: "BISNIS", time: "14:50", tag: "IDX", sentiment: "BEARISH", title: "Amman Mineral (AMMN) terkoreksi ke level Rp 4.660 (-3,92%) akibat aksi rebalancing portofolio pengelola dana global.", impact: "Tekanan jual pada saham komoditas mineral membayangi pergerakan indeks sektor bahan baku BEI.", tickers: ["AMMN.JK"] }
     ],
     economicCalendar: [
-      { time: "20:30 WIB", event: "US Core CPI YoY", actual: "3.2%", forecast: "3.2%", previous: "3.3%", impact: "HIGH" },
-      { time: "Tomorrow", event: "FOMC Rate Decision", actual: "4.75%", forecast: "4.75%", previous: "5.25%", impact: "CRITICAL" },
-      { time: "23 Sept", event: "Bank Indonesia BI-Rate", actual: "-", forecast: "6.00%", previous: "6.25%", impact: "HIGH" },
-      { time: "27 Sept", event: "US Core PCE Price Index", actual: "-", forecast: "0.2%", previous: "0.2%", impact: "HIGH" }
+      { time: "22-23 Sept", event: "Rapat Dewan Gubernur (RDG) Bank Indonesia (BI-Rate)", actual: "-", forecast: "6.00%", previous: "6.00%", impact: "HIGH" },
+      { time: "23 Sept", event: "US S&P Global Flash Manufacturing & Services PMI", actual: "-", forecast: "51.2", previous: "50.8", impact: "HIGH" },
+      { time: "24 Sept", event: "US-China Bilateral Summit (Donald Trump - Xi Jinping)", actual: "-", forecast: "Trade & Tariffs", previous: "-", impact: "CRITICAL" },
+      { time: "Pekan Ini", event: "Speeches by 8 Federal Reserve Officials (Rate Guidance)", actual: "-", forecast: "Policy Direction", previous: "25 bps Hike", impact: "HIGH" },
+      { time: "27 Sept", event: "US Core PCE Price Index YoY (Fed Target)", actual: "-", forecast: "2.6%", previous: "2.6%", impact: "HIGH" }
     ],
     defaultLayout: [
       { id: "chart", x: 0, y: 0, w: 7.5, h: 14 },
@@ -916,8 +921,8 @@ a { color: var(--cyan); text-decoration: none; }
               <div class="chart-sub-header">
                 <span class="asset-pill badge-gc">01 GC</span>
                 <span class="bold org">GC1! · GOLD FUTURES / XAUUSD</span>
-                <span class="num bold" id="gc-price-val">$4,403.20</span>
-                <span class="num up" id="gc-chg-val">+0.52%</span>
+                <span class="num bold" id="gc-price-val">$4,405.90</span>
+                <span class="num up" id="gc-chg-val">+0.06%</span>
                 <span class="faint" style="margin-left:auto;font-size:8.5px;">COMEX / PHYSICAL SPOT</span>
               </div>
               <div class="chart-sub-body" id="sub-body-gc">
@@ -931,8 +936,8 @@ a { color: var(--cyan); text-decoration: none; }
               <div class="chart-sub-header">
                 <span class="asset-pill badge-nq">02 NQ</span>
                 <span class="bold cy">NQ1! · E-MINI NASDAQ 100</span>
-                <span class="num bold" id="nq-price-val">$30,253.50</span>
-                <span class="num up" id="nq-chg-val">+1.12%</span>
+                <span class="num bold" id="nq-price-val">$30,264.50</span>
+                <span class="num up" id="nq-chg-val">+1.15%</span>
                 <span class="faint" style="margin-left:auto;font-size:8.5px;">CME / US TECH 100</span>
               </div>
               <div class="chart-sub-body" id="sub-body-nq">
@@ -946,8 +951,8 @@ a { color: var(--cyan); text-decoration: none; }
               <div class="chart-sub-header">
                 <span class="asset-pill badge-btc">03 BTC</span>
                 <span class="bold org">BTCUSD · BITCOIN / US DOLLAR</span>
-                <span class="num bold" id="btc-price-val">$85,053.14</span>
-                <span class="num up" id="btc-chg-val">+5.63%</span>
+                <span class="num bold" id="btc-price-val">$85,365.63</span>
+                <span class="num up" id="btc-chg-val">+6.15%</span>
                 <span class="faint" style="margin-left:auto;font-size:8.5px;">BINANCE PUBLIC LIVE</span>
               </div>
               <div class="chart-sub-body" id="sub-body-btc">
@@ -980,7 +985,7 @@ a { color: var(--cyan); text-decoration: none; }
               <div class="hm-top-row">
                 <div>
                   <span class="faint" style="font-size:8.5px;">SPOT PRICE</span>
-                  <div class="hm-spot-val org num" id="hm-spot-val">$85,053.14</div>
+                  <div class="hm-spot-val org num" id="hm-spot-val">$85,365.63</div>
                 </div>
                 <div style="text-align:right;">
                   <span class="faint" style="font-size:8.5px;">ORDER FLOW IMBALANCE</span>
@@ -995,7 +1000,7 @@ a { color: var(--cyan); text-decoration: none; }
               </div>
               <div class="hm-wall-alert" id="hm-wall-alert">
                 <span>⚡</span>
-                <span id="hm-wall-text">MAJOR LIQUIDITY WALL AT $84,500 (+45.2 BTC SUPPORT)</span>
+                <span id="hm-wall-text">MAJOR LIQUIDITY WALL AT $85,000 (+52.4 BTC SUPPORT)</span>
               </div>
             </div>
             <div class="heatmap-ladder" id="hm-ladder-body"></div>
@@ -1068,8 +1073,10 @@ a { color: var(--cyan); text-decoration: none; }
             <button class="tb-btn" onclick="setPortalFilter('REUTERS', this)">REUTERS</button>
             <button class="tb-btn" onclick="setPortalFilter('CNBC', this)">CNBC</button>
             <button class="tb-btn" onclick="setPortalFilter('COINDESK', this)">COINDESK</button>
-            <button class="tb-btn" onclick="setPortalFilter('KONTAN', this)">KONTAN/IDX</button>
+            <button class="tb-btn" onclick="setPortalFilter('KONTAN', this)">KONTAN</button>
             <button class="tb-btn" onclick="setPortalFilter('FOREXLIVE', this)">FXLIVE</button>
+            <button class="tb-btn" onclick="setPortalFilter('INVESTING', this)">INVESTING</button>
+            <button class="tb-btn" onclick="setPortalFilter('BISNIS', this)">BISNIS</button>
             <input type="text" class="search-input" placeholder="> grep news..." style="width:100px;margin-left:auto;" oninput="filterNewsByGrep(this.value)">
           </div>
           <div style="flex:1;overflow-y:auto;" id="news-feed-container"></div>
@@ -1211,9 +1218,9 @@ a { color: var(--cyan); text-decoration: none; }
     } else if (type === 'OVERBOUGHT') {
       list = list.filter(u => u.rsi >= 65).sort((a, b) => b.rsi - a.rsi);
     } else if (type === 'GOLDEN_CROSS') {
-      list = list.filter(u => u.signal === 'GOLDEN_CROSS' || u.signal === 'BULLISH');
+      list = list.filter(u => u.signal === 'GOLDEN_CROSS' || u.signal === 'BULLISH' || (u.rsi >= 55 && u.chgPct > 0)).sort((a, b) => b.chgPct - a.chgPct);
     } else if (type === 'VOL_BREAKOUT') {
-      list = list.filter(u => u.signal === 'VOL_BREAKOUT' || u.chgPct > 3);
+      list = list.filter(u => u.signal === 'VOL_BREAKOUT' || Math.abs(u.chgPct) >= 2.0).sort((a, b) => Math.abs(b.chgPct) - Math.abs(a.chgPct));
     }
 
     tbody.innerHTML = list.map(u => {
@@ -1264,9 +1271,9 @@ a { color: var(--cyan); text-decoration: none; }
   }
 
   // Pre-populate with realistic baseline bars
-  window.W_TERMINAL.barsGC = generateBaselineBars(4403.20, 45, 0.004);
-  window.W_TERMINAL.barsNQ = generateBaselineBars(30253.50, 45, 0.005);
-  window.W_TERMINAL.barsBTC = generateBaselineBars(85053.14, 45, 0.012);
+  window.W_TERMINAL.barsGC = generateBaselineBars(4405.90, 45, 0.004);
+  window.W_TERMINAL.barsNQ = generateBaselineBars(30264.50, 45, 0.005);
+  window.W_TERMINAL.barsBTC = generateBaselineBars(85365.63, 45, 0.012);
 
   // --- LIVE REAL-TIME MARKET DATA INGESTION ENGINE ---
   let wsBinance = null;
@@ -1364,57 +1371,90 @@ a { color: var(--cyan); text-decoration: none; }
         }
       }).catch(() => {});
 
-    // 3. Connect Live Binance WebSocket for Sub-Second Tick Updates
+    // 3. Connect Live Binance WebSocket for Sub-Second Multi-Asset Tick Updates
     try {
       if (wsBinance) wsBinance.close();
-      wsBinance = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@ticker/paxgusdt@ticker");
+      wsBinance = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@ticker/paxgusdt@ticker/ethusdt@ticker/solusdt@ticker");
       wsBinance.onmessage = function(event) {
         try {
           const msg = JSON.parse(event.data);
+          let symKey = null;
+          let priceElId = null;
+          let chgElId = null;
+          let barsKey = null;
+
           if (msg.s === 'BTCUSDT') {
-            const p = parseFloat(msg.c);
-            const chgPct = parseFloat(msg.P);
-            const btcItem = window.W_TERMINAL.universe.find(u => u.sym === "BTC/USD");
-            if (btcItem) {
-              btcItem.last = p;
-              btcItem.chgPct = chgPct;
-            }
-            const priceEl = document.getElementById("btc-price-val");
-            const chgEl = document.getElementById("btc-chg-val");
-            if (priceEl) priceEl.textContent = `$${fmtNum(p, 2)}`;
-            if (chgEl) {
-              chgEl.textContent = fmtPct(chgPct);
-              chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
-            }
-            if (window.W_TERMINAL.barsBTC.length > 0) {
-              const lastBar = window.W_TERMINAL.barsBTC[window.W_TERMINAL.barsBTC.length - 1];
-              lastBar.close = p;
-              lastBar.high = Math.max(lastBar.high, p);
-              lastBar.low = Math.min(lastBar.low, p);
-            }
-            if (window.W_TERMINAL.heatmapSym === 'BTC/USD') updatePriceHeatmap();
+            symKey = 'BTC/USD';
+            priceElId = 'btc-price-val';
+            chgElId = 'btc-chg-val';
+            barsKey = 'barsBTC';
           } else if (msg.s === 'PAXGUSDT') {
+            symKey = 'GC1!';
+            priceElId = 'gc-price-val';
+            chgElId = 'gc-chg-val';
+            barsKey = 'barsGC';
+          } else if (msg.s === 'ETHUSDT') {
+            symKey = 'ETH/USD';
+          } else if (msg.s === 'SOLUSDT') {
+            symKey = 'SOL/USD';
+          }
+
+          if (symKey) {
             const p = parseFloat(msg.c);
             const chgPct = parseFloat(msg.P);
-            const gcItem = window.W_TERMINAL.universe.find(u => u.sym === "GC1!");
-            if (gcItem) {
-              gcItem.last = p;
-              gcItem.chgPct = chgPct;
+            const item = window.W_TERMINAL.universe.find(u => u.sym === symKey);
+            if (item) {
+              item.last = p;
+              item.chgPct = chgPct;
+              if (msg.h) item.high = parseFloat(msg.h);
+              if (msg.l) item.low = parseFloat(msg.l);
+
+              // Update Watchlist Row
+              const symClean = item.sym.replace(/[^a-zA-Z0-9]/g, '');
+              const el = document.querySelector(`.t-row-${symClean}`);
+              if (el) {
+                const cellLast = el.querySelector('.cell-last');
+                const cellChg = el.querySelector('.cell-chg');
+                if (cellLast) {
+                  cellLast.textContent = fmtNum(item.last, item.dp);
+                  cellLast.className = `cell-last num bold ${chgPct >= 0 ? 'up' : 'dn'}`;
+                }
+                if (cellChg) {
+                  cellChg.textContent = fmtPct(item.chgPct);
+                  cellChg.className = `cell-chg num ${item.chgPct >= 0 ? 'up' : 'dn'}`;
+                }
+              }
+
+              // Update Screener Row
+              const scrRow = document.querySelector(`#screener-tbody tr[data-sym="${item.sym}"]`);
+              if (scrRow) {
+                const cells = scrRow.querySelectorAll('td');
+                if (cells[2]) cells[2].textContent = fmtNum(item.last, item.dp);
+                if (cells[3]) {
+                  cells[3].textContent = fmtPct(item.chgPct);
+                  cells[3].className = `num ${item.chgPct >= 0 ? 'up' : 'dn'}`;
+                }
+              }
             }
-            const priceEl = document.getElementById("gc-price-val");
-            const chgEl = document.getElementById("gc-chg-val");
-            if (priceEl) priceEl.textContent = `$${fmtNum(p, 2)}`;
-            if (chgEl) {
-              chgEl.textContent = fmtPct(chgPct);
-              chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
+
+            if (priceElId) {
+              const priceEl = document.getElementById(priceElId);
+              const chgEl = document.getElementById(chgElId);
+              if (priceEl) priceEl.textContent = `$${fmtNum(p, 2)}`;
+              if (chgEl) {
+                chgEl.textContent = fmtPct(chgPct);
+                chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
+              }
             }
-            if (window.W_TERMINAL.barsGC.length > 0) {
-              const lastBar = window.W_TERMINAL.barsGC[window.W_TERMINAL.barsGC.length - 1];
+
+            if (barsKey && window.W_TERMINAL[barsKey].length > 0) {
+              const lastBar = window.W_TERMINAL[barsKey][window.W_TERMINAL[barsKey].length - 1];
               lastBar.close = p;
               lastBar.high = Math.max(lastBar.high, p);
               lastBar.low = Math.min(lastBar.low, p);
             }
-            if (window.W_TERMINAL.heatmapSym === 'GC1!') updatePriceHeatmap();
+
+            if (window.W_TERMINAL.heatmapSym === symKey) updatePriceHeatmap();
           }
         } catch(e) {}
       };
