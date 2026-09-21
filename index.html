@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WHY://TERMINAL — Multi-Asset Trading Desk, Market Screener & Multi-Portal News Wire</title>
-<meta name="description" content="Professional Bloomberg-style ASCII Trading Terminal for Stocks (IDX & US), Crypto, Forex, and Commodities with Live Multi-Portal News Screening."/>
+<title>WHY://TERMINAL — Triple Stacked Live Charts (GC, NQ, BTC), Price Heatmap, Screener & News Wire</title>
+<meta name="description" content="Professional Bloomberg-style ASCII Financial Terminal featuring Triple Stacked Real-Time Charts (Gold, Nasdaq, Bitcoin), Liquidity Price Heatmap, Market Screener and Multi-Portal News."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -268,56 +268,96 @@ a { color: var(--cyan); text-decoration: none; }
 .terminal-tbl tr:hover td { background: #121212; cursor: pointer; }
 .terminal-tbl tr.active td { background: #1b1505; border-left: 2px solid var(--org); }
 
-/* CHART STYLING */
-.chart-container {
-  position: relative; width: 100%; height: 100%; min-height: 220px;
+/* TRIPLE STACKED CHARTS STYLING */
+.stacked-charts-wrap {
+  display: flex; flex-direction: column; height: 100%; width: 100%;
+  gap: 4px; padding: 4px; overflow: hidden; background: #020202;
 }
-canvas.chart-cv { width: 100%; height: 100%; display: block; }
+.chart-panel {
+  flex: 1; min-height: 110px; display: flex; flex-direction: column;
+  background: #060606; border: 1px solid var(--line); position: relative;
+  overflow: hidden; border-radius: 2px;
+}
+.chart-panel:hover { border-color: rgba(242, 140, 0, 0.4); }
+.chart-sub-header {
+  flex: 0 0 22px; display: flex; align-items: center; gap: 8px;
+  padding: 0 8px; background: #0b0b0b; border-bottom: 1px solid var(--line);
+  font-size: 10px; font-weight: 700; user-select: none;
+}
+.chart-sub-header .asset-pill {
+  padding: 1px 5px; font-size: 8.5px; font-weight: 800; border-radius: 1px;
+}
+.badge-gc { background: rgba(242, 140, 0, 0.2); color: #F28C00; border: 1px solid #F28C00; }
+.badge-nq { background: rgba(63, 167, 163, 0.2); color: #3FA7A3; border: 1px solid #3FA7A3; }
+.badge-btc { background: rgba(255, 180, 84, 0.2); color: #FFB454; border: 1px solid #FFB454; }
+.chart-sub-body {
+  flex: 1; position: relative; width: 100%; height: calc(100% - 22px);
+  overflow: hidden;
+}
+.chart-sub-body canvas.chart-cv {
+  width: 100%; height: 100%; display: block;
+}
+.tv-embed-container {
+  width: 100%; height: 100%; border: none;
+}
 .chart-tooltip {
   position: absolute; display: none; background: rgba(0,0,0,0.92);
   border: 1px solid var(--org); padding: 6px 9px; font-size: 9.5px;
-  pointer-events: none; z-index: 20; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+  pointer-events: none; z-index: 50; color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.9);
 }
 
-/* ORDER BOOK (L2 DEPTH) */
-.ob-wrap { display: flex; flex-direction: column; height: 100%; font-size: 10px; }
-.ob-row {
+/* PRICE & LIQUIDITY DEPTH HEATMAP */
+.heatmap-container {
+  display: flex; flex-direction: column; height: 100%; width: 100%;
+  overflow: hidden; font-size: 10px; background: #040404;
+}
+.heatmap-metrics-bar {
+  padding: 6px 8px; background: #090909; border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.hm-top-row {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 2px 8px; position: relative; height: 18px; cursor: pointer;
 }
-.ob-row:hover { background: rgba(255,255,255,0.06); }
-.ob-bar { position: absolute; top: 0; bottom: 0; right: 0; opacity: 0.22; pointer-events: none; }
-.ob-row.ask .ob-bar { background: var(--dn); }
-.ob-row.bid .ob-bar { background: var(--up); }
-.ob-spread {
-  padding: 4px 8px; text-align: center; background: #0c0c0c;
-  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
-  font-weight: 800; font-size: 10px; color: var(--org);
+.hm-spot-val {
+  font-size: 13px; font-weight: 800; font-family: var(--mono);
 }
-
-/* TRADING DESK & BLOTTER */
-.desk-wrap { display: flex; flex-direction: column; gap: 8px; padding: 8px; height: 100%; }
-.desk-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.desk-btn { padding: 8px; font-size: 11px; font-weight: 800; text-align: center; border-radius: 2px; }
-.desk-btn.buy { background: rgba(0, 193, 118, 0.2); color: #00C176; border: 1px solid #00C176; }
-.desk-btn.buy:hover, .desk-btn.buy.active { background: #00C176; color: #000; }
-.desk-btn.sell { background: rgba(255, 77, 79, 0.2); color: #FF4D4F; border: 1px solid #FF4D4F; }
-.desk-btn.sell:hover, .desk-btn.sell.active { background: #FF4D4F; color: #000; }
-
-.desk-form { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 10px; }
-.desk-field { display: flex; flex-direction: column; gap: 2px; }
-.desk-field label { color: var(--ink-dim); font-size: 9px; font-weight: 700; }
-.desk-field input {
-  background: #000; border: 1px solid var(--line2); padding: 4px 6px;
-  color: #fff; font-weight: 700; font-family: var(--mono);
+.hm-imbalance-wrap { display: flex; flex-direction: column; gap: 2px; }
+.hm-imbalance-bar {
+  display: flex; height: 5px; width: 100%; background: #111;
+  border-radius: 1px; overflow: hidden;
 }
-.desk-field input:focus { border-color: var(--org); }
-
-.desk-submit {
-  background: var(--org); color: #000; font-weight: 800; padding: 6px;
-  text-align: center; margin-top: 4px; border-radius: 2px;
+.hm-imb-bid { background: var(--up); height: 100%; transition: width 0.3s; }
+.hm-imb-ask { background: var(--dn); height: 100%; transition: width 0.3s; }
+.hm-wall-alert {
+  font-size: 8.5px; font-weight: 700; color: var(--amber);
+  background: rgba(255, 180, 84, 0.08); border: 1px solid rgba(255, 180, 84, 0.25);
+  padding: 2px 6px; border-radius: 1px; display: flex; align-items: center; gap: 4px;
 }
-.desk-submit:hover { filter: brightness(1.15); }
+.heatmap-ladder {
+  flex: 1; overflow-y: auto; overflow-x: hidden; position: relative;
+  scrollbar-width: thin;
+}
+.hm-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5px 8px; position: relative; font-size: 9.5px; height: 17px;
+  cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+.hm-row:hover { background: rgba(255, 255, 255, 0.08); }
+.hm-bar {
+  position: absolute; top: 0; bottom: 0; right: 0; opacity: 0.28;
+  pointer-events: none; transition: width 0.2s;
+}
+.hm-row.ask .hm-bar { background: linear-gradient(90deg, transparent, #FF4D4F); }
+.hm-row.bid .hm-bar { background: linear-gradient(90deg, transparent, #00C176); }
+.hm-row.spot-row {
+  background: rgba(242, 140, 0, 0.15); border-top: 1px solid var(--org);
+  border-bottom: 1px solid var(--org); font-weight: 800; color: var(--org);
+  height: 20px;
+}
+.hm-price { font-family: var(--mono); font-weight: 700; z-index: 2; width: 85px; }
+.hm-pct { font-size: 8.5px; z-index: 2; width: 45px; text-align: right; }
+.hm-vol { font-family: var(--mono); z-index: 2; width: 65px; text-align: right; }
+.hm-tag { font-size: 8px; font-weight: 800; padding: 0 4px; border-radius: 1px; z-index: 2; }
 
 /* MULTI-PORTAL NEWS & SCREENER STYLING */
 .portal-badge {
@@ -465,9 +505,9 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
 <!-- PIN LOCK SCREEN -->
 <div id="lockScreen" class="lock-screen">
   <div class="lock-card" id="lockCard">
-    <div class="lock-badge">🔒 SECURE DESK ACCESS</div>
+    <div class="lock-badge">🔒 SECURE TERMINAL ACCESS</div>
     <div class="lock-title">WHY://TERMINAL</div>
-    <div class="lock-sub">Enter 6-Digit PIN to Access Trading Desk</div>
+    <div class="lock-sub">Enter 6-Digit PIN to Access Financial Terminal</div>
 
     <div class="pin-display" id="pinDots">
       <span class="pin-dot"></span>
@@ -577,7 +617,7 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
 <!-- BOTTOM COMMAND LINE (CLI) -->
 <footer id="clibar">
   <span class="prompt">WHY:CMD></span>
-  <input type="text" id="cli-input" placeholder="Type command (e.g. :chart btc, :screen rsi, :portal kontan, :buy btc 0.5, :tf 15m, :help)" autocomplete="off" spellcheck="false"/>
+  <input type="text" id="cli-input" placeholder="Type command (e.g. :chart btc, :screen rsi, :heatmap gc, :portal kontan, :tf 15m, :help)" autocomplete="off" spellcheck="false"/>
   <span class="cli-hint">[?] shortcuts · [Esc] close drawer</span>
 </footer>
 
@@ -619,27 +659,27 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
 
   // --- UNIFIED TRADING DATA UNIVERSE ---
   window.W_TERMINAL = {
-    activeSym: "BTC/USD",
+    activeSym: "GC1!",
+    heatmapSym: "BTC/USD",
     timeframe: "15m",
     chartType: "candle",
+    chartStreamMode: "canvas", // 'canvas' or 'tv'
     indicators: { ema: true, bb: false, vol: true, rsi: true },
     editMode: false,
     tapePaused: false,
     activePortalFilter: "ALL",
     activeScreenerTab: "OVERSOLD",
-    account: {
-      balance: 100000.0,
-      equity: 100000.0,
-      margin: 0.0,
-      realizedPnl: 0.0,
-      positions: [
-        { id: "pos_1", sym: "BTC/USD", side: "LONG", size: 0.5, entry: 62800.0, mark: 63850.0, pnl: 525.0, pnlPct: 1.67, sl: 61500, tp: 66000 },
-        { id: "pos_2", sym: "NVDA", side: "LONG", size: 50, entry: 115.2, mark: 118.8, pnl: 180.0, pnlPct: 3.12, sl: 110, tp: 125 }
-      ]
-    },
+    barsGC: [],
+    barsNQ: [],
+    barsBTC: [],
+    depthBTC: { bids: [], asks: [] },
     universe: [
-      // CRYPTO
-      { sym: "BTC/USD", name: "Bitcoin", cat: "CRYPTO", last: 63850.00, chg: 1520.00, chgPct: 2.44, high: 64200.00, low: 62100.00, vol: "28.4B", rsi: 64.2, signal: "BULLISH", dp: 2 },
+      // 1. PRIMARY ASSETS (GC GOLD · NQ NASDAQ · BTC/USD)
+      { sym: "GC1!", name: "Gold Futures / XAUUSD", cat: "METALS", last: 4403.20, chg: 22.80, chgPct: 0.52, high: 4428.00, low: 4375.50, vol: "240K", rsi: 65.4, signal: "BULLISH", dp: 2 },
+      { sym: "NQ1!", name: "E-Mini Nasdaq 100", cat: "US", last: 30253.50, chg: 336.25, chgPct: 1.12, high: 30340.00, low: 29890.00, vol: "1.4M", rsi: 68.2, signal: "GOLDEN_CROSS", dp: 2 },
+      { sym: "BTC/USD", name: "Bitcoin / US Dollar", cat: "CRYPTO", last: 85053.14, chg: 4520.00, chgPct: 5.63, high: 85299.87, low: 80327.64, vol: "21.4K", rsi: 72.8, signal: "OVERBOUGHT", dp: 2 },
+      
+      // CRYPTO ALTS
       { sym: "ETH/USD", name: "Ethereum", cat: "CRYPTO", last: 2640.50, chg: 82.30, chgPct: 3.22, high: 2680.00, low: 2550.00, vol: "14.1B", rsi: 58.6, signal: "NEUTRAL", dp: 2 },
       { sym: "SOL/USD", name: "Solana", cat: "CRYPTO", last: 148.50, chg: 8.15, chgPct: 5.81, high: 152.00, low: 139.80, vol: "4.2B", rsi: 72.4, signal: "OVERBOUGHT", dp: 2 },
       
@@ -670,12 +710,12 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
     ],
     news: [
       { id: "n1", portal: "BLOOMBERG", time: "18:52", tag: "MACRO", sentiment: "BULLISH", title: "Federal Reserve memproyeksikan pelonggaran moneter lanjutan usai tren inflasi PCE mendingin sesuai target.", impact: "Yield obligasi AS turun, aset berisiko (Equities & Crypto) menguat.", tickers: ["BTC/USD", "NVDA", "IHSG"] },
-      { id: "n2", portal: "COINDESK", time: "18:45", tag: "CRYPTO", sentiment: "BULLISH", title: "Arus modal masuk mingguan Spot Bitcoin ETF melampaui \$1,2 Miliar dipimpin BlackRock IBIT.", impact: "Likuiditas institusional menyerap pasokan exchange, BTC menguji level \$64.000.", tickers: ["BTC/USD", "ETH/USD", "SOL/USD"] },
+      { id: "n2", portal: "COINDESK", time: "18:45", tag: "CRYPTO", sentiment: "BULLISH", title: "Arus modal masuk mingguan Spot Bitcoin ETF melampaui $1,2 Miliar dipimpin BlackRock IBIT.", impact: "Likuiditas institusional menyerap pasokan exchange, BTC menguji level $85.000.", tickers: ["BTC/USD", "ETH/USD", "SOL/USD"] },
       { id: "n3", portal: "KONTAN", time: "18:30", tag: "IDX", sentiment: "BULLISH", title: "Bank Central Asia (BBCA) dan BMRI pimpin penguatan IHSG dengan aksi beli bersih asing tembus Rp 1,4 Triliun.", impact: "Indeks IHSG stabil di atas level psikologis 7.800.", tickers: ["BBCA.JK", "BMRI.JK", "IHSG"] },
       { id: "n4", portal: "REUTERS", time: "18:12", tag: "US TECH", sentiment: "BULLISH", title: "NVIDIA umumkan percepatan arsitektur chip AI generasi terbaru dengan pesanan penuh hingga 2027.", impact: "Valuasi saham semikonduktor naik, target harga konsensus analis dinaikkan.", tickers: ["NVDA", "TSLA", "MSFT"] },
-      { id: "n5", portal: "CNBC", time: "17:55", tag: "METALS", sentiment: "BULLISH", title: "Harga emas dunia tembus level rekor tertinggi baru di \$2.622 per troy ounce terdorong permintaan safe-haven global.", impact: "Penguatan berkelanjutan XAU/USD dan saham tambang emas.", tickers: ["XAU/USD", "AMMN.JK"] },
+      { id: "n5", portal: "CNBC", time: "17:55", tag: "METALS", sentiment: "BULLISH", title: "Harga emas dunia tembus level rekor tertinggi baru di $4.403 per troy ounce terdorong eskalasi safe-haven global.", impact: "Penguatan berkelanjutan GC1! Gold dan saham tambang emas.", tickers: ["GC1!", "AMMN.JK"] },
       { id: "n6", portal: "FOREXLIVE", time: "17:35", tag: "FOREX", sentiment: "NEUTRAL", title: "Rupiah bertahan di kisaran Rp 15.180 per Dolar AS didukung cadangan devisa kuat Bank Indonesia.", impact: "Volatilitas USD/IDR stabil, ekspektasi BI-Rate tetap akomodatif.", tickers: ["USD/IDR"] },
-      { id: "n7", portal: "REUTERS", time: "17:05", tag: "ENERGY", sentiment: "BEARISH", title: "Minyak mentah Brent tertekan di kisaran \$74,8 per barel seiring pemulihan bertahap pasokan OPEC+.", impact: "Tekanan jangka pendek pada emiten energi.", tickers: ["BRENT"] },
+      { id: "n7", portal: "REUTERS", time: "17:05", tag: "ENERGY", sentiment: "BEARISH", title: "Minyak mentah Brent tertekan di kisaran $74,8 per barel seiring pemulihan bertahap pasokan OPEC+.", impact: "Tekanan jangka pendek pada emiten energi.", tickers: ["BRENT"] },
       { id: "n8", portal: "KONTAN", time: "16:40", tag: "IDX", sentiment: "NEUTRAL", title: "Bank Rakyat Indonesia (BBRI) konsolidasikan kredit mikro, rasio NPL terjaga di bawah 3,0%.", impact: "Peluang akumulasi bertahap di area oversold.", tickers: ["BBRI.JK"] }
     ],
     economicCalendar: [
@@ -685,14 +725,13 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
       { time: "27 Sept", event: "US Core PCE Price Index", actual: "-", forecast: "0.2%", previous: "0.2%", impact: "HIGH" }
     ],
     defaultLayout: [
-      { id: "chart", x: 0, y: 0, w: 7, h: 9 },
-      { id: "orderbook", x: 7, y: 0, w: 2.5, h: 9 },
-      { id: "desk", x: 9.5, y: 0, w: 2.5, h: 9 },
-      { id: "watchlist", x: 0, y: 9, w: 4.5, h: 8 },
-      { id: "screener", x: 4.5, y: 9, w: 4.5, h: 8 },
-      { id: "news", x: 9, y: 9, w: 3, h: 8 },
-      { id: "heatmap", x: 0, y: 17, w: 6, h: 6 },
-      { id: "sessions", x: 6, y: 17, w: 6, h: 6 }
+      { id: "chart", x: 0, y: 0, w: 7.5, h: 14 },
+      { id: "priceheatmap", x: 7.5, y: 0, w: 4.5, h: 7 },
+      { id: "news", x: 7.5, y: 7, w: 4.5, h: 7 },
+      { id: "watchlist", x: 0, y: 14, w: 4, h: 7 },
+      { id: "screener", x: 4, y: 14, w: 4, h: 7 },
+      { id: "sessions", x: 8, y: 14, w: 4, h: 7 },
+      { id: "heatmap", x: 0, y: 21, w: 12, h: 5 }
     ]
   };
 
@@ -790,26 +829,10 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
       }
     }
 
-    if (item.sym === window.W_TERMINAL.activeSym) {
-      updateOrderBook(item);
-      updatePositionsMarkPrice(item.last);
+    if (item.sym === window.W_TERMINAL.heatmapSym || item.sym === window.W_TERMINAL.activeSym) {
+      updatePriceHeatmap();
     }
   }, 1200);
-
-  function updatePositionsMarkPrice(price) {
-    let totalUnrealized = 0;
-    window.W_TERMINAL.account.positions.forEach(pos => {
-      if (pos.sym === window.W_TERMINAL.activeSym) {
-        pos.mark = price;
-        const diff = pos.side === 'LONG' ? (pos.mark - pos.entry) : (pos.entry - pos.mark);
-        pos.pnl = diff * pos.size;
-        pos.pnlPct = (diff / pos.entry) * 100;
-      }
-      totalUnrealized += pos.pnl;
-    });
-    window.W_TERMINAL.account.equity = window.W_TERMINAL.account.balance + totalUnrealized;
-    renderBlotter();
-  }
 
   // --- SQUARIFIED TREEMAP (Bruls et al.) ---
   function squarify(items, rect) {
@@ -864,16 +887,19 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
 
   // --- WIDGET REGISTRY ---
   const WIDGETS = {
-    // 01. TECHNICAL CHART
+    // 01. TRIPLE STACKED LIVE CHARTS (GC · NQ · BTC)
     chart: {
       num: "01",
-      title: "TECHNICAL CANDLESTICK & INDICATORS",
+      title: "TRIPLE STACKED LIVE CHARTS (GC · NQ · BTC)",
       render(body) {
         body.innerHTML = `
           <div class="w-toolbar">
-            <span class="bold org" id="chart-sym-label" style="font-size:11px;">${window.W_TERMINAL.activeSym}</span>
+            <div style="display:flex;gap:3px;">
+              <button class="tb-btn ${window.W_TERMINAL.chartStreamMode === 'canvas' ? 'active' : ''}" id="btn-chartmode-canvas" onclick="setChartStreamMode('canvas')">ASCII CANVAS</button>
+              <button class="tb-btn ${window.W_TERMINAL.chartStreamMode === 'tv' ? 'active' : ''}" id="btn-chartmode-tv" onclick="setChartStreamMode('tv')">TRADINGVIEW PRO</button>
+            </div>
             <div style="display:flex;gap:3px;margin:0 6px;">
-              ${['1m', '5m', '15m', '1h', '4h', '1D'].map(tf => `
+              ${['1m', '5m', '15m', '1h', '1D'].map(tf => `
                 <button class="tb-btn ${window.W_TERMINAL.timeframe === tf ? 'active' : ''}" onclick="setTimeframe('${tf}')">${tf.toUpperCase()}</button>
               `).join("")}
             </div>
@@ -881,71 +907,101 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
             <button class="tb-btn ${window.W_TERMINAL.chartType === 'line' ? 'active' : ''}" onclick="setChartType('line')">LINE</button>
             <button class="tb-btn ${window.W_TERMINAL.indicators.ema ? 'active' : ''}" onclick="toggleIndicator('ema')">EMA 20/50</button>
             <button class="tb-btn ${window.W_TERMINAL.indicators.rsi ? 'active' : ''}" onclick="toggleIndicator('rsi')">RSI (14)</button>
-            <span class="faint" style="margin-left:auto;font-size:9px;">REAL-TIME FEED</span>
+            <span class="faint up" style="margin-left:auto;font-size:9px;">● LIVE STREAM FEED</span>
           </div>
-          <div class="chart-container">
-            <canvas class="chart-cv" id="cv-trading-chart"></canvas>
-            <div class="chart-tooltip" id="chart-tooltip"></div>
+
+          <div class="stacked-charts-wrap">
+            <!-- 1. TOP: GC GOLD -->
+            <div class="chart-panel" id="panel-gc">
+              <div class="chart-sub-header">
+                <span class="asset-pill badge-gc">01 GC</span>
+                <span class="bold org">GC1! · GOLD FUTURES / XAUUSD</span>
+                <span class="num bold" id="gc-price-val">$4,403.20</span>
+                <span class="num up" id="gc-chg-val">+0.52%</span>
+                <span class="faint" style="margin-left:auto;font-size:8.5px;">COMEX / PHYSICAL SPOT</span>
+              </div>
+              <div class="chart-sub-body" id="sub-body-gc">
+                <canvas class="chart-cv" id="cv-chart-gc"></canvas>
+                <div class="tv-embed-container" id="tv-gc" style="display:none;"></div>
+              </div>
+            </div>
+
+            <!-- 2. MIDDLE: NQ NASDAQ -->
+            <div class="chart-panel" id="panel-nq">
+              <div class="chart-sub-header">
+                <span class="asset-pill badge-nq">02 NQ</span>
+                <span class="bold cy">NQ1! · E-MINI NASDAQ 100</span>
+                <span class="num bold" id="nq-price-val">$30,253.50</span>
+                <span class="num up" id="nq-chg-val">+1.12%</span>
+                <span class="faint" style="margin-left:auto;font-size:8.5px;">CME / US TECH 100</span>
+              </div>
+              <div class="chart-sub-body" id="sub-body-nq">
+                <canvas class="chart-cv" id="cv-chart-nq"></canvas>
+                <div class="tv-embed-container" id="tv-nq" style="display:none;"></div>
+              </div>
+            </div>
+
+            <!-- 3. BOTTOM: BTC/USD -->
+            <div class="chart-panel" id="panel-btc">
+              <div class="chart-sub-header">
+                <span class="asset-pill badge-btc">03 BTC</span>
+                <span class="bold org">BTCUSD · BITCOIN / US DOLLAR</span>
+                <span class="num bold" id="btc-price-val">$85,053.14</span>
+                <span class="num up" id="btc-chg-val">+5.63%</span>
+                <span class="faint" style="margin-left:auto;font-size:8.5px;">BINANCE PUBLIC LIVE</span>
+              </div>
+              <div class="chart-sub-body" id="sub-body-btc">
+                <canvas class="chart-cv" id="cv-chart-btc"></canvas>
+                <div class="tv-embed-container" id="tv-btc" style="display:none;"></div>
+              </div>
+            </div>
           </div>
+          <div class="chart-tooltip" id="chart-tooltip"></div>
         `;
-        setTimeout(drawTradingChart, 40);
+        setTimeout(drawAllStackedCharts, 40);
       }
     },
 
-    // 02. ORDER BOOK
-    orderbook: {
+    // 02. PRICE & LIQUIDITY DEPTH HEATMAP (replaces Order Book)
+    priceheatmap: {
       num: "02",
-      title: "L2 ORDER BOOK DEPTH",
+      title: "PRICE & LIQUIDITY DEPTH HEATMAP",
       render(body) {
         body.innerHTML = `
           <div class="w-toolbar">
-            <span class="faint" style="font-size:9px;">BID / ASK DEPTH LADDER</span>
-            <span class="faint" style="margin-left:auto;font-size:9px;">SPREAD <b id="ob-spread-val" class="org">0.05%</b></span>
+            <span class="faint" style="font-size:9px;">ASSET:</span>
+            <button class="tb-btn ${window.W_TERMINAL.heatmapSym === 'GC1!' ? 'active' : ''}" onclick="setHeatmapAsset('GC1!', this)">GC GOLD</button>
+            <button class="tb-btn ${window.W_TERMINAL.heatmapSym === 'NQ1!' ? 'active' : ''}" onclick="setHeatmapAsset('NQ1!', this)">NQ NASDAQ</button>
+            <button class="tb-btn ${window.W_TERMINAL.heatmapSym === 'BTC/USD' ? 'active' : ''}" onclick="setHeatmapAsset('BTC/USD', this)">BTC/USD</button>
+            <span class="faint" style="margin-left:auto;font-size:9px;" id="hm-header-spread">SPREAD 0.01%</span>
           </div>
-          <div class="ob-wrap" id="ob-container"></div>
-        `;
-        const activeItem = window.W_TERMINAL.universe.find(u => u.sym === window.W_TERMINAL.activeSym) || window.W_TERMINAL.universe[0];
-        updateOrderBook(activeItem);
-      }
-    },
-
-    // 03. TRADING DESK
-    desk: {
-      num: "03",
-      title: "TRADING DESK & POSITION BLOTTER",
-      render(body) {
-        body.innerHTML = `
-          <div class="desk-wrap">
-            <div class="desk-actions">
-              <button class="desk-btn buy active" id="btn-side-buy" onclick="setTradeSide('BUY')">▲ BUY / LONG</button>
-              <button class="desk-btn sell" id="btn-side-sell" onclick="setTradeSide('SELL')">▼ SELL / SHORT</button>
-            </div>
-            <div class="desk-form">
-              <div class="desk-field">
-                <label>SIZE / LOT</label>
-                <input type="number" id="desk-size" value="0.5" step="0.1" min="0.01"/>
+          <div class="heatmap-container" id="hm-container">
+            <div class="heatmap-metrics-bar">
+              <div class="hm-top-row">
+                <div>
+                  <span class="faint" style="font-size:8.5px;">SPOT PRICE</span>
+                  <div class="hm-spot-val org num" id="hm-spot-val">$85,053.14</div>
+                </div>
+                <div style="text-align:right;">
+                  <span class="faint" style="font-size:8.5px;">ORDER FLOW IMBALANCE</span>
+                  <div style="font-size:10px;font-weight:800;" id="hm-imbalance-text"><span class="up">58% BID</span> / <span class="dn">42% ASK</span></div>
+                </div>
               </div>
-              <div class="desk-field">
-                <label>LIMIT PRICE ($ / Rp)</label>
-                <input type="number" id="desk-price" value="0"/>
+              <div class="hm-imbalance-wrap">
+                <div class="hm-imbalance-bar">
+                  <div class="hm-imb-bid" id="hm-imb-bid" style="width:58%;"></div>
+                  <div class="hm-imb-ask" id="hm-imb-ask" style="width:42%;"></div>
+                </div>
               </div>
-              <div class="desk-field">
-                <label>STOP LOSS (SL)</label>
-                <input type="number" id="desk-sl" placeholder="Optional"/>
-              </div>
-              <div class="desk-field">
-                <label>TAKE PROFIT (TP)</label>
-                <input type="number" id="desk-tp" placeholder="Optional"/>
+              <div class="hm-wall-alert" id="hm-wall-alert">
+                <span>⚡</span>
+                <span id="hm-wall-text">MAJOR LIQUIDITY WALL AT $84,500 (+45.2 BTC SUPPORT)</span>
               </div>
             </div>
-            <button class="desk-submit" onclick="executePaperTrade()">SUBMIT ORDER</button>
-            <div style="margin-top:6px;border-top:1px solid var(--line);padding-top:6px;flex:1;overflow-y:auto;" id="blotter-container"></div>
+            <div class="heatmap-ladder" id="hm-ladder-body"></div>
           </div>
         `;
-        const item = window.W_TERMINAL.universe.find(u => u.sym === window.W_TERMINAL.activeSym) || window.W_TERMINAL.universe[0];
-        const priceInput = document.getElementById("desk-price");
-        if (priceInput) priceInput.value = item.last;
-        renderBlotter();
+        setTimeout(updatePriceHeatmap, 40);
       }
     },
 
@@ -1086,16 +1142,12 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
     
     const topBadge = document.getElementById("top-active-sym");
     if (topBadge) topBadge.textContent = sym;
-    
-    const chartLbl = document.getElementById("chart-sym-label");
-    if (chartLbl) chartLbl.textContent = sym;
-
-    const priceInput = document.getElementById("desk-price");
-    if (priceInput) priceInput.value = item.last;
 
     playTone(580, 'sine', 0.05);
-    drawTradingChart();
-    updateOrderBook(item);
+    drawAllStackedCharts();
+    if (['GC1!', 'NQ1!', 'BTC/USD'].includes(sym)) {
+      setHeatmapAsset(sym);
+    }
     openInspector('asset', item);
 
     document.querySelectorAll("#wl-tbody tr, #screener-tbody tr").forEach(tr => {
@@ -1188,33 +1240,212 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
     playTone(660, 'sine', 0.04);
   };
 
-  // --- DRAW TECHNICAL CANDLESTICK CHART ---
-  function drawTradingChart() {
-    const cv = document.getElementById("cv-trading-chart");
-    if (!cv) return;
+  // =========================================================================
+  // LIVE REAL-TIME MARKET DATA & TRIPLE STACKED CHARTS (GC, NQ, BTC)
+  // =========================================================================
+
+  // Generate initial synthetic baseline OHLCV if network is waiting
+  function generateBaselineBars(basePrice, count = 45, volatility = 0.008) {
+    const bars = [];
+    let p = basePrice * (1 - volatility * 3);
+    const now = Date.now();
+    for (let i = 0; i < count; i++) {
+      const open = p;
+      const move = (Math.sin(i * 0.4) * 0.006 + (Math.random() - 0.48) * volatility) * basePrice;
+      const close = Math.max(0.01, open + move);
+      const high = Math.max(open, close) + Math.random() * (basePrice * volatility * 0.5);
+      const low = Math.min(open, close) - Math.random() * (basePrice * volatility * 0.5);
+      const vol = Math.floor(Math.random() * 400 + 80);
+      bars.push({ time: now - (count - i) * 15 * 60000, open, high, low, close, vol });
+      p = close;
+    }
+    bars[bars.length - 1].close = basePrice;
+    return bars;
+  }
+
+  // Pre-populate with realistic baseline bars
+  window.W_TERMINAL.barsGC = generateBaselineBars(4403.20, 45, 0.004);
+  window.W_TERMINAL.barsNQ = generateBaselineBars(30253.50, 45, 0.005);
+  window.W_TERMINAL.barsBTC = generateBaselineBars(85053.14, 45, 0.012);
+
+  // --- LIVE REAL-TIME MARKET DATA INGESTION ENGINE ---
+  let wsBinance = null;
+  function initLiveFeeds() {
+    // 1. Fetch Real-Time BTC Klines & Ticker from Binance Public API
+    fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=BTCUSDT")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.lastPrice) {
+          const last = parseFloat(data.lastPrice);
+          const chg = parseFloat(data.priceChange);
+          const chgPct = parseFloat(data.priceChangePercent);
+          const high = parseFloat(data.highPrice);
+          const low = parseFloat(data.lowPrice);
+          const vol = parseFloat(data.volume);
+
+          const btcItem = window.W_TERMINAL.universe.find(u => u.sym === "BTC/USD");
+          if (btcItem) {
+            btcItem.last = last;
+            btcItem.chg = chg;
+            btcItem.chgPct = chgPct;
+            btcItem.high = high;
+            btcItem.low = low;
+            btcItem.vol = `${(vol / 1000).toFixed(1)}K`;
+          }
+          const priceEl = document.getElementById("btc-price-val");
+          const chgEl = document.getElementById("btc-chg-val");
+          if (priceEl) priceEl.textContent = `$${fmtNum(last, 2)}`;
+          if (chgEl) {
+            chgEl.textContent = fmtPct(chgPct);
+            chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
+          }
+        }
+      }).catch(() => {});
+
+    fetch("https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=15m&limit=45")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          window.W_TERMINAL.barsBTC = data.map(k => ({
+            time: k[0],
+            open: parseFloat(k[1]),
+            high: parseFloat(k[2]),
+            low: parseFloat(k[3]),
+            close: parseFloat(k[4]),
+            vol: Math.round(parseFloat(k[5]))
+          }));
+          drawSingleChart("cv-chart-btc", "BTC/USD", window.W_TERMINAL.barsBTC, 2);
+          updatePriceHeatmap();
+        }
+      }).catch(() => {});
+
+    // 2. Fetch Real-Time Physical Gold (PAXG) from Binance Public API
+    fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.lastPrice) {
+          const last = parseFloat(data.lastPrice);
+          const chg = parseFloat(data.priceChange);
+          const chgPct = parseFloat(data.priceChangePercent);
+          const high = parseFloat(data.highPrice);
+          const low = parseFloat(data.lowPrice);
+
+          const gcItem = window.W_TERMINAL.universe.find(u => u.sym === "GC1!");
+          if (gcItem) {
+            gcItem.last = last;
+            gcItem.chg = chg;
+            gcItem.chgPct = chgPct;
+            gcItem.high = high;
+            gcItem.low = low;
+          }
+          const priceEl = document.getElementById("gc-price-val");
+          const chgEl = document.getElementById("gc-chg-val");
+          if (priceEl) priceEl.textContent = `$${fmtNum(last, 2)}`;
+          if (chgEl) {
+            chgEl.textContent = fmtPct(chgPct);
+            chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
+          }
+        }
+      }).catch(() => {});
+
+    fetch("https://api.binance.com/api/v3/klines?symbol=PAXGUSDT&interval=15m&limit=45")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          window.W_TERMINAL.barsGC = data.map(k => ({
+            time: k[0],
+            open: parseFloat(k[1]),
+            high: parseFloat(k[2]),
+            low: parseFloat(k[3]),
+            close: parseFloat(k[4]),
+            vol: Math.round(parseFloat(k[5]))
+          }));
+          drawSingleChart("cv-chart-gc", "GC1!", window.W_TERMINAL.barsGC, 2);
+        }
+      }).catch(() => {});
+
+    // 3. Connect Live Binance WebSocket for Sub-Second Tick Updates
+    try {
+      if (wsBinance) wsBinance.close();
+      wsBinance = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@ticker/paxgusdt@ticker");
+      wsBinance.onmessage = function(event) {
+        try {
+          const msg = JSON.parse(event.data);
+          if (msg.s === 'BTCUSDT') {
+            const p = parseFloat(msg.c);
+            const chgPct = parseFloat(msg.P);
+            const btcItem = window.W_TERMINAL.universe.find(u => u.sym === "BTC/USD");
+            if (btcItem) {
+              btcItem.last = p;
+              btcItem.chgPct = chgPct;
+            }
+            const priceEl = document.getElementById("btc-price-val");
+            const chgEl = document.getElementById("btc-chg-val");
+            if (priceEl) priceEl.textContent = `$${fmtNum(p, 2)}`;
+            if (chgEl) {
+              chgEl.textContent = fmtPct(chgPct);
+              chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
+            }
+            if (window.W_TERMINAL.barsBTC.length > 0) {
+              const lastBar = window.W_TERMINAL.barsBTC[window.W_TERMINAL.barsBTC.length - 1];
+              lastBar.close = p;
+              lastBar.high = Math.max(lastBar.high, p);
+              lastBar.low = Math.min(lastBar.low, p);
+            }
+            if (window.W_TERMINAL.heatmapSym === 'BTC/USD') updatePriceHeatmap();
+          } else if (msg.s === 'PAXGUSDT') {
+            const p = parseFloat(msg.c);
+            const chgPct = parseFloat(msg.P);
+            const gcItem = window.W_TERMINAL.universe.find(u => u.sym === "GC1!");
+            if (gcItem) {
+              gcItem.last = p;
+              gcItem.chgPct = chgPct;
+            }
+            const priceEl = document.getElementById("gc-price-val");
+            const chgEl = document.getElementById("gc-chg-val");
+            if (priceEl) priceEl.textContent = `$${fmtNum(p, 2)}`;
+            if (chgEl) {
+              chgEl.textContent = fmtPct(chgPct);
+              chgEl.className = `num ${chgPct >= 0 ? 'up' : 'dn'}`;
+            }
+            if (window.W_TERMINAL.barsGC.length > 0) {
+              const lastBar = window.W_TERMINAL.barsGC[window.W_TERMINAL.barsGC.length - 1];
+              lastBar.close = p;
+              lastBar.high = Math.max(lastBar.high, p);
+              lastBar.low = Math.min(lastBar.low, p);
+            }
+            if (window.W_TERMINAL.heatmapSym === 'GC1!') updatePriceHeatmap();
+          }
+        } catch(e) {}
+      };
+      wsBinance.onerror = function() {};
+    } catch(e) {}
+
+    // 4. Also fetch Live Depth for BTC for Price Heatmap
+    fetch("https://api.binance.com/api/v3/depth?symbol=BTCUSDT&limit=20")
+      .then(res => res.json())
+      .then(d => {
+        if (d && d.bids && d.asks) {
+          window.W_TERMINAL.depthBTC = {
+            bids: d.bids.map(b => [parseFloat(b[0]), parseFloat(b[1])]),
+            asks: d.asks.map(a => [parseFloat(a[0]), parseFloat(a[1])])
+          };
+          updatePriceHeatmap();
+        }
+      }).catch(() => {});
+  }
+
+  // --- DRAW INDIVIDUAL HIGH-DENSITY CANVAS CHART ---
+  function drawSingleChart(cvId, symName, bars, dp = 2) {
+    const cv = document.getElementById(cvId);
+    if (!cv || !bars || !bars.length) return;
     const ctx = cv.getContext("2d");
     const container = cv.parentElement;
-    const w = container.clientWidth || 600;
-    const h = container.clientHeight || 300;
+    const w = container.clientWidth || 400;
+    const h = container.clientHeight || 150;
     cv.width = w * window.devicePixelRatio;
     cv.height = h * window.devicePixelRatio;
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-
-    const activeItem = window.W_TERMINAL.universe.find(u => u.sym === window.W_TERMINAL.activeSym) || window.W_TERMINAL.universe[0];
-
-    const bars = [];
-    let price = activeItem.last * 0.94;
-    for (let i = 0; i < 45; i++) {
-      const open = price;
-      const move = (Math.sin(i * 0.45) * 0.008 + (Math.random() - 0.48) * 0.012) * activeItem.last;
-      const close = Math.max(0.01, open + move);
-      const high = Math.max(open, close) + Math.random() * (activeItem.last * 0.005);
-      const low = Math.min(open, close) - Math.random() * (activeItem.last * 0.005);
-      const vol = Math.floor(Math.random() * 500 + 100);
-      bars.push({ open, high, low, close, vol });
-      price = close;
-    }
-    bars[bars.length - 1].close = activeItem.last;
 
     function calcEMA(data, period) {
       const k = 2 / (period + 1);
@@ -1233,63 +1464,46 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
     const ema20 = calcEMA(bars, 20);
     const ema50 = calcEMA(bars, 50);
 
-    function calcRSI(data, period = 14) {
-      const rsi = [];
-      let gains = 0, losses = 0;
-      for (let i = 1; i < data.length; i++) {
-        const diff = data[i].close - data[i - 1].close;
-        if (i <= period) {
-          if (diff >= 0) gains += diff; else losses -= diff;
-          rsi.push(50);
-        } else {
-          const g = diff >= 0 ? diff : 0;
-          const l = diff < 0 ? -diff : 0;
-          gains = (gains * (period - 1) + g) / period;
-          losses = (losses * (period - 1) + l) / period;
-          const rs = losses === 0 ? 100 : gains / losses;
-          rsi.push(100 - (100 / (1 + rs)));
-        }
-      }
-      return [50].concat(rsi);
-    }
-    const rsi14 = calcRSI(bars);
-
     const hasRsi = window.W_TERMINAL.indicators.rsi;
-    const rsiH = hasRsi ? 60 : 0;
-    const padTop = 15, padBottom = 25 + rsiH, padLeft = 10, padRight = 65;
-    const plotW = w - padLeft - padRight;
-    const plotH = h - padTop - padBottom;
+    const rsiH = hasRsi ? Math.min(38, Math.floor(h * 0.25)) : 0;
+    const padTop = 8, padBottom = 14 + rsiH, padLeft = 8, padRight = 62;
+    const plotW = Math.max(10, w - padLeft - padRight);
+    const plotH = Math.max(10, h - padTop - padBottom);
     const barW = plotW / bars.length;
 
-    ctx.fillStyle = "#080808";
+    // Background
+    ctx.fillStyle = "#060606";
     ctx.fillRect(0, 0, w, h);
 
-    const minPrice = Math.min(...bars.map(b => b.low)) * 0.998;
-    const maxPrice = Math.max(...bars.map(b => b.high)) * 1.002;
+    const minPrice = Math.min(...bars.map(b => b.low)) * 0.999;
+    const maxPrice = Math.max(...bars.map(b => b.high)) * 1.001;
     const range = maxPrice - minPrice || 1;
 
-    ctx.strokeStyle = "#1a1a1a";
+    // Horizontal Price Grids
+    ctx.strokeStyle = "#161616";
     ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = padTop + (plotH / 4) * i;
+    for (let i = 0; i <= 3; i++) {
+      const y = padTop + (plotH / 3) * i;
       ctx.beginPath(); ctx.moveTo(padLeft, y); ctx.lineTo(w - padRight, y); ctx.stroke();
-      const priceLabel = fmtNum(maxPrice - (range / 4) * i, activeItem.dp);
-      ctx.fillStyle = "#666"; ctx.font = "9px monospace";
-      ctx.fillText(priceLabel, w - padRight + 6, y + 3);
+      const pLabel = fmtNum(maxPrice - (range / 3) * i, dp);
+      ctx.fillStyle = "#666"; ctx.font = "8.5px monospace";
+      ctx.fillText(pLabel, w - padRight + 5, y + 3);
     }
 
+    // Volume Bars
     if (window.W_TERMINAL.indicators.vol) {
       const maxVol = Math.max(...bars.map(b => b.vol)) || 1;
       bars.forEach((b, i) => {
         const x = padLeft + i * barW;
-        const vH = (b.vol / maxVol) * 35;
-        ctx.fillStyle = b.close >= b.open ? "rgba(0, 193, 118, 0.22)" : "rgba(255, 77, 79, 0.22)";
-        ctx.fillRect(x + 1, padTop + plotH - vH, barW - 2, vH);
+        const vH = (b.vol / maxVol) * Math.min(24, plotH * 0.35);
+        ctx.fillStyle = b.close >= b.open ? "rgba(0, 193, 118, 0.2)" : "rgba(255, 77, 79, 0.2)";
+        ctx.fillRect(x + 0.5, padTop + plotH - vH, Math.max(1, barW - 1), vH);
       });
     }
 
+    // Candlesticks or Line
     if (window.W_TERMINAL.chartType === 'line') {
-      ctx.beginPath(); ctx.strokeStyle = "#00C176"; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.strokeStyle = "#00C176"; ctx.lineWidth = 1.6;
       bars.forEach((b, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = padTop + plotH - ((b.close - minPrice) / range) * plotH;
@@ -1310,15 +1524,16 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
         ctx.lineWidth = 1;
 
         ctx.beginPath(); ctx.moveTo(x, yHigh); ctx.lineTo(x, yLow); ctx.stroke();
-        const bw = Math.max(3, barW * 0.72);
+        const bw = Math.max(2, barW * 0.7);
         const top = Math.min(yOpen, yClose);
-        const bodyH = Math.max(2, Math.abs(yClose - yOpen));
+        const bodyH = Math.max(1.5, Math.abs(yClose - yOpen));
         ctx.fillRect(x - bw / 2, top, bw, bodyH);
       });
     }
 
+    // EMA Ribbons
     if (window.W_TERMINAL.indicators.ema) {
-      ctx.beginPath(); ctx.strokeStyle = "#FFB454"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.strokeStyle = "#FFB454"; ctx.lineWidth = 1.2;
       ema20.forEach((val, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = padTop + plotH - ((val - minPrice) / range) * plotH;
@@ -1326,7 +1541,7 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
       });
       ctx.stroke();
 
-      ctx.beginPath(); ctx.strokeStyle = "#3FA7A3"; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.strokeStyle = "#3FA7A3"; ctx.lineWidth = 1.2;
       ema50.forEach((val, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = padTop + plotH - ((val - minPrice) / range) * plotH;
@@ -1335,13 +1550,14 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
       ctx.stroke();
     }
 
-    if (hasRsi) {
-      const rsiTop = h - rsiH + 6;
-      const rsiPlotH = rsiH - 16;
-      ctx.fillStyle = "#0c0c0c"; ctx.fillRect(padLeft, rsiTop, plotW, rsiPlotH);
-      ctx.strokeStyle = "#252525"; ctx.strokeRect(padLeft, rsiTop, plotW, rsiPlotH);
+    // RSI Sub-panel
+    if (hasRsi && rsiH > 0) {
+      const rsiTop = h - rsiH + 3;
+      const rsiPlotH = rsiH - 6;
+      ctx.fillStyle = "#0a0a0a"; ctx.fillRect(padLeft, rsiTop, plotW, rsiPlotH);
+      ctx.strokeStyle = "#1f1f1f"; ctx.strokeRect(padLeft, rsiTop, plotW, rsiPlotH);
 
-      ctx.setLineDash([3, 3]);
+      ctx.setLineDash([2, 2]);
       ctx.strokeStyle = "#FF4D4F";
       const y70 = rsiTop + rsiPlotH - (70 / 100) * rsiPlotH;
       ctx.beginPath(); ctx.moveTo(padLeft, y70); ctx.lineTo(padLeft + plotW, y70); ctx.stroke();
@@ -1350,19 +1566,9 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
       const y30 = rsiTop + rsiPlotH - (30 / 100) * rsiPlotH;
       ctx.beginPath(); ctx.moveTo(padLeft, y30); ctx.lineTo(padLeft + plotW, y30); ctx.stroke();
       ctx.setLineDash([]);
-
-      ctx.beginPath(); ctx.strokeStyle = "#B288FF"; ctx.lineWidth = 1.5;
-      rsi14.forEach((r, i) => {
-        const x = padLeft + i * barW + barW / 2;
-        const y = rsiTop + rsiPlotH - (r / 100) * rsiPlotH;
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      });
-      ctx.stroke();
-
-      ctx.fillStyle = "#B288FF"; ctx.font = "9px monospace";
-      ctx.fillText(`RSI(14): ${rsi14[rsi14.length - 1].toFixed(1)}`, w - padRight + 6, rsiTop + rsiPlotH / 2 + 3);
     }
 
+    // Mouse Move Crosshair & Tooltip
     cv.onmousemove = function(e) {
       const rect = cv.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
@@ -1372,13 +1578,13 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
         const tip = document.getElementById("chart-tooltip");
         if (tip) {
           tip.style.display = "block";
-          tip.style.left = `${Math.min(w - 180, mouseX + 10)}px`;
-          tip.style.top = `24px`;
+          tip.style.left = `${Math.min(w - 180, mouseX + 12)}px`;
+          tip.style.top = `${rect.top - cv.closest('.stacked-charts-wrap').getBoundingClientRect().top + 10}px`;
           tip.innerHTML = `
-            <b class="org">${activeItem.sym}</b> (${window.W_TERMINAL.timeframe})<br>
-            O: <span class="num">${fmtNum(b.open, activeItem.dp)}</span> H: <span class="num">${fmtNum(b.high, activeItem.dp)}</span><br>
-            L: <span class="num">${fmtNum(b.low, activeItem.dp)}</span> C: <span class="num bold ${b.close>=b.open?'up':'dn'}">${fmtNum(b.close, activeItem.dp)}</span><br>
-            VOL: <span class="num">${b.vol}</span> · RSI: <span class="num cy">${rsi14[idx].toFixed(1)}</span>
+            <b class="org">${symName}</b> (${window.W_TERMINAL.timeframe})<br>
+            O: <span class="num">${fmtNum(b.open, dp)}</span> H: <span class="num">${fmtNum(b.high, dp)}</span><br>
+            L: <span class="num">${fmtNum(b.low, dp)}</span> C: <span class="num bold ${b.close>=b.open?'up':'dn'}">${fmtNum(b.close, dp)}</span><br>
+            VOL: <span class="num">${b.vol}</span>
           `;
         }
       }
@@ -1389,168 +1595,236 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
     };
   }
 
+  // Draw all 3 stacked charts simultaneously
+  window.drawAllStackedCharts = function() {
+    if (window.W_TERMINAL.chartStreamMode === 'tv') {
+      renderTradingViewEmbeds();
+      return;
+    }
+    // 1. TOP: GC Gold
+    drawSingleChart("cv-chart-gc", "GC1!", window.W_TERMINAL.barsGC, 2);
+    // 2. MIDDLE: NQ Nasdaq
+    drawSingleChart("cv-chart-nq", "NQ1!", window.W_TERMINAL.barsNQ, 2);
+    // 3. BOTTOM: BTC/USD
+    drawSingleChart("cv-chart-btc", "BTC/USD", window.W_TERMINAL.barsBTC, 2);
+  };
+
+  // --- TRADINGVIEW PRO EMBED CONTROLLER ---
+  function renderTradingViewEmbeds() {
+    const panels = [
+      { id: 'tv-gc', cv: 'cv-chart-gc', sym: 'COMEX:GC1!' },
+      { id: 'tv-nq', cv: 'cv-chart-nq', sym: 'CME_MINI:NQ1!' },
+      { id: 'tv-btc', cv: 'cv-chart-btc', sym: 'BINANCE:BTCUSDT' }
+    ];
+
+    panels.forEach(p => {
+      const cvEl = document.getElementById(p.cv);
+      const tvEl = document.getElementById(p.id);
+      if (cvEl) cvEl.style.display = "none";
+      if (tvEl) {
+        tvEl.style.display = "block";
+        if (!tvEl.hasChildNodes()) {
+          const encoded = encodeURIComponent(p.sym);
+          tvEl.innerHTML = `
+            <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=${p.id}&symbol=${encoded}&interval=15&hidesidetoolbar=1&hidetoptoolbar=0&symboledit=0&saveimage=0&toolbarbg=000000&theme=dark&style=1&timezone=Asia%2FJakarta&studies=%5B%5D&withdateranges=1&showpopupbutton=0&locale=en" style="width:100%;height:100%;border:none;"></iframe>
+          `;
+        }
+      }
+    });
+  }
+
+  window.setChartStreamMode = function(mode) {
+    window.W_TERMINAL.chartStreamMode = mode;
+    const btnCanvas = document.getElementById("btn-chartmode-canvas");
+    const btnTv = document.getElementById("btn-chartmode-tv");
+    if (btnCanvas) btnCanvas.classList.toggle("active", mode === 'canvas');
+    if (btnTv) btnTv.classList.toggle("active", mode === 'tv');
+
+    if (mode === 'canvas') {
+      ['tv-gc', 'tv-nq', 'tv-btc'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "none";
+      });
+      ['cv-chart-gc', 'cv-chart-nq', 'cv-chart-btc'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = "block";
+      });
+      drawAllStackedCharts();
+    } else {
+      renderTradingViewEmbeds();
+    }
+    playTone(620, 'sine', 0.04);
+  };
+
   window.setTimeframe = function(tf) {
     window.W_TERMINAL.timeframe = tf;
-    document.querySelectorAll(".chart-container").forEach(c => {
-      c.parentElement.querySelector(".w-toolbar").querySelectorAll("button").forEach(b => {
-        if (['1M', '5M', '15M', '1H', '4H', '1D'].includes(b.textContent)) {
-          b.classList.toggle("active", b.textContent.toLowerCase() === tf.toLowerCase());
-        }
-      });
+    document.querySelectorAll(".w-toolbar button").forEach(b => {
+      if (['1M', '5M', '15M', '1H', '1D'].includes(b.textContent)) {
+        b.classList.toggle("active", b.textContent.toLowerCase() === tf.toLowerCase());
+      }
     });
     playTone(600, 'sine', 0.04);
-    drawTradingChart();
+    if (['1m', '5m', '15m', '1h', '1d'].includes(tf.toLowerCase())) {
+      fetch(`https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=${tf.toLowerCase()}&limit=45`)
+        .then(r => r.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            window.W_TERMINAL.barsBTC = data.map(k => ({
+              time: k[0], open: parseFloat(k[1]), high: parseFloat(k[2]),
+              low: parseFloat(k[3]), close: parseFloat(k[4]), vol: Math.round(parseFloat(k[5]))
+            }));
+            drawAllStackedCharts();
+          }
+        }).catch(() => drawAllStackedCharts());
+    } else {
+      drawAllStackedCharts();
+    }
   };
 
   window.setChartType = function(type) {
     window.W_TERMINAL.chartType = type;
-    drawTradingChart();
+    drawAllStackedCharts();
   };
 
   window.toggleIndicator = function(ind) {
     window.W_TERMINAL.indicators[ind] = !window.W_TERMINAL.indicators[ind];
-    drawTradingChart();
+    drawAllStackedCharts();
   };
 
-  // --- ORDER BOOK (L2) RENDERER ---
-  function updateOrderBook(item) {
-    const container = document.getElementById("ob-container");
+  // =========================================================================
+  // PRICE & LIQUIDITY DEPTH HEATMAP CONTROLLER
+  // =========================================================================
+
+  window.setHeatmapAsset = function(sym, btn) {
+    window.W_TERMINAL.heatmapSym = sym;
+    document.querySelectorAll("#widget-priceheatmap .w-toolbar button").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    updatePriceHeatmap();
+    playTone(680, 'sine', 0.04);
+  };
+
+  function updatePriceHeatmap() {
+    const container = document.getElementById("hm-ladder-body");
     if (!container) return;
 
-    const base = item.last;
-    const dp = item.dp;
+    const sym = window.W_TERMINAL.heatmapSym || "BTC/USD";
+    const item = window.W_TERMINAL.universe.find(u => u.sym === sym) || window.W_TERMINAL.universe[0];
+    const spot = item.last;
+    const dp = item.dp || 2;
+
+    // Update Header Spot & Spread
+    const spotEl = document.getElementById("hm-spot-val");
+    if (spotEl) {
+      spotEl.textContent = `$${fmtNum(spot, dp)}`;
+      spotEl.className = `hm-spot-val num ${item.chgPct >= 0 ? 'up' : 'dn'}`;
+    }
+
+    const spreadVal = spot * 0.00015;
+    const spreadPct = 0.015;
+    const sprEl = document.getElementById("hm-header-spread");
+    if (sprEl) sprEl.textContent = `SPREAD: $${fmtNum(spreadVal, dp)} (${spreadPct}%)`;
+
+    // Build 18 Heatmap Price Tiers: 9 Asks (Above Spot) and 9 Bids (Below Spot)
     const asks = [];
     const bids = [];
-    let cumAsk = 0, cumBid = 0;
+    let totalAskVol = 0;
+    let totalBidVol = 0;
+    let maxVol = 1;
 
-    for (let i = 8; i >= 1; i--) {
-      const p = base * (1 + i * 0.0006);
-      const sz = Math.floor(Math.random() * 45 + 5);
-      cumAsk += sz;
-      asks.push({ p, sz, cum: cumAsk });
+    // Use live Binance depth if BTC, or calculated volume distribution for GC/NQ
+    const isBtc = sym === "BTC/USD";
+    const depthData = isBtc ? window.W_TERMINAL.depthBTC : null;
+
+    for (let i = 9; i >= 1; i--) {
+      const stepPct = i * 0.0016;
+      const p = spot * (1 + stepPct);
+      let vol = Math.floor(Math.sin(i * 0.6) * 25 + 15);
+      if (depthData && depthData.asks && depthData.asks[i - 1]) {
+        vol = Math.round(depthData.asks[i - 1][1] * 10) / 10;
+      }
+      totalAskVol += vol;
+      if (vol > maxVol) maxVol = vol;
+      asks.push({ p, deltaPct: stepPct * 100, vol, isWall: i === 5 || i === 8 });
     }
-    for (let i = 1; i <= 8; i++) {
-      const p = base * (1 - i * 0.0006);
-      const sz = Math.floor(Math.random() * 45 + 5);
-      cumBid += sz;
-      bids.push({ p, sz, cum: cumBid });
+
+    for (let i = 1; i <= 9; i++) {
+      const stepPct = i * 0.0016;
+      const p = spot * (1 - stepPct);
+      let vol = Math.floor(Math.cos(i * 0.6) * 30 + 18);
+      if (depthData && depthData.bids && depthData.bids[i - 1]) {
+        vol = Math.round(depthData.bids[i - 1][1] * 10) / 10;
+      }
+      totalBidVol += vol;
+      if (vol > maxVol) maxVol = vol;
+      bids.push({ p, deltaPct: -stepPct * 100, vol, isWall: i === 4 || i === 7 });
     }
 
-    const maxCum = Math.max(cumAsk, cumBid) || 1;
+    // Order flow imbalance %
+    const totalVol = (totalAskVol + totalBidVol) || 1;
+    const bidPct = Math.round((totalBidVol / totalVol) * 100);
+    const askPct = 100 - bidPct;
 
+    const imbBarBid = document.getElementById("hm-imb-bid");
+    const imbBarAsk = document.getElementById("hm-imb-ask");
+    const imbText = document.getElementById("hm-imbalance-text");
+    if (imbBarBid) imbBarBid.style.width = `${bidPct}%`;
+    if (imbBarAsk) imbBarAsk.style.width = `${askPct}%`;
+    if (imbText) imbText.innerHTML = `<span class="up">${bidPct}% BID</span> / <span class="dn">${askPct}% ASK</span>`;
+
+    // Major Liquidity Wall alert
+    const majorWall = bids.find(b => b.isWall) || bids[3];
+    const wallText = document.getElementById("hm-wall-text");
+    if (wallText && majorWall) {
+      wallText.textContent = `MAJOR LIQUIDITY WALL AT $${fmtNum(majorWall.p, dp)} (+${majorWall.vol} LIQUIDITY SUPPORT)`;
+    }
+
+    // Render HTML Ladder
     let html = "";
+
+    // 1. Asks (Resistance Heatmap - Red)
     asks.forEach(a => {
-      const barW = (a.cum / maxCum) * 100;
+      const heatIntensity = Math.min(1, a.vol / maxVol);
+      const barW = Math.max(8, Math.round((a.vol / maxVol) * 95));
+      const bgGradient = `linear-gradient(90deg, transparent 40%, rgba(255, 77, 79, ${0.15 + heatIntensity * 0.45}) 100%)`;
       html += `
-        <div class="ob-row ask" onclick="populateOrderPrice(${a.p.toFixed(dp)})">
-          <span class="num dn bold">${fmtNum(a.p, dp)}</span>
-          <span class="num faint">${a.sz}</span>
-          <div class="ob-bar" style="width:${barW}%;"></div>
+        <div class="hm-row ask" onclick="openInspector('asset', { sym: '${sym}', last: ${a.p} })">
+          <span class="hm-price num dn bold">${fmtNum(a.p, dp)}</span>
+          <span class="hm-pct num dn">+${a.deltaPct.toFixed(2)}%</span>
+          <span class="hm-vol num faint">${a.vol}</span>
+          ${a.isWall ? '<span class="hm-tag pill pill-cogs">RESIST WALL</span>' : ''}
+          <div class="hm-bar" style="width:${barW}%; background:${bgGradient};"></div>
         </div>
       `;
     });
 
-    const spread = asks[asks.length - 1].p - bids[0].p;
-    const spreadPct = (spread / base) * 100;
-    html += `<div class="ob-spread">SPREAD: ${spread.toFixed(dp)} (${spreadPct.toFixed(3)}%)</div>`;
-
-    bids.forEach(b => {
-      const barW = (b.cum / maxCum) * 100;
-      html += `
-        <div class="ob-row bid" onclick="populateOrderPrice(${b.p.toFixed(dp)})">
-          <span class="num up bold">${fmtNum(b.p, dp)}</span>
-          <span class="num faint">${b.sz}</span>
-          <div class="ob-bar" style="width:${barW}%;"></div>
-        </div>
-      `;
-    });
-
-    container.innerHTML = html;
-  }
-
-  window.populateOrderPrice = function(price) {
-    const input = document.getElementById("desk-price");
-    if (input) input.value = price;
-    playTone(720, 'sine', 0.04);
-  };
-
-  // --- TRADING DESK EXECUTION ---
-  let selectedSide = 'BUY';
-  window.setTradeSide = function(side) {
-    selectedSide = side;
-    document.getElementById("btn-side-buy").classList.toggle("active", side === 'BUY');
-    document.getElementById("btn-side-sell").classList.toggle("active", side === 'SELL');
-    playTone(side === 'BUY' ? 680 : 440, 'sine', 0.05);
-  };
-
-  window.executePaperTrade = function() {
-    const size = parseFloat(document.getElementById("desk-size").value) || 0.1;
-    const price = parseFloat(document.getElementById("desk-price").value) || 100;
-    const sl = parseFloat(document.getElementById("desk-sl").value) || null;
-    const tp = parseFloat(document.getElementById("desk-tp").value) || null;
-
-    const newPos = {
-      id: "pos_" + Date.now().toString(36),
-      sym: window.W_TERMINAL.activeSym,
-      side: selectedSide,
-      size: size,
-      entry: price,
-      mark: price,
-      pnl: 0,
-      pnlPct: 0,
-      sl: sl,
-      tp: tp
-    };
-
-    window.W_TERMINAL.account.positions.unshift(newPos);
-    playTone(880, 'triangle', 0.1);
-    renderBlotter();
-  };
-
-  function renderBlotter() {
-    const container = document.getElementById("blotter-container");
-    if (!container) return;
-
-    const positions = window.W_TERMINAL.account.positions;
-    let html = `
-      <div style="font-size:9.5px;margin-bottom:6px;display:flex;justify-content:space-between;color:var(--ink-dim);">
-        <span>EQUITY: <b class="org num">$${fmtNum(window.W_TERMINAL.account.equity, 2)}</b></span>
-        <span>POSITIONS: <b>${positions.length}</b></span>
+    // 2. Spot Price Line
+    html += `
+      <div class="hm-row spot-row">
+        <span class="hm-price num org bold">▶ SPOT $${fmtNum(spot, dp)}</span>
+        <span class="hm-pct num org">0.00%</span>
+        <span class="hm-vol num org bold">${item.chgPct >= 0 ? '+' : ''}${item.chgPct.toFixed(2)}%</span>
+        <span class="hm-tag pill" style="background:#F28C00;color:#000;font-weight:800;">ACTIVE FAIR VALUE</span>
       </div>
     `;
 
-    if (!positions.length) {
-      html += `<div class="faint" style="padding:10px;text-align:center;">No active positions.</div>`;
-    } else {
-      html += positions.map(p => `
-        <div style="padding:4px 6px;border:1px solid var(--line);background:#070707;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;font-size:10px;">
-          <div>
-            <b class="org">${p.sym}</b>
-            <span class="${p.side === 'LONG' ? 'up' : 'dn'}" style="font-size:9px;font-weight:800;margin-left:4px;">${p.side}</span>
-            <span class="faint">× ${p.size}</span>
-            <div class="faint" style="font-size:8.5px;">Entry: ${fmtNum(p.entry)}</div>
-          </div>
-          <div style="text-align:right;">
-            <div class="num bold ${p.pnl >= 0 ? 'up' : 'dn'}">${p.pnl >= 0 ? '+' : ''}$${fmtNum(p.pnl, 2)} (${fmtPct(p.pnlPct)})</div>
-            <button style="color:var(--dn);font-size:9px;text-decoration:underline;" onclick="closePosition('${p.id}')">CLOSE</button>
-          </div>
+    // 3. Bids (Support Heatmap - Green)
+    bids.forEach(b => {
+      const heatIntensity = Math.min(1, b.vol / maxVol);
+      const barW = Math.max(8, Math.round((b.vol / maxVol) * 95));
+      const bgGradient = `linear-gradient(90deg, transparent 40%, rgba(0, 193, 118, ${0.15 + heatIntensity * 0.45}) 100%)`;
+      html += `
+        <div class="hm-row bid" onclick="openInspector('asset', { sym: '${sym}', last: ${b.p} })">
+          <span class="hm-price num up bold">${fmtNum(b.p, dp)}</span>
+          <span class="hm-pct num up">${b.deltaPct.toFixed(2)}%</span>
+          <span class="hm-vol num faint">${b.vol}</span>
+          ${b.isWall ? '<span class="hm-tag pill pill-cash">SUPPORT WALL</span>' : ''}
+          <div class="hm-bar" style="width:${barW}%; background:${bgGradient};"></div>
         </div>
-      `).join("");
-    }
+      `;
+    });
 
     container.innerHTML = html;
   }
-
-  window.closePosition = function(id) {
-    const pos = window.W_TERMINAL.account.positions.find(p => p.id === id);
-    if (pos) {
-      window.W_TERMINAL.account.balance += pos.pnl;
-      window.W_TERMINAL.account.realizedPnl += pos.pnl;
-      window.W_TERMINAL.account.positions = window.W_TERMINAL.account.positions.filter(p => p.id !== id);
-      playTone(600, 'sine', 0.08);
-      renderBlotter();
-    }
-  };
 
   // --- WATCHLIST RENDERER ---
   function renderWatchlistRows(items) {
@@ -1691,15 +1965,20 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
 
   // --- GRID LAYOUT CONTROLLER ---
   function getLayout() {
-    const saved = localStorage.getItem("why_terminal_layout");
+    const saved = localStorage.getItem("why_terminal_layout_v2");
     if (saved) {
-      try { return JSON.parse(saved); } catch(e) {}
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.some(x => x.id === 'priceheatmap')) {
+          return parsed;
+        }
+      } catch(e) {}
     }
     return window.W_TERMINAL.defaultLayout;
   }
 
   function saveLayout(l) {
-    localStorage.setItem("why_terminal_layout", JSON.stringify(l));
+    localStorage.setItem("why_terminal_layout_v2", JSON.stringify(l));
   }
 
   function renderGrid() {
@@ -1786,7 +2065,8 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
         item.w = cols; item.h = rows;
         wEl.style.width = `${cols * colW - 6}px`; wEl.style.height = `${rows * rowH - 6}px`;
         saveLayout(getLayout());
-        if (item.id === 'chart') drawTradingChart();
+        if (item.id === 'chart') drawAllStackedCharts();
+        if (item.id === 'priceheatmap') updatePriceHeatmap();
         if (item.id === 'heatmap') drawTradingTreemap();
       };
     };
@@ -1813,6 +2093,7 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
   window.resetLayoutPrompt = function() {
     if (confirm("Reset default Bloomberg layout for WHY://TERMINAL?")) {
       localStorage.removeItem("why_terminal_layout");
+      localStorage.removeItem("why_terminal_layout_v2");
       renderGrid();
       playTone(840, 'sine', 0.06);
     }
@@ -1831,11 +2112,16 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
   function handleCli(cmd) {
     playTone(550, 'sine', 0.05);
     if (cmd === ':help') {
-      alert("WHY://TERMINAL Commands:\n:chart <symbol> - Load asset (e.g. :chart btc, :chart bbca)\n:portal <name> - Filter news portal (e.g. :portal kontan)\n:screen <type> - Filter screener (e.g. :screen rsi)\n:tf <1m|5m|15m|1h|1d> - Set timeframe\n:buy <size> - Place Long\n:sell <size> - Place Short\n:edit - Toggle Grid Edit\n:preset - Reset Layout\n:sound - Toggle Audio\n:tape - Toggle Ticker");
+      alert("WHY://TERMINAL Commands:\n:chart <symbol> - Focus asset (e.g. :chart btc, :chart bbca)\n:heatmap <gc|nq|btc> - Set Price Heatmap asset\n:portal <name> - Filter news portal (e.g. :portal kontan)\n:screen <type> - Filter screener (e.g. :screen rsi)\n:tf <1m|5m|15m|1h|1d> - Set timeframe\n:edit - Toggle Grid Edit\n:preset - Reset Layout\n:sound - Toggle Audio\n:tape - Toggle Ticker");
     } else if (cmd.startsWith(':chart ')) {
       const s = cmd.replace(':chart ', '').trim().toUpperCase();
       const item = window.W_TERMINAL.universe.find(u => u.sym.toUpperCase().startsWith(s));
       if (item) setActiveAsset(item.sym);
+    } else if (cmd.startsWith(':heatmap ')) {
+      const h = cmd.replace(':heatmap ', '').trim().toUpperCase();
+      if (h.includes('GC') || h.includes('GOLD')) setHeatmapAsset('GC1!');
+      else if (h.includes('NQ') || h.includes('NAS')) setHeatmapAsset('NQ1!');
+      else if (h.includes('BTC')) setHeatmapAsset('BTC/USD');
     } else if (cmd.startsWith(':portal ')) {
       const p = cmd.replace(':portal ', '').trim().toUpperCase();
       setPortalFilter(p);
@@ -1973,6 +2259,7 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
   // --- BOOT ---
   renderTape();
   renderGrid();
+  initLiveFeeds();
 })();
 </script>
 </body>
