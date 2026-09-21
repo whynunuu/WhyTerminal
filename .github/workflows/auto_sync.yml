@@ -1,0 +1,30 @@
+name: Auto Sync Market Data (Every 6 Hours)
+
+on:
+  schedule:
+    - cron: '0 */6 * * *' # Every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run Market Data & News Sync
+        run: python sync_terminal.py
+
+      - name: Commit & Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --staged --quiet || (git commit -m "chore(sync): auto-sync market data & screening [skip ci]" && git push)
