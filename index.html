@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TRADE://TERMINAL — Multi-Asset Trading Desk & Market Radar</title>
-<meta name="description" content="Bloomberg-style ASCII Professional Trading Terminal for Stocks (IDX & US), Crypto, Forex, and Commodities."/>
+<title>WHY://TERMINAL — Multi-Asset Trading Desk, Market Screener & Multi-Portal News Wire</title>
+<meta name="description" content="Professional Bloomberg-style ASCII Trading Terminal for Stocks (IDX & US), Crypto, Forex, and Commodities with Live Multi-Portal News Screening."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 /* ==========================================================================
-   TRADE://TERMINAL — Bloomberg / Cyberpunk Professional Trading Desk
+   WHY://TERMINAL — Bloomberg / ASCII High-Density Trading Visual System
    ========================================================================== */
 :root {
   --bg: #000000;
@@ -145,10 +145,6 @@ a { color: var(--cyan); text-decoration: none; }
 .tape-item .t-sym { color: var(--org); font-weight: 800; }
 .tape-item .t-val { font-weight: 700; }
 .tape-item .t-chg { font-size: 10px; }
-.tape-flash-up { animation: flashUp 0.6s ease-out; }
-.tape-flash-dn { animation: flashDn 0.6s ease-out; }
-@keyframes flashUp { 0% { background: rgba(0, 193, 118, 0.4); } 100% { background: transparent; } }
-@keyframes flashDn { 0% { background: rgba(255, 77, 79, 0.4); } 100% { background: transparent; } }
 
 /* ---------- CANVAS & GRID SYSTEM ---------- */
 #canvas {
@@ -197,7 +193,6 @@ a { color: var(--cyan); text-decoration: none; }
   border-color: var(--org) !important;
 }
 .widget.minimized .w-body { display: none; }
-.widget.pinned .w-title { background: #161108; }
 
 .w-title {
   flex: 0 0 24px;
@@ -277,9 +272,7 @@ a { color: var(--cyan); text-decoration: none; }
 .chart-container {
   position: relative; width: 100%; height: 100%; min-height: 220px;
 }
-canvas.chart-cv {
-  width: 100%; height: 100%; display: block;
-}
+canvas.chart-cv { width: 100%; height: 100%; display: block; }
 .chart-tooltip {
   position: absolute; display: none; background: rgba(0,0,0,0.92);
   border: 1px solid var(--org); padding: 6px 9px; font-size: 9.5px;
@@ -287,17 +280,13 @@ canvas.chart-cv {
 }
 
 /* ORDER BOOK (L2 DEPTH) */
-.ob-wrap {
-  display: flex; flex-direction: column; height: 100%; font-size: 10px;
-}
+.ob-wrap { display: flex; flex-direction: column; height: 100%; font-size: 10px; }
 .ob-row {
   display: flex; align-items: center; justify-content: space-between;
   padding: 2px 8px; position: relative; height: 18px; cursor: pointer;
 }
 .ob-row:hover { background: rgba(255,255,255,0.06); }
-.ob-bar {
-  position: absolute; top: 0; bottom: 0; right: 0; opacity: 0.22; pointer-events: none;
-}
+.ob-bar { position: absolute; top: 0; bottom: 0; right: 0; opacity: 0.22; pointer-events: none; }
 .ob-row.ask .ob-bar { background: var(--dn); }
 .ob-row.bid .ob-bar { background: var(--up); }
 .ob-spread {
@@ -307,24 +296,15 @@ canvas.chart-cv {
 }
 
 /* TRADING DESK & BLOTTER */
-.desk-wrap {
-  display: flex; flex-direction: column; gap: 8px; padding: 8px; height: 100%;
-}
-.desk-actions {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
-}
-.desk-btn {
-  padding: 8px; font-size: 11px; font-weight: 800; text-align: center;
-  border-radius: 2px;
-}
+.desk-wrap { display: flex; flex-direction: column; gap: 8px; padding: 8px; height: 100%; }
+.desk-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.desk-btn { padding: 8px; font-size: 11px; font-weight: 800; text-align: center; border-radius: 2px; }
 .desk-btn.buy { background: rgba(0, 193, 118, 0.2); color: #00C176; border: 1px solid #00C176; }
 .desk-btn.buy:hover, .desk-btn.buy.active { background: #00C176; color: #000; }
 .desk-btn.sell { background: rgba(255, 77, 79, 0.2); color: #FF4D4F; border: 1px solid #FF4D4F; }
 .desk-btn.sell:hover, .desk-btn.sell.active { background: #FF4D4F; color: #000; }
 
-.desk-form {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 10px;
-}
+.desk-form { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: 10px; }
 .desk-field { display: flex; flex-direction: column; gap: 2px; }
 .desk-field label { color: var(--ink-dim); font-size: 9px; font-weight: 700; }
 .desk-field input {
@@ -339,10 +319,37 @@ canvas.chart-cv {
 }
 .desk-submit:hover { filter: brightness(1.15); }
 
-/* SQUARIFIED TREEMAP */
-.treemap-stage {
-  position: relative; width: 100%; height: 100%; min-height: 180px; overflow: hidden;
+/* MULTI-PORTAL NEWS & SCREENER STYLING */
+.portal-badge {
+  padding: 1px 5px; font-size: 8.5px; font-weight: 800; border-radius: 1px;
+  text-transform: uppercase;
 }
+.portal-bloomberg { background: rgba(242, 140, 0, 0.25); color: #F28C00; border: 1px solid #F28C00; }
+.portal-reuters { background: rgba(255, 128, 0, 0.25); color: #ff9933; border: 1px solid #ff9933; }
+.portal-cnbc { background: rgba(0, 193, 118, 0.25); color: #00C176; border: 1px solid #00C176; }
+.portal-coindesk { background: rgba(178, 136, 255, 0.25); color: #B288FF; border: 1px solid #B288FF; }
+.portal-kontan { background: rgba(63, 167, 163, 0.25); color: #3FA7A3; border: 1px solid #3FA7A3; }
+.portal-forexlive { background: rgba(255, 77, 79, 0.25); color: #FF4D4F; border: 1px solid #FF4D4F; }
+
+.sentiment-tag {
+  font-size: 8.5px; font-weight: 800; padding: 1px 4px; border-radius: 1px;
+}
+.sent-bullish { background: rgba(0, 193, 118, 0.2); color: var(--up); }
+.sent-bearish { background: rgba(255, 77, 79, 0.2); color: var(--dn); }
+.sent-neutral { background: rgba(138, 138, 138, 0.2); color: var(--flat); }
+
+.news-item {
+  padding: 7px 9px; border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 3px; cursor: pointer;
+  transition: background 0.1s;
+}
+.news-item:hover { background: #111; }
+.news-head { display: flex; align-items: center; gap: 6px; font-size: 9px; }
+.news-title { font-size: 11px; color: var(--ink); line-height: 1.38; font-weight: 500; }
+.news-impact { font-size: 9px; color: var(--ink-dim); display: flex; gap: 6px; margin-top: 2px; }
+
+/* SQUARIFIED TREEMAP */
+.treemap-stage { position: relative; width: 100%; height: 100%; min-height: 180px; overflow: hidden; }
 .tm-tile {
   position: absolute; border: 1px solid rgba(0,0,0,0.6);
   cursor: pointer; overflow: hidden; padding: 4px; display: flex;
@@ -352,33 +359,18 @@ canvas.chart-cv {
 .tm-tile .t-title { font-weight: 800; font-size: 10px; color: #fff; text-shadow: 0 1px 2px #000; }
 .tm-tile .t-val { font-weight: 700; font-size: 9.5px; color: #fff; }
 
-/* NEWS WIRE */
-.news-item {
-  padding: 6px 8px; border-bottom: 1px solid var(--line);
-  display: flex; flex-direction: column; gap: 2px; cursor: pointer;
-}
-.news-item:hover { background: #101010; }
-.news-head { display: flex; align-items: center; gap: 6px; font-size: 9px; }
-.news-tag {
-  padding: 0 4px; font-size: 8.5px; font-weight: 800;
-  background: #1f1f1f; color: var(--org); border: 1px solid var(--line2);
-}
-.news-title { font-size: 10.5px; color: var(--ink); line-height: 1.35; }
-
 /* WORLD SESSIONS */
 .session-item {
   display: flex; align-items: center; justify-content: space-between;
   padding: 6px 10px; border-bottom: 1px solid var(--line);
 }
-.session-status {
-  padding: 1px 6px; font-size: 9px; font-weight: 800; border-radius: 1px;
-}
+.session-status { padding: 1px 6px; font-size: 9px; font-weight: 800; border-radius: 1px; }
 .session-open { background: rgba(0, 193, 118, 0.2); color: var(--up); border: 1px solid var(--up); }
 .session-closed { background: rgba(255, 77, 79, 0.15); color: var(--dn); border: 1px solid var(--dn); }
 
 /* ---------- INSPECTOR DRAWER ---------- */
 #inspector {
-  position: fixed; top: var(--cmdh); right: -420px; width: 420px;
+  position: fixed; top: var(--cmdh); right: -430px; width: 430px;
   bottom: var(--clih); background: #060606; border-left: 1px solid var(--org);
   z-index: 150; display: flex; flex-direction: column;
   transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -392,10 +384,7 @@ canvas.chart-cv {
 }
 .ins-body { flex: 1; overflow-y: auto; padding: 12px; font-size: 10.5px; }
 .ins-sec { margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
-.ins-sec-title {
-  color: var(--org); font-weight: 800; font-size: 9.5px; margin-bottom: 6px;
-  letter-spacing: 0.5px;
-}
+.ins-sec-title { color: var(--org); font-weight: 800; font-size: 9.5px; margin-bottom: 6px; letter-spacing: 0.5px; }
 .ins-row { display: flex; justify-content: space-between; padding: 3px 0; }
 .ins-row .k { color: var(--ink-dim); }
 .ins-row .v { font-weight: 700; color: var(--ink); }
@@ -408,10 +397,7 @@ canvas.chart-cv {
   font-size: 11px; z-index: 110;
 }
 #clibar .prompt { color: var(--org); font-weight: 800; }
-#clibar input {
-  flex: 1; background: none; border: none; color: #fff;
-  font-family: var(--mono); font-size: 11px;
-}
+#clibar input { flex: 1; background: none; border: none; color: #fff; font-family: var(--mono); font-size: 11px; }
 #clibar .cli-hint { font-size: 9.5px; color: var(--ink-faint); }
 </style>
 </head>
@@ -420,7 +406,7 @@ canvas.chart-cv {
 <!-- TOP COMMAND BAR -->
 <header id="cmdbar" role="banner">
   <div class="brand">
-    <span>TRADE://TERMINAL</span>
+    <span>WHY://TERMINAL</span>
     <span class="cursor"></span>
   </div>
 
@@ -475,9 +461,9 @@ canvas.chart-cv {
 </main>
 
 <!-- INSPECTOR DRAWER -->
-<aside id="inspector" aria-label="Technical Instrument Inspector">
+<aside id="inspector" aria-label="Technical & News Inspector">
   <div class="ins-head">
-    <span id="ins-title">> TECHNICAL INSPECTOR</span>
+    <span id="ins-title">> INSPECTOR</span>
     <button class="w-btn" onclick="closeInspector()" style="font-size:14px;">✕</button>
   </div>
   <div class="ins-body" id="ins-content"></div>
@@ -485,8 +471,8 @@ canvas.chart-cv {
 
 <!-- BOTTOM COMMAND LINE (CLI) -->
 <footer id="clibar">
-  <span class="prompt">TRADE:CMD></span>
-  <input type="text" id="cli-input" placeholder="Type command (e.g. :chart btc, :buy btc 0.5, :tf 15m, :preset, :sound, :help)" autocomplete="off" spellcheck="false"/>
+  <span class="prompt">WHY:CMD></span>
+  <input type="text" id="cli-input" placeholder="Type command (e.g. :chart btc, :screen rsi, :portal kontan, :buy btc 0.5, :tf 15m, :help)" autocomplete="off" spellcheck="false"/>
   <span class="cli-hint">[?] shortcuts · [Esc] close drawer</span>
 </footer>
 
@@ -527,13 +513,15 @@ canvas.chart-cv {
   const fmtPct = (n) => (n > 0 ? "+" : "") + Number(n || 0).toFixed(2) + "%";
 
   // --- UNIFIED TRADING DATA UNIVERSE ---
-  window.T_DESK = {
+  window.W_TERMINAL = {
     activeSym: "BTC/USD",
     timeframe: "15m",
-    chartType: "candle", // "candle" or "line"
+    chartType: "candle",
     indicators: { ema: true, bb: false, vol: true, rsi: true },
     editMode: false,
     tapePaused: false,
+    activePortalFilter: "ALL",
+    activeScreenerTab: "OVERSOLD",
     account: {
       balance: 100000.0,
       equity: 100000.0,
@@ -546,50 +534,60 @@ canvas.chart-cv {
     },
     universe: [
       // CRYPTO
-      { sym: "BTC/USD", name: "Bitcoin", cat: "CRYPTO", last: 63850.00, chg: 1520.00, chgPct: 2.44, high: 64200.00, low: 62100.00, vol: "28.4B", dp: 2 },
-      { sym: "ETH/USD", name: "Ethereum", cat: "CRYPTO", last: 2640.50, chg: 82.30, chgPct: 3.22, high: 2680.00, low: 2550.00, vol: "14.1B", dp: 2 },
-      { sym: "SOL/USD", name: "Solana", cat: "CRYPTO", last: 148.50, chg: 8.15, chgPct: 5.81, high: 152.00, low: 139.80, vol: "4.2B", dp: 2 },
+      { sym: "BTC/USD", name: "Bitcoin", cat: "CRYPTO", last: 63850.00, chg: 1520.00, chgPct: 2.44, high: 64200.00, low: 62100.00, vol: "28.4B", rsi: 64.2, signal: "BULLISH", dp: 2 },
+      { sym: "ETH/USD", name: "Ethereum", cat: "CRYPTO", last: 2640.50, chg: 82.30, chgPct: 3.22, high: 2680.00, low: 2550.00, vol: "14.1B", rsi: 58.6, signal: "NEUTRAL", dp: 2 },
+      { sym: "SOL/USD", name: "Solana", cat: "CRYPTO", last: 148.50, chg: 8.15, chgPct: 5.81, high: 152.00, low: 139.80, vol: "4.2B", rsi: 72.4, signal: "OVERBOUGHT", dp: 2 },
       
       // SAHAM INDONESIA (IDX)
-      { sym: "BBCA.JK", name: "Bank Central Asia", cat: "IDX", last: 10450, chg: 125, chgPct: 1.21, high: 10500, low: 10325, vol: "840M", dp: 0 },
-      { sym: "BBRI.JK", name: "Bank Rakyat Indonesia", cat: "IDX", last: 5275, chg: -50, chgPct: -0.94, high: 5350, low: 5250, vol: "1.1B", dp: 0 },
-      { sym: "BMRI.JK", name: "Bank Mandiri", cat: "IDX", last: 7150, chg: 125, chgPct: 1.78, high: 7200, low: 7025, vol: "720M", dp: 0 },
-      { sym: "TLKM.JK", name: "Telkom Indonesia", cat: "IDX", last: 3120, chg: 40, chgPct: 1.30, high: 3140, low: 3080, vol: "450M", dp: 0 },
-      { sym: "ASII.JK", name: "Astra International", cat: "IDX", last: 5100, chg: 25, chgPct: 0.49, high: 5150, low: 5075, vol: "310M", dp: 0 },
-      { sym: "AMMN.JK", name: "Amman Mineral", cat: "IDX", last: 9850, chg: 325, chgPct: 3.41, high: 9950, low: 9500, vol: "580M", dp: 0 },
-      { sym: "IHSG", name: "IDX Composite", cat: "IDX", last: 7812.50, chg: 34.20, chgPct: 0.44, high: 7830.10, low: 7780.40, vol: "18.4T", dp: 2 },
+      { sym: "BBCA.JK", name: "Bank Central Asia", cat: "IDX", last: 10450, chg: 125, chgPct: 1.21, high: 10500, low: 10325, vol: "840M", rsi: 62.1, signal: "GOLDEN_CROSS", dp: 0 },
+      { sym: "BBRI.JK", name: "Bank Rakyat Indonesia", cat: "IDX", last: 5275, chg: -50, chgPct: -0.94, high: 5350, low: 5250, vol: "1.1B", rsi: 34.5, signal: "OVERSOLD", dp: 0 },
+      { sym: "BMRI.JK", name: "Bank Mandiri", cat: "IDX", last: 7150, chg: 125, chgPct: 1.78, high: 7200, low: 7025, vol: "720M", rsi: 66.8, signal: "BULLISH", dp: 0 },
+      { sym: "TLKM.JK", name: "Telkom Indonesia", cat: "IDX", last: 3120, chg: 40, chgPct: 1.30, high: 3140, low: 3080, vol: "450M", rsi: 41.2, signal: "NEUTRAL", dp: 0 },
+      { sym: "ASII.JK", name: "Astra International", cat: "IDX", last: 5100, chg: 25, chgPct: 0.49, high: 5150, low: 5075, vol: "310M", rsi: 48.0, signal: "NEUTRAL", dp: 0 },
+      { sym: "AMMN.JK", name: "Amman Mineral", cat: "IDX", last: 9850, chg: 325, chgPct: 3.41, high: 9950, low: 9500, vol: "580M", rsi: 71.0, signal: "OVERBOUGHT", dp: 0 },
+      { sym: "IHSG", name: "IDX Composite", cat: "IDX", last: 7812.50, chg: 34.20, chgPct: 0.44, high: 7830.10, low: 7780.40, vol: "18.4T", rsi: 61.5, signal: "BULLISH", dp: 2 },
 
       // US EQUITIES
-      { sym: "NVDA", name: "NVIDIA Corp", cat: "US", last: 118.80, chg: 4.35, chgPct: 3.80, high: 120.40, low: 114.20, vol: "48.2B", dp: 2 },
-      { sym: "AAPL", name: "Apple Inc", cat: "US", last: 228.40, chg: 1.36, chgPct: 0.60, high: 229.50, low: 226.80, vol: "18.5B", dp: 2 },
-      { sym: "TSLA", name: "Tesla Inc", cat: "US", last: 243.20, chg: 9.60, chgPct: 4.11, high: 247.00, low: 232.50, vol: "22.1B", dp: 2 },
-      { sym: "MSFT", name: "Microsoft Corp", cat: "US", last: 435.50, chg: 3.45, chgPct: 0.80, high: 438.00, low: 432.10, vol: "15.4B", dp: 2 },
+      { sym: "NVDA", name: "NVIDIA Corp", cat: "US", last: 118.80, chg: 4.35, chgPct: 3.80, high: 120.40, low: 114.20, vol: "48.2B", rsi: 67.5, signal: "VOL_BREAKOUT", dp: 2 },
+      { sym: "AAPL", name: "Apple Inc", cat: "US", last: 228.40, chg: 1.36, chgPct: 0.60, high: 229.50, low: 226.80, vol: "18.5B", rsi: 52.3, signal: "NEUTRAL", dp: 2 },
+      { sym: "TSLA", name: "Tesla Inc", cat: "US", last: 243.20, chg: 9.60, chgPct: 4.11, high: 247.00, low: 232.50, vol: "22.1B", rsi: 69.2, signal: "GOLDEN_CROSS", dp: 2 },
+      { sym: "MSFT", name: "Microsoft Corp", cat: "US", last: 435.50, chg: 3.45, chgPct: 0.80, high: 438.00, low: 432.10, vol: "15.4B", rsi: 54.1, signal: "NEUTRAL", dp: 2 },
 
       // FOREX
-      { sym: "USD/IDR", name: "US Dollar / Rupiah", cat: "FOREX", last: 15180, chg: -45, chgPct: -0.30, high: 15240, low: 15160, vol: "Forex", dp: 0 },
-      { sym: "EUR/USD", name: "Euro / US Dollar", cat: "FOREX", last: 1.1160, chg: 0.0017, chgPct: 0.15, high: 1.1180, low: 1.1130, vol: "Forex", dp: 4 },
-      { sym: "GBP/USD", name: "British Pound / USD", cat: "FOREX", last: 1.3280, chg: 0.0029, chgPct: 0.22, high: 1.3310, low: 1.3240, vol: "Forex", dp: 4 },
+      { sym: "USD/IDR", name: "US Dollar / Rupiah", cat: "FOREX", last: 15180, chg: -45, chgPct: -0.30, high: 15240, low: 15160, vol: "Forex", rsi: 32.0, signal: "OVERSOLD", dp: 0 },
+      { sym: "EUR/USD", name: "Euro / US Dollar", cat: "FOREX", last: 1.1160, chg: 0.0017, chgPct: 0.15, high: 1.1180, low: 1.1130, vol: "Forex", rsi: 56.4, signal: "NEUTRAL", dp: 4 },
+      { sym: "GBP/USD", name: "British Pound / USD", cat: "FOREX", last: 1.3280, chg: 0.0029, chgPct: 0.22, high: 1.3310, low: 1.3240, vol: "Forex", rsi: 61.2, signal: "BULLISH", dp: 4 },
 
       // COMMODITIES
-      { sym: "XAU/USD", name: "Gold Spot", cat: "METALS", last: 2622.50, chg: 16.20, chgPct: 0.62, high: 2628.90, low: 2605.10, vol: "Metal", dp: 2 },
-      { sym: "XAG/USD", name: "Silver Spot", cat: "METALS", last: 31.15, chg: 0.43, chgPct: 1.40, high: 31.45, low: 30.65, vol: "Metal", dp: 2 },
-      { sym: "BRENT", name: "Brent Crude Oil", cat: "METALS", last: 74.85, chg: -0.65, chgPct: -0.86, high: 75.90, low: 74.30, vol: "Energy", dp: 2 }
+      { sym: "XAU/USD", name: "Gold Spot", cat: "METALS", last: 2622.50, chg: 16.20, chgPct: 0.62, high: 2628.90, low: 2605.10, vol: "Metal", rsi: 74.8, signal: "OVERBOUGHT", dp: 2 },
+      { sym: "XAG/USD", name: "Silver Spot", cat: "METALS", last: 31.15, chg: 0.43, chgPct: 1.40, high: 31.45, low: 30.65, vol: "Metal", rsi: 68.0, signal: "BULLISH", dp: 2 },
+      { sym: "BRENT", name: "Brent Crude Oil", cat: "METALS", last: 74.85, chg: -0.65, chgPct: -0.86, high: 75.90, low: 74.30, vol: "Energy", rsi: 38.4, signal: "BEARISH", dp: 2 }
     ],
     news: [
-      { time: "18:42", tag: "CRYPTO", title: "Bitcoin menguji resistensi \$64.000 menyusul peningkatan volume open interest derivatif." },
-      { time: "18:25", tag: "MACRO", title: "Federal Reserve diproyeksikan melanjutkan pelonggaran moneter seiring inflasi inti yang melandai." },
-      { time: "18:05", tag: "IDX", title: "Saham perbankan BBCA dan BMRI ditutup reli kuat dengan akumulasi investor asing masif." },
-      { time: "17:40", tag: "US TECH", title: "NVIDIA memimpin reli sektor AI dan semikonduktor didorong lonjakan permintaan hyperscaler." },
-      { time: "17:15", tag: "METALS", title: "Emas dunia capai rekor all-time high di \$2.622 per troy ounce sebagai aset safe haven." }
+      { id: "n1", portal: "BLOOMBERG", time: "18:52", tag: "MACRO", sentiment: "BULLISH", title: "Federal Reserve memproyeksikan pelonggaran moneter lanjutan usai tren inflasi PCE mendingin sesuai target.", impact: "Yield obligasi AS turun, aset berisiko (Equities & Crypto) menguat.", tickers: ["BTC/USD", "NVDA", "IHSG"] },
+      { id: "n2", portal: "COINDESK", time: "18:45", tag: "CRYPTO", sentiment: "BULLISH", title: "Arus modal masuk mingguan Spot Bitcoin ETF melampaui \$1,2 Miliar dipimpin BlackRock IBIT.", impact: "Likuiditas institusional menyerap pasokan exchange, BTC menguji level \$64.000.", tickers: ["BTC/USD", "ETH/USD", "SOL/USD"] },
+      { id: "n3", portal: "KONTAN", time: "18:30", tag: "IDX", sentiment: "BULLISH", title: "Bank Central Asia (BBCA) dan BMRI pimpin penguatan IHSG dengan aksi beli bersih asing tembus Rp 1,4 Triliun.", impact: "Indeks IHSG stabil di atas level psikologis 7.800.", tickers: ["BBCA.JK", "BMRI.JK", "IHSG"] },
+      { id: "n4", portal: "REUTERS", time: "18:12", tag: "US TECH", sentiment: "BULLISH", title: "NVIDIA umumkan percepatan arsitektur chip AI generasi terbaru dengan pesanan penuh hingga 2027.", impact: "Valuasi saham semikonduktor naik, target harga konsensus analis dinaikkan.", tickers: ["NVDA", "TSLA", "MSFT"] },
+      { id: "n5", portal: "CNBC", time: "17:55", tag: "METALS", sentiment: "BULLISH", title: "Harga emas dunia tembus level rekor tertinggi baru di \$2.622 per troy ounce terdorong permintaan safe-haven global.", impact: "Penguatan berkelanjutan XAU/USD dan saham tambang emas.", tickers: ["XAU/USD", "AMMN.JK"] },
+      { id: "n6", portal: "FOREXLIVE", time: "17:35", tag: "FOREX", sentiment: "NEUTRAL", title: "Rupiah bertahan di kisaran Rp 15.180 per Dolar AS didukung cadangan devisa kuat Bank Indonesia.", impact: "Volatilitas USD/IDR stabil, ekspektasi BI-Rate tetap akomodatif.", tickers: ["USD/IDR"] },
+      { id: "n7", portal: "REUTERS", time: "17:05", tag: "ENERGY", sentiment: "BEARISH", title: "Minyak mentah Brent tertekan di kisaran \$74,8 per barel seiring pemulihan bertahap pasokan OPEC+.", impact: "Tekanan jangka pendek pada emiten energi.", tickers: ["BRENT"] },
+      { id: "n8", portal: "KONTAN", time: "16:40", tag: "IDX", sentiment: "NEUTRAL", title: "Bank Rakyat Indonesia (BBRI) konsolidasikan kredit mikro, rasio NPL terjaga di bawah 3,0%.", impact: "Peluang akumulasi bertahap di area oversold.", tickers: ["BBRI.JK"] }
+    ],
+    economicCalendar: [
+      { time: "20:30 WIB", event: "US Core CPI YoY", actual: "3.2%", forecast: "3.2%", previous: "3.3%", impact: "HIGH" },
+      { time: "Tomorrow", event: "FOMC Rate Decision", actual: "4.75%", forecast: "4.75%", previous: "5.25%", impact: "CRITICAL" },
+      { time: "23 Sept", event: "Bank Indonesia BI-Rate", actual: "-", forecast: "6.00%", previous: "6.25%", impact: "HIGH" },
+      { time: "27 Sept", event: "US Core PCE Price Index", actual: "-", forecast: "0.2%", previous: "0.2%", impact: "HIGH" }
     ],
     defaultLayout: [
       { id: "chart", x: 0, y: 0, w: 7, h: 9 },
       { id: "orderbook", x: 7, y: 0, w: 2.5, h: 9 },
       { id: "desk", x: 9.5, y: 0, w: 2.5, h: 9 },
-      { id: "watchlist", x: 0, y: 9, w: 5, h: 8 },
-      { id: "heatmap", x: 5, y: 9, w: 4, h: 8 },
-      { id: "sessions", x: 9, y: 9, w: 3, h: 4 },
-      { id: "news", x: 9, y: 13, w: 3, h: 4 }
+      { id: "watchlist", x: 0, y: 9, w: 4.5, h: 8 },
+      { id: "screener", x: 4.5, y: 9, w: 4.5, h: 8 },
+      { id: "news", x: 9, y: 9, w: 3, h: 8 },
+      { id: "heatmap", x: 0, y: 17, w: 6, h: 6 },
+      { id: "sessions", x: 6, y: 17, w: 6, h: 6 }
     ]
   };
 
@@ -620,7 +618,7 @@ canvas.chart-cv {
   function renderTape() {
     const track = document.getElementById("tape-track");
     track.innerHTML = "";
-    const items = window.T_DESK.universe;
+    const items = window.W_TERMINAL.universe;
     const stream = items.concat(items).concat(items);
 
     stream.forEach(it => {
@@ -641,7 +639,7 @@ canvas.chart-cv {
 
   let tapePos = 0;
   function animateTape() {
-    if (!window.T_DESK.tapePaused) {
+    if (!window.W_TERMINAL.tapePaused) {
       tapePos -= 0.8;
       const track = document.getElementById("tape-track");
       if (track) {
@@ -656,24 +654,23 @@ canvas.chart-cv {
   requestAnimationFrame(animateTape);
 
   window.toggleTape = function() {
-    window.T_DESK.tapePaused = !window.T_DESK.tapePaused;
+    window.W_TERMINAL.tapePaused = !window.W_TERMINAL.tapePaused;
     const btn = document.getElementById("tape-toggle-btn");
-    btn.textContent = window.T_DESK.tapePaused ? "▶" : "⏸";
+    btn.textContent = window.W_TERMINAL.tapePaused ? "▶" : "⏸";
     playTone(520, 'sine', 0.04);
   };
 
   // --- SIMULATED REAL-TIME MICRO-TICKS ---
   setInterval(() => {
-    const universe = window.T_DESK.universe;
+    const universe = window.W_TERMINAL.universe;
     const idx = Math.floor(Math.random() * universe.length);
     const item = universe[idx];
-    const pctDelta = (Math.random() - 0.48) * 0.0015;
+    const pctDelta = (Math.random() - 0.48) * 0.0014;
     const delta = item.last * pctDelta;
     item.last = Math.max(0.0001, item.last + delta);
     item.chg += delta;
     item.chgPct = (item.chg / (item.last - item.chg)) * 100;
 
-    // Update active row
     const el = document.querySelector(`.t-row-${item.sym.replace(/[^a-zA-Z0-9]/g, '')}`);
     if (el) {
       const cellLast = el.querySelector('.cell-last');
@@ -688,8 +685,7 @@ canvas.chart-cv {
       }
     }
 
-    // If active asset changed, update order book and positions mark price
-    if (item.sym === window.T_DESK.activeSym) {
+    if (item.sym === window.W_TERMINAL.activeSym) {
       updateOrderBook(item);
       updatePositionsMarkPrice(item.last);
     }
@@ -697,8 +693,8 @@ canvas.chart-cv {
 
   function updatePositionsMarkPrice(price) {
     let totalUnrealized = 0;
-    window.T_DESK.account.positions.forEach(pos => {
-      if (pos.sym === window.T_DESK.activeSym) {
+    window.W_TERMINAL.account.positions.forEach(pos => {
+      if (pos.sym === window.W_TERMINAL.activeSym) {
         pos.mark = price;
         const diff = pos.side === 'LONG' ? (pos.mark - pos.entry) : (pos.entry - pos.mark);
         pos.pnl = diff * pos.size;
@@ -706,7 +702,7 @@ canvas.chart-cv {
       }
       totalUnrealized += pos.pnl;
     });
-    window.T_DESK.account.equity = window.T_DESK.account.balance + totalUnrealized;
+    window.W_TERMINAL.account.equity = window.W_TERMINAL.account.balance + totalUnrealized;
     renderBlotter();
   }
 
@@ -718,9 +714,7 @@ canvas.chart-cv {
     
     function layout(nodes, r) {
       if (!nodes.length) return [];
-      if (nodes.length === 1) {
-        return [{ ...nodes[0], x: r.x, y: r.y, w: r.w, h: r.h }];
-      }
+      if (nodes.length === 1) return [{ ...nodes[0], x: r.x, y: r.y, w: r.w, h: r.h }];
       const isWide = r.w >= r.h;
       let row = [nodes[0]];
       let bestAspect = Infinity;
@@ -729,14 +723,12 @@ canvas.chart-cv {
         const candidate = nodes.slice(0, i + 1);
         const rowSum = candidate.reduce((s, it) => s + it.value, 0);
         const rowLen = isWide ? (rowSum / sum) * r.w : (rowSum / sum) * r.h;
-        
         let maxA = 0;
         candidate.forEach(c => {
           const itemBreadth = (c.value / rowSum) * (isWide ? r.h : r.w);
           const a = Math.max(rowLen / itemBreadth, itemBreadth / rowLen);
           if (a > maxA) maxA = a;
         });
-
         if (maxA <= bestAspect) {
           bestAspect = maxA;
           row = candidate;
@@ -750,11 +742,8 @@ canvas.chart-cv {
 
       row.forEach(node => {
         const breadth = (node.value / rowSum) * (isWide ? r.h : r.w);
-        if (isWide) {
-          rects.push({ ...node, x: r.x, y: r.y + offset, w: rowLen, h: breadth });
-        } else {
-          rects.push({ ...node, x: r.x + offset, y: r.y, w: breadth, h: rowLen });
-        }
+        if (isWide) rects.push({ ...node, x: r.x, y: r.y + offset, w: rowLen, h: breadth });
+        else rects.push({ ...node, x: r.x + offset, y: r.y, w: breadth, h: rowLen });
         offset += breadth;
       });
 
@@ -765,7 +754,6 @@ canvas.chart-cv {
 
       return rects.concat(layout(remNodes, remRect));
     }
-
     return layout(items, rect);
   }
 
@@ -778,16 +766,16 @@ canvas.chart-cv {
       render(body) {
         body.innerHTML = `
           <div class="w-toolbar">
-            <span class="bold org" id="chart-sym-label" style="font-size:11px;">${window.T_DESK.activeSym}</span>
+            <span class="bold org" id="chart-sym-label" style="font-size:11px;">${window.W_TERMINAL.activeSym}</span>
             <div style="display:flex;gap:3px;margin:0 6px;">
               ${['1m', '5m', '15m', '1h', '4h', '1D'].map(tf => `
-                <button class="tb-btn ${window.T_DESK.timeframe === tf ? 'active' : ''}" onclick="setTimeframe('${tf}')">${tf.toUpperCase()}</button>
+                <button class="tb-btn ${window.W_TERMINAL.timeframe === tf ? 'active' : ''}" onclick="setTimeframe('${tf}')">${tf.toUpperCase()}</button>
               `).join("")}
             </div>
-            <button class="tb-btn ${window.T_DESK.chartType === 'candle' ? 'active' : ''}" onclick="setChartType('candle')">CANDLE</button>
-            <button class="tb-btn ${window.T_DESK.chartType === 'line' ? 'active' : ''}" onclick="setChartType('line')">LINE</button>
-            <button class="tb-btn ${window.T_DESK.indicators.ema ? 'active' : ''}" onclick="toggleIndicator('ema')">EMA 20/50</button>
-            <button class="tb-btn ${window.T_DESK.indicators.rsi ? 'active' : ''}" onclick="toggleIndicator('rsi')">RSI (14)</button>
+            <button class="tb-btn ${window.W_TERMINAL.chartType === 'candle' ? 'active' : ''}" onclick="setChartType('candle')">CANDLE</button>
+            <button class="tb-btn ${window.W_TERMINAL.chartType === 'line' ? 'active' : ''}" onclick="setChartType('line')">LINE</button>
+            <button class="tb-btn ${window.W_TERMINAL.indicators.ema ? 'active' : ''}" onclick="toggleIndicator('ema')">EMA 20/50</button>
+            <button class="tb-btn ${window.W_TERMINAL.indicators.rsi ? 'active' : ''}" onclick="toggleIndicator('rsi')">RSI (14)</button>
             <span class="faint" style="margin-left:auto;font-size:9px;">REAL-TIME FEED</span>
           </div>
           <div class="chart-container">
@@ -811,7 +799,7 @@ canvas.chart-cv {
           </div>
           <div class="ob-wrap" id="ob-container"></div>
         `;
-        const activeItem = window.T_DESK.universe.find(u => u.sym === window.T_DESK.activeSym) || window.T_DESK.universe[0];
+        const activeItem = window.W_TERMINAL.universe.find(u => u.sym === window.W_TERMINAL.activeSym) || window.W_TERMINAL.universe[0];
         updateOrderBook(activeItem);
       }
     },
@@ -849,7 +837,7 @@ canvas.chart-cv {
             <div style="margin-top:6px;border-top:1px solid var(--line);padding-top:6px;flex:1;overflow-y:auto;" id="blotter-container"></div>
           </div>
         `;
-        const item = window.T_DESK.universe.find(u => u.sym === window.T_DESK.activeSym) || window.T_DESK.universe[0];
+        const item = window.W_TERMINAL.universe.find(u => u.sym === window.W_TERMINAL.activeSym) || window.W_TERMINAL.universe[0];
         const priceInput = document.getElementById("desk-price");
         if (priceInput) priceInput.value = item.last;
         renderBlotter();
@@ -877,13 +865,61 @@ canvas.chart-cv {
             </table>
           </div>
         `;
-        renderWatchlistRows(window.T_DESK.universe);
+        renderWatchlistRows(window.W_TERMINAL.universe);
       }
     },
 
-    // 05. SQUARIFIED HEATMAP
-    heatmap: {
+    // 05. TECHNICAL MARKET SCREENER (NEW)
+    screener: {
       num: "05",
+      title: "TECHNICAL MARKET SCREENER",
+      render(body) {
+        body.innerHTML = `
+          <div class="w-toolbar">
+            <button class="tb-btn active" onclick="setScreenerFilter('OVERSOLD', this)">OVERSOLD (RSI<35)</button>
+            <button class="tb-btn" onclick="setScreenerFilter('OVERBOUGHT', this)">OVERBOUGHT (RSI>65)</button>
+            <button class="tb-btn" onclick="setScreenerFilter('GOLDEN_CROSS', this)">GOLDEN CROSS</button>
+            <button class="tb-btn" onclick="setScreenerFilter('VOL_BREAKOUT', this)">VOL SURGE</button>
+            <span class="faint" style="margin-left:auto;font-size:9px;">AUTO-SCAN</span>
+          </div>
+          <div style="flex:1;overflow:auto;">
+            <table class="terminal-tbl">
+              <thead>
+                <tr><th>SYM</th><th>NAME</th><th>LAST</th><th>CHG%</th><th>RSI(14)</th><th>SIGNAL</th><th>ACTION</th></tr>
+              </thead>
+              <tbody id="screener-tbody"></tbody>
+            </table>
+          </div>
+        `;
+        renderScreenerRows('OVERSOLD');
+      }
+    },
+
+    // 06. MULTI-PORTAL NEWS WIRE (ENHANCED)
+    news: {
+      num: "06",
+      title: "MULTI-PORTAL FINANCIAL NEWS WIRE",
+      render(body) {
+        body.innerHTML = `
+          <div class="w-toolbar">
+            <button class="tb-btn active" onclick="setPortalFilter('ALL', this)">ALL</button>
+            <button class="tb-btn" onclick="setPortalFilter('BLOOMBERG', this)">BLOOMBERG</button>
+            <button class="tb-btn" onclick="setPortalFilter('REUTERS', this)">REUTERS</button>
+            <button class="tb-btn" onclick="setPortalFilter('CNBC', this)">CNBC</button>
+            <button class="tb-btn" onclick="setPortalFilter('COINDESK', this)">COINDESK</button>
+            <button class="tb-btn" onclick="setPortalFilter('KONTAN', this)">KONTAN/IDX</button>
+            <button class="tb-btn" onclick="setPortalFilter('FOREXLIVE', this)">FXLIVE</button>
+            <input type="text" class="search-input" placeholder="> grep news..." style="width:100px;margin-left:auto;" oninput="filterNewsByGrep(this.value)">
+          </div>
+          <div style="flex:1;overflow-y:auto;" id="news-feed-container"></div>
+        `;
+        renderNewsFeed(window.W_TERMINAL.news);
+      }
+    },
+
+    // 07. SQUARIFIED HEATMAP
+    heatmap: {
+      num: "07",
       title: "SQUARIFIED ASSET HEATMAP",
       render(body) {
         body.innerHTML = `
@@ -896,51 +932,43 @@ canvas.chart-cv {
       }
     },
 
-    // 06. WORLD SESSIONS
+    // 08. WORLD SESSIONS & ECONOMIC CALENDAR
     sessions: {
-      num: "06",
-      title: "WORLD TRADING SESSIONS",
+      num: "08",
+      title: "WORLD SESSIONS & ECONOMIC CALENDAR",
       render(body) {
-        body.innerHTML = `
-          <div class="session-item">
-            <div><div class="bold">ASIAN SESSION (Tokyo / Jakarta)</div><div class="faint" style="font-size:9px;">07:00 - 15:00 WIB</div></div>
-            <span class="session-status session-closed">CLOSED</span>
-          </div>
-          <div class="session-item">
-            <div><div class="bold">EUROPEAN SESSION (London)</div><div class="faint" style="font-size:9px;">14:00 - 22:30 WIB</div></div>
-            <span class="session-status session-open">ACTIVE</span>
-          </div>
-          <div class="session-item">
-            <div><div class="bold">AMERICAN SESSION (New York)</div><div class="faint" style="font-size:9px;">20:30 - 03:00 WIB</div></div>
-            <span class="session-status session-closed">PRE-MKT</span>
-          </div>
-          <div style="padding:6px 10px;font-size:9px;color:var(--cyan);font-weight:700;">
-            > PEAK LIQUIDITY OVERLAP: 20:30 - 22:30 WIB (London + NY)
-          </div>
-        `;
-      }
-    },
-
-    // 07. NEWS WIRE
-    news: {
-      num: "07",
-      title: "BREAKING MARKET NEWS WIRE",
-      render(body) {
-        let html = window.T_DESK.news.map(n => `
-          <div class="news-item">
-            <div class="news-head">
-              <span class="news-tag">${n.tag}</span>
-              <span class="faint">${n.time} WIB</span>
-            </div>
-            <div class="news-title">${n.title}</div>
+        const calRows = window.W_TERMINAL.economicCalendar.map(c => `
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 8px;border-bottom:1px solid var(--line);font-size:9.5px;">
+            <span class="faint">${c.time}</span>
+            <b style="flex:1;margin:0 8px;">${c.event}</b>
+            <span class="pill ${c.impact === 'CRITICAL' ? 'pill-tf' : 'pill-cash'}">${c.impact}</span>
+            <span class="num org" style="width:45px;text-align:right;">${c.forecast}</span>
           </div>
         `).join("");
 
         body.innerHTML = `
           <div class="w-toolbar">
-            <span class="faint" style="font-size:9px;">LIVE WIRE FEED</span>
+            <span class="faint" style="font-size:9px;">SESSIONS & HIGH-IMPACT MACRO EVENTS</span>
           </div>
-          <div style="flex:1;overflow-y:auto;">${html}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;height:100%;">
+            <div style="border-right:1px solid var(--line);overflow-y:auto;">
+              <div class="session-item">
+                <div><div class="bold">ASIAN (Tokyo / Jkt)</div><div class="faint" style="font-size:9px;">07:00 - 15:00 WIB</div></div>
+                <span class="session-status session-closed">CLOSED</span>
+              </div>
+              <div class="session-item">
+                <div><div class="bold">EUROPEAN (London)</div><div class="faint" style="font-size:9px;">14:00 - 22:30 WIB</div></div>
+                <span class="session-status session-open">ACTIVE</span>
+              </div>
+              <div class="session-item">
+                <div><div class="bold">AMERICAN (New York)</div><div class="faint" style="font-size:9px;">20:30 - 03:00 WIB</div></div>
+                <span class="session-status session-closed">PRE-MKT</span>
+              </div>
+            </div>
+            <div style="overflow-y:auto;">
+              ${calRows}
+            </div>
+          </div>
         `;
       }
     }
@@ -948,33 +976,114 @@ canvas.chart-cv {
 
   // --- ACTIVE ASSET CONTROLLER ---
   window.setActiveAsset = function(sym) {
-    window.T_DESK.activeSym = sym;
-    const item = window.T_DESK.universe.find(u => u.sym === sym) || window.T_DESK.universe[0];
+    window.W_TERMINAL.activeSym = sym;
+    const item = window.W_TERMINAL.universe.find(u => u.sym === sym) || window.W_TERMINAL.universe[0];
     
-    // Update Topbar
     const topBadge = document.getElementById("top-active-sym");
     if (topBadge) topBadge.textContent = sym;
     
-    // Update Chart Label
     const chartLbl = document.getElementById("chart-sym-label");
     if (chartLbl) chartLbl.textContent = sym;
 
-    // Update Desk Price
     const priceInput = document.getElementById("desk-price");
     if (priceInput) priceInput.value = item.last;
 
     playTone(580, 'sine', 0.05);
     drawTradingChart();
     updateOrderBook(item);
-    openInspector(item);
+    openInspector('asset', item);
 
-    // Highlight row in watchlist
-    document.querySelectorAll("#wl-tbody tr").forEach(tr => {
+    document.querySelectorAll("#wl-tbody tr, #screener-tbody tr").forEach(tr => {
       tr.classList.toggle("active", tr.dataset.sym === sym);
     });
   };
 
-  // --- DRAW TECHNICAL CANDLESTICK CHART WITH INDICATORS ---
+  // --- MULTI-PORTAL NEWS CONTROLLER ---
+  function renderNewsFeed(newsItems) {
+    const container = document.getElementById("news-feed-container");
+    if (!container) return;
+
+    container.innerHTML = newsItems.map(n => {
+      const portalClass = `portal-${n.portal.toLowerCase().replace(/[^a-z]/g, '')}`;
+      const sentClass = n.sentiment === 'BULLISH' ? 'sent-bullish' : (n.sentiment === 'BEARISH' ? 'sent-bearish' : 'sent-neutral');
+      return `
+        <div class="news-item" onclick="openInspector('news', ${JSON.stringify(n).replace(/"/g, '&quot;')})">
+          <div class="news-head">
+            <span class="portal-badge ${portalClass}">${n.portal}</span>
+            <span class="sentiment-tag ${sentClass}">${n.sentiment}</span>
+            <span class="faint">${n.time} WIB</span>
+            <span class="faint" style="margin-left:auto;">[${n.tag}]</span>
+          </div>
+          <div class="news-title">${n.title}</div>
+          <div class="news-impact">
+            <span class="faint">Tickers:</span>
+            ${n.tickers.map(t => `<b class="org" style="cursor:pointer;" onclick="event.stopPropagation();setActiveAsset('${t}')">${t}</b>`).join(" · ")}
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  window.setPortalFilter = function(portal, btn) {
+    document.querySelectorAll("#widget-news .w-toolbar button").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    window.W_TERMINAL.activePortalFilter = portal;
+    const filtered = portal === 'ALL' ? window.W_TERMINAL.news : window.W_TERMINAL.news.filter(n => n.portal.toUpperCase().includes(portal.toUpperCase()));
+    renderNewsFeed(filtered);
+    playTone(640, 'sine', 0.04);
+  };
+
+  window.filterNewsByGrep = function(q) {
+    const query = (q || '').toLowerCase();
+    const portal = window.W_TERMINAL.activePortalFilter;
+    let list = portal === 'ALL' ? window.W_TERMINAL.news : window.W_TERMINAL.news.filter(n => n.portal.toUpperCase().includes(portal.toUpperCase()));
+    if (query) {
+      list = list.filter(n => n.title.toLowerCase().includes(query) || n.tag.toLowerCase().includes(query) || n.tickers.some(t => t.toLowerCase().includes(query)));
+    }
+    renderNewsFeed(list);
+  };
+
+  // --- TECHNICAL SCREENER CONTROLLER ---
+  function renderScreenerRows(type) {
+    const tbody = document.getElementById("screener-tbody");
+    if (!tbody) return;
+
+    let list = window.W_TERMINAL.universe.slice();
+    if (type === 'OVERSOLD') {
+      list = list.filter(u => u.rsi <= 45).sort((a, b) => a.rsi - b.rsi);
+    } else if (type === 'OVERBOUGHT') {
+      list = list.filter(u => u.rsi >= 65).sort((a, b) => b.rsi - a.rsi);
+    } else if (type === 'GOLDEN_CROSS') {
+      list = list.filter(u => u.signal === 'GOLDEN_CROSS' || u.signal === 'BULLISH');
+    } else if (type === 'VOL_BREAKOUT') {
+      list = list.filter(u => u.signal === 'VOL_BREAKOUT' || u.chgPct > 3);
+    }
+
+    tbody.innerHTML = list.map(u => {
+      const rsiClass = u.rsi <= 35 ? 'up bold' : (u.rsi >= 65 ? 'dn bold' : 'faint');
+      return `
+        <tr data-sym="${u.sym}" onclick="setActiveAsset('${u.sym}')">
+          <td class="bold org">${u.sym}</td>
+          <td class="faint">${u.name}</td>
+          <td class="num bold">${fmtNum(u.last, u.dp)}</td>
+          <td class="num ${u.chgPct >= 0 ? 'up' : 'dn'}">${fmtPct(u.chgPct)}</td>
+          <td class="num ${rsiClass}">${u.rsi.toFixed(1)}</td>
+          <td><span class="pill ${u.chgPct >= 0 ? 'pill-cash' : 'pill-cogs'}">${u.signal}</span></td>
+          <td><button class="tb-btn" onclick="event.stopPropagation();setActiveAsset('${u.sym}')">CHART ↗</button></td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  window.setScreenerFilter = function(type, btn) {
+    document.querySelectorAll("#widget-screener .w-toolbar button").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    window.W_TERMINAL.activeScreenerTab = type;
+    renderScreenerRows(type);
+    playTone(660, 'sine', 0.04);
+  };
+
+  // --- DRAW TECHNICAL CANDLESTICK CHART ---
   function drawTradingChart() {
     const cv = document.getElementById("cv-trading-chart");
     if (!cv) return;
@@ -986,9 +1095,8 @@ canvas.chart-cv {
     cv.height = h * window.devicePixelRatio;
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-    const activeItem = window.T_DESK.universe.find(u => u.sym === window.T_DESK.activeSym) || window.T_DESK.universe[0];
+    const activeItem = window.W_TERMINAL.universe.find(u => u.sym === window.W_TERMINAL.activeSym) || window.W_TERMINAL.universe[0];
 
-    // Generate deterministic 45 historical bars for this asset
     const bars = [];
     let price = activeItem.last * 0.94;
     for (let i = 0; i < 45; i++) {
@@ -1001,10 +1109,8 @@ canvas.chart-cv {
       bars.push({ open, high, low, close, vol });
       price = close;
     }
-    // Set the last bar close to activeItem.last
     bars[bars.length - 1].close = activeItem.last;
 
-    // Calculate EMA 20 and EMA 50
     function calcEMA(data, period) {
       const k = 2 / (period + 1);
       const ema = [];
@@ -1022,7 +1128,6 @@ canvas.chart-cv {
     const ema20 = calcEMA(bars, 20);
     const ema50 = calcEMA(bars, 50);
 
-    // Calculate RSI 14
     function calcRSI(data, period = 14) {
       const rsi = [];
       let gains = 0, losses = 0;
@@ -1044,41 +1149,31 @@ canvas.chart-cv {
     }
     const rsi14 = calcRSI(bars);
 
-    // Padding
-    const hasRsi = window.T_DESK.indicators.rsi;
+    const hasRsi = window.W_TERMINAL.indicators.rsi;
     const rsiH = hasRsi ? 60 : 0;
     const padTop = 15, padBottom = 25 + rsiH, padLeft = 10, padRight = 65;
     const plotW = w - padLeft - padRight;
     const plotH = h - padTop - padBottom;
     const barW = plotW / bars.length;
 
-    // Background
     ctx.fillStyle = "#080808";
     ctx.fillRect(0, 0, w, h);
 
-    // Price scaling
     const minPrice = Math.min(...bars.map(b => b.low)) * 0.998;
     const maxPrice = Math.max(...bars.map(b => b.high)) * 1.002;
     const range = maxPrice - minPrice || 1;
 
-    // Grid lines & Axis labels
     ctx.strokeStyle = "#1a1a1a";
     ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
       const y = padTop + (plotH / 4) * i;
-      ctx.beginPath();
-      ctx.moveTo(padLeft, y);
-      ctx.lineTo(w - padRight, y);
-      ctx.stroke();
-
+      ctx.beginPath(); ctx.moveTo(padLeft, y); ctx.lineTo(w - padRight, y); ctx.stroke();
       const priceLabel = fmtNum(maxPrice - (range / 4) * i, activeItem.dp);
-      ctx.fillStyle = "#666";
-      ctx.font = "9px monospace";
+      ctx.fillStyle = "#666"; ctx.font = "9px monospace";
       ctx.fillText(priceLabel, w - padRight + 6, y + 3);
     }
 
-    // Volume bars at bottom of price chart
-    if (window.T_DESK.indicators.vol) {
+    if (window.W_TERMINAL.indicators.vol) {
       const maxVol = Math.max(...bars.map(b => b.vol)) || 1;
       bars.forEach((b, i) => {
         const x = padLeft + i * barW;
@@ -1088,16 +1183,12 @@ canvas.chart-cv {
       });
     }
 
-    // Render Price Chart (Candlestick or Line)
-    if (window.T_DESK.chartType === 'line') {
-      ctx.beginPath();
-      ctx.strokeStyle = "#00C176";
-      ctx.lineWidth = 2;
+    if (window.W_TERMINAL.chartType === 'line') {
+      ctx.beginPath(); ctx.strokeStyle = "#00C176"; ctx.lineWidth = 2;
       bars.forEach((b, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = padTop + plotH - ((b.close - minPrice) / range) * plotH;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       });
       ctx.stroke();
     } else {
@@ -1113,13 +1204,7 @@ canvas.chart-cv {
         ctx.fillStyle = isUp ? "#00C176" : "#FF4D4F";
         ctx.lineWidth = 1;
 
-        // Wick
-        ctx.beginPath();
-        ctx.moveTo(x, yHigh);
-        ctx.lineTo(x, yLow);
-        ctx.stroke();
-
-        // Body
+        ctx.beginPath(); ctx.moveTo(x, yHigh); ctx.lineTo(x, yLow); ctx.stroke();
         const bw = Math.max(3, barW * 0.72);
         const top = Math.min(yOpen, yClose);
         const bodyH = Math.max(2, Math.abs(yClose - yOpen));
@@ -1127,12 +1212,8 @@ canvas.chart-cv {
       });
     }
 
-    // EMA Indicators
-    if (window.T_DESK.indicators.ema) {
-      // EMA 20
-      ctx.beginPath();
-      ctx.strokeStyle = "#FFB454";
-      ctx.lineWidth = 1.5;
+    if (window.W_TERMINAL.indicators.ema) {
+      ctx.beginPath(); ctx.strokeStyle = "#FFB454"; ctx.lineWidth = 1.5;
       ema20.forEach((val, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = padTop + plotH - ((val - minPrice) / range) * plotH;
@@ -1140,10 +1221,7 @@ canvas.chart-cv {
       });
       ctx.stroke();
 
-      // EMA 50
-      ctx.beginPath();
-      ctx.strokeStyle = "#3FA7A3";
-      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.strokeStyle = "#3FA7A3"; ctx.lineWidth = 1.5;
       ema50.forEach((val, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = padTop + plotH - ((val - minPrice) / range) * plotH;
@@ -1152,16 +1230,12 @@ canvas.chart-cv {
       ctx.stroke();
     }
 
-    // RSI Sub-Panel
     if (hasRsi) {
       const rsiTop = h - rsiH + 6;
       const rsiPlotH = rsiH - 16;
-      ctx.fillStyle = "#0c0c0c";
-      ctx.fillRect(padLeft, rsiTop, plotW, rsiPlotH);
-      ctx.strokeStyle = "#252525";
-      ctx.strokeRect(padLeft, rsiTop, plotW, rsiPlotH);
+      ctx.fillStyle = "#0c0c0c"; ctx.fillRect(padLeft, rsiTop, plotW, rsiPlotH);
+      ctx.strokeStyle = "#252525"; ctx.strokeRect(padLeft, rsiTop, plotW, rsiPlotH);
 
-      // Overbought (70) and Oversold (30) levels
       ctx.setLineDash([3, 3]);
       ctx.strokeStyle = "#FF4D4F";
       const y70 = rsiTop + rsiPlotH - (70 / 100) * rsiPlotH;
@@ -1172,10 +1246,7 @@ canvas.chart-cv {
       ctx.beginPath(); ctx.moveTo(padLeft, y30); ctx.lineTo(padLeft + plotW, y30); ctx.stroke();
       ctx.setLineDash([]);
 
-      // RSI Line
-      ctx.beginPath();
-      ctx.strokeStyle = "#B288FF";
-      ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.strokeStyle = "#B288FF"; ctx.lineWidth = 1.5;
       rsi14.forEach((r, i) => {
         const x = padLeft + i * barW + barW / 2;
         const y = rsiTop + rsiPlotH - (r / 100) * rsiPlotH;
@@ -1183,13 +1254,10 @@ canvas.chart-cv {
       });
       ctx.stroke();
 
-      // RSI Label
-      ctx.fillStyle = "#B288FF";
-      ctx.font = "9px monospace";
+      ctx.fillStyle = "#B288FF"; ctx.font = "9px monospace";
       ctx.fillText(`RSI(14): ${rsi14[rsi14.length - 1].toFixed(1)}`, w - padRight + 6, rsiTop + rsiPlotH / 2 + 3);
     }
 
-    // Crosshair & Tooltip
     cv.onmousemove = function(e) {
       const rect = cv.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
@@ -1202,7 +1270,7 @@ canvas.chart-cv {
           tip.style.left = `${Math.min(w - 180, mouseX + 10)}px`;
           tip.style.top = `24px`;
           tip.innerHTML = `
-            <b class="org">${activeItem.sym}</b> (${window.T_DESK.timeframe})<br>
+            <b class="org">${activeItem.sym}</b> (${window.W_TERMINAL.timeframe})<br>
             O: <span class="num">${fmtNum(b.open, activeItem.dp)}</span> H: <span class="num">${fmtNum(b.high, activeItem.dp)}</span><br>
             L: <span class="num">${fmtNum(b.low, activeItem.dp)}</span> C: <span class="num bold ${b.close>=b.open?'up':'dn'}">${fmtNum(b.close, activeItem.dp)}</span><br>
             VOL: <span class="num">${b.vol}</span> · RSI: <span class="num cy">${rsi14[idx].toFixed(1)}</span>
@@ -1217,7 +1285,7 @@ canvas.chart-cv {
   }
 
   window.setTimeframe = function(tf) {
-    window.T_DESK.timeframe = tf;
+    window.W_TERMINAL.timeframe = tf;
     document.querySelectorAll(".chart-container").forEach(c => {
       c.parentElement.querySelector(".w-toolbar").querySelectorAll("button").forEach(b => {
         if (['1M', '5M', '15M', '1H', '4H', '1D'].includes(b.textContent)) {
@@ -1230,12 +1298,12 @@ canvas.chart-cv {
   };
 
   window.setChartType = function(type) {
-    window.T_DESK.chartType = type;
+    window.W_TERMINAL.chartType = type;
     drawTradingChart();
   };
 
   window.toggleIndicator = function(ind) {
-    window.T_DESK.indicators[ind] = !window.T_DESK.indicators[ind];
+    window.W_TERMINAL.indicators[ind] = !window.W_TERMINAL.indicators[ind];
     drawTradingChart();
   };
 
@@ -1266,7 +1334,6 @@ canvas.chart-cv {
     const maxCum = Math.max(cumAsk, cumBid) || 1;
 
     let html = "";
-    // Render Asks
     asks.forEach(a => {
       const barW = (a.cum / maxCum) * 100;
       html += `
@@ -1278,12 +1345,10 @@ canvas.chart-cv {
       `;
     });
 
-    // Spread
     const spread = asks[asks.length - 1].p - bids[0].p;
     const spreadPct = (spread / base) * 100;
     html += `<div class="ob-spread">SPREAD: ${spread.toFixed(dp)} (${spreadPct.toFixed(3)}%)</div>`;
 
-    // Render Bids
     bids.forEach(b => {
       const barW = (b.cum / maxCum) * 100;
       html += `
@@ -1321,7 +1386,7 @@ canvas.chart-cv {
 
     const newPos = {
       id: "pos_" + Date.now().toString(36),
-      sym: window.T_DESK.activeSym,
+      sym: window.W_TERMINAL.activeSym,
       side: selectedSide,
       size: size,
       entry: price,
@@ -1332,7 +1397,7 @@ canvas.chart-cv {
       tp: tp
     };
 
-    window.T_DESK.account.positions.unshift(newPos);
+    window.W_TERMINAL.account.positions.unshift(newPos);
     playTone(880, 'triangle', 0.1);
     renderBlotter();
   };
@@ -1341,10 +1406,10 @@ canvas.chart-cv {
     const container = document.getElementById("blotter-container");
     if (!container) return;
 
-    const positions = window.T_DESK.account.positions;
+    const positions = window.W_TERMINAL.account.positions;
     let html = `
       <div style="font-size:9.5px;margin-bottom:6px;display:flex;justify-content:space-between;color:var(--ink-dim);">
-        <span>EQUITY: <b class="org num">$${fmtNum(window.T_DESK.account.equity, 2)}</b></span>
+        <span>EQUITY: <b class="org num">$${fmtNum(window.W_TERMINAL.account.equity, 2)}</b></span>
         <span>POSITIONS: <b>${positions.length}</b></span>
       </div>
     `;
@@ -1372,11 +1437,11 @@ canvas.chart-cv {
   }
 
   window.closePosition = function(id) {
-    const pos = window.T_DESK.account.positions.find(p => p.id === id);
+    const pos = window.W_TERMINAL.account.positions.find(p => p.id === id);
     if (pos) {
-      window.T_DESK.account.balance += pos.pnl;
-      window.T_DESK.account.realizedPnl += pos.pnl;
-      window.T_DESK.account.positions = window.T_DESK.account.positions.filter(p => p.id !== id);
+      window.W_TERMINAL.account.balance += pos.pnl;
+      window.W_TERMINAL.account.realizedPnl += pos.pnl;
+      window.W_TERMINAL.account.positions = window.W_TERMINAL.account.positions.filter(p => p.id !== id);
       playTone(600, 'sine', 0.08);
       renderBlotter();
     }
@@ -1388,7 +1453,7 @@ canvas.chart-cv {
     if (!tbody) return;
     tbody.innerHTML = items.map(t => {
       const symClean = t.sym.replace(/[^a-zA-Z0-9]/g, '');
-      const isActive = t.sym === window.T_DESK.activeSym;
+      const isActive = t.sym === window.W_TERMINAL.activeSym;
       return `
         <tr class="t-row-${symClean} ${isActive ? 'active' : ''}" data-sym="${t.sym}" onclick="setActiveAsset('${t.sym}')">
           <td class="bold org">${t.sym}</td>
@@ -1406,13 +1471,13 @@ canvas.chart-cv {
   window.setWatchlistCategory = function(cat, btn) {
     document.querySelectorAll(".w-toolbar button").forEach(b => b.classList.remove("active"));
     if (btn) btn.classList.add("active");
-    const items = cat === 'ALL' ? window.T_DESK.universe : window.T_DESK.universe.filter(u => u.cat === cat);
+    const items = cat === 'ALL' ? window.W_TERMINAL.universe : window.W_TERMINAL.universe.filter(u => u.cat === cat);
     renderWatchlistRows(items);
   };
 
   window.filterWatchlist = function(q) {
     const query = (q || '').toLowerCase();
-    const filtered = window.T_DESK.universe.filter(u => 
+    const filtered = window.W_TERMINAL.universe.filter(u => 
       u.sym.toLowerCase().includes(query) || u.name.toLowerCase().includes(query)
     );
     renderWatchlistRows(filtered);
@@ -1426,7 +1491,7 @@ canvas.chart-cv {
     const w = stage.clientWidth || 380;
     const h = stage.clientHeight || 200;
 
-    const items = window.T_DESK.universe.map(u => ({
+    const items = window.W_TERMINAL.universe.map(u => ({
       key: u.sym,
       value: Math.max(1, Math.abs(u.chgPct) * 10 + 5),
       payload: u
@@ -1452,41 +1517,65 @@ canvas.chart-cv {
     });
   }
 
-  // --- TECHNICAL INSPECTOR DRAWER ---
-  window.openInspector = function(item) {
+  // --- INSPECTOR DRAWER CONTROLLER ---
+  window.openInspector = function(type, data) {
     const ins = document.getElementById("inspector");
     const body = document.getElementById("ins-content");
     const title = document.getElementById("ins-title");
-    title.textContent = `> INSPECTOR · ${item.sym}`;
 
-    const rsiVal = 64.2;
-    const atr = (item.last * 0.024).toFixed(item.dp);
+    if (type === 'news') {
+      title.textContent = `> NEWS INTEL · ${data.portal}`;
+      body.innerHTML = `
+        <div class="ins-sec">
+          <div class="ins-sec-title">HEADLINE SUMMARY</div>
+          <div style="font-size:12px;font-weight:700;line-height:1.4;margin-bottom:8px;">${data.title}</div>
+          <div class="ins-row"><span class="k">Portal Source</span><span class="v org bold">${data.portal}</span></div>
+          <div class="ins-row"><span class="k">Release Time</span><span class="v">${data.time} WIB</span></div>
+          <div class="ins-row"><span class="k">Sentiment</span><span class="v ${data.sentiment === 'BULLISH' ? 'up' : (data.sentiment === 'BEARISH' ? 'dn' : 'org')}">${data.sentiment}</span></div>
+          <div class="ins-row"><span class="k">Category Tag</span><span class="v cy">[${data.tag}]</span></div>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">POTENTIAL MARKET IMPACT</div>
+          <p style="color:var(--ink);line-height:1.5;">${data.impact}</p>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">KEY IMPACTED ASSETS</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+            ${data.tickers.map(t => `<button class="tb-btn" style="padding:4px 8px;" onclick="setActiveAsset('${t}')">CHART ${t} ↗</button>`).join("")}
+          </div>
+        </div>
+      `;
+    } else {
+      const item = data;
+      title.textContent = `> ASSET TELEMETRY · ${item.sym}`;
+      const atr = (item.last * 0.024).toFixed(item.dp);
 
-    body.innerHTML = `
-      <div class="ins-sec">
-        <div class="ins-sec-title">CORE INSTRUMENT SPECS</div>
-        <div class="ins-row"><span class="k">Symbol</span><span class="v org bold">${item.sym}</span></div>
-        <div class="ins-row"><span class="k">Asset Name</span><span class="v">${item.name}</span></div>
-        <div class="ins-row"><span class="k">Category</span><span class="v cy">${item.cat}</span></div>
-        <div class="ins-row"><span class="k">Last Settlement</span><span class="v num bold ${item.chgPct>=0?'up':'dn'}">${fmtNum(item.last, item.dp)}</span></div>
-        <div class="ins-row"><span class="k">24h Net Move</span><span class="v num ${item.chgPct>=0?'up':'dn'}">${fmtPct(item.chgPct)}</span></div>
-      </div>
-      <div class="ins-sec">
-        <div class="ins-sec-title">TECHNICAL GAUGES & MOMENTUM</div>
-        <div class="ins-row"><span class="k">RSI (14) Momentum</span><span class="v num up">${rsiVal} (Bullish)</span></div>
-        <div class="ins-row"><span class="k">EMA Ribbon 20/50</span><span class="v up">Golden Cross (Bullish)</span></div>
-        <div class="ins-row"><span class="k">Average True Range (ATR)</span><span class="v num">${atr}</span></div>
-        <div class="ins-row"><span class="k">24h Intraday Range</span><span class="v num faint">${item.low} - ${item.high}</span></div>
-      </div>
-      <div class="ins-sec">
-        <div class="ins-sec-title">KEY PIVOT LEVELS (ESTIMATED)</div>
-        <div class="ins-row"><span class="k">Resistance 2 (R2)</span><span class="v num dn">${(item.last * 1.03).toFixed(item.dp)}</span></div>
-        <div class="ins-row"><span class="k">Resistance 1 (R1)</span><span class="v num dn">${(item.last * 1.015).toFixed(item.dp)}</span></div>
-        <div class="ins-row"><span class="k">Pivot Point (PP)</span><span class="v num org">${item.last.toFixed(item.dp)}</span></div>
-        <div class="ins-row"><span class="k">Support 1 (S1)</span><span class="v num up">${(item.last * 0.985).toFixed(item.dp)}</span></div>
-        <div class="ins-row"><span class="k">Support 2 (S2)</span><span class="v num up">${(item.last * 0.97).toFixed(item.dp)}</span></div>
-      </div>
-    `;
+      body.innerHTML = `
+        <div class="ins-sec">
+          <div class="ins-sec-title">CORE INSTRUMENT SPECS</div>
+          <div class="ins-row"><span class="k">Symbol</span><span class="v org bold">${item.sym}</span></div>
+          <div class="ins-row"><span class="k">Asset Name</span><span class="v">${item.name}</span></div>
+          <div class="ins-row"><span class="k">Category</span><span class="v cy">${item.cat}</span></div>
+          <div class="ins-row"><span class="k">Last Price</span><span class="v num bold ${item.chgPct>=0?'up':'dn'}">${fmtNum(item.last, item.dp)}</span></div>
+          <div class="ins-row"><span class="k">24h Net Move</span><span class="v num ${item.chgPct>=0?'up':'dn'}">${fmtPct(item.chgPct)}</span></div>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">TECHNICAL GAUGES & MOMENTUM</div>
+          <div class="ins-row"><span class="k">RSI (14) Momentum</span><span class="v num up">${item.rsi.toFixed(1)} (${item.signal})</span></div>
+          <div class="ins-row"><span class="k">EMA Ribbon 20/50</span><span class="v up">Golden Cross (Bullish)</span></div>
+          <div class="ins-row"><span class="k">Average True Range (ATR)</span><span class="v num">${atr}</span></div>
+          <div class="ins-row"><span class="k">24h Range</span><span class="v num faint">${item.low} - ${item.high}</span></div>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">KEY PIVOT LEVELS (ESTIMATED)</div>
+          <div class="ins-row"><span class="k">Resistance 2 (R2)</span><span class="v num dn">${(item.last * 1.03).toFixed(item.dp)}</span></div>
+          <div class="ins-row"><span class="k">Resistance 1 (R1)</span><span class="v num dn">${(item.last * 1.015).toFixed(item.dp)}</span></div>
+          <div class="ins-row"><span class="k">Pivot Point (PP)</span><span class="v num org">${item.last.toFixed(item.dp)}</span></div>
+          <div class="ins-row"><span class="k">Support 1 (S1)</span><span class="v num up">${(item.last * 0.985).toFixed(item.dp)}</span></div>
+          <div class="ins-row"><span class="k">Support 2 (S2)</span><span class="v num up">${(item.last * 0.97).toFixed(item.dp)}</span></div>
+        </div>
+      `;
+    }
 
     ins.classList.add("open");
   };
@@ -1497,15 +1586,15 @@ canvas.chart-cv {
 
   // --- GRID LAYOUT CONTROLLER ---
   function getLayout() {
-    const saved = localStorage.getItem("trade_terminal_layout");
+    const saved = localStorage.getItem("why_terminal_layout");
     if (saved) {
       try { return JSON.parse(saved); } catch(e) {}
     }
-    return window.T_DESK.defaultLayout;
+    return window.W_TERMINAL.defaultLayout;
   }
 
   function saveLayout(l) {
-    localStorage.setItem("trade_terminal_layout", JSON.stringify(l));
+    localStorage.setItem("why_terminal_layout", JSON.stringify(l));
   }
 
   function renderGrid() {
@@ -1551,7 +1640,7 @@ canvas.chart-cv {
   function setupDrag(wEl, item, colW, rowH) {
     const handle = wEl.querySelector(".w-drag");
     handle.onmousedown = function(e) {
-      if (!window.T_DESK.editMode) return;
+      if (!window.W_TERMINAL.editMode) return;
       e.preventDefault();
       wEl.classList.add("dragging");
       const startX = e.clientX, startY = e.clientY;
@@ -1576,7 +1665,7 @@ canvas.chart-cv {
   function setupResize(wEl, item, colW, rowH) {
     const handle = wEl.querySelector(".w-resize");
     handle.onmousedown = function(e) {
-      if (!window.T_DESK.editMode) return;
+      if (!window.W_TERMINAL.editMode) return;
       e.preventDefault();
       const startX = e.clientX, startY = e.clientY;
       const origW = parseFloat(wEl.style.width), origH = parseFloat(wEl.style.height);
@@ -1610,15 +1699,15 @@ canvas.chart-cv {
   };
 
   window.toggleEditMode = function() {
-    window.T_DESK.editMode = !window.T_DESK.editMode;
-    document.getElementById("btn-edit-grid").classList.toggle("active", window.T_DESK.editMode);
-    document.getElementById("canvas").classList.toggle("edit-mode", window.T_DESK.editMode);
-    playTone(window.T_DESK.editMode ? 750 : 420, 'sine', 0.05);
+    window.W_TERMINAL.editMode = !window.W_TERMINAL.editMode;
+    document.getElementById("btn-edit-grid").classList.toggle("active", window.W_TERMINAL.editMode);
+    document.getElementById("canvas").classList.toggle("edit-mode", window.W_TERMINAL.editMode);
+    playTone(window.W_TERMINAL.editMode ? 750 : 420, 'sine', 0.05);
   };
 
   window.resetLayoutPrompt = function() {
-    if (confirm("Reset layout default Bloomberg trading desk?")) {
-      localStorage.removeItem("trade_terminal_layout");
+    if (confirm("Reset default Bloomberg layout for WHY://TERMINAL?")) {
+      localStorage.removeItem("why_terminal_layout");
       renderGrid();
       playTone(840, 'sine', 0.06);
     }
@@ -1637,11 +1726,14 @@ canvas.chart-cv {
   function handleCli(cmd) {
     playTone(550, 'sine', 0.05);
     if (cmd === ':help') {
-      alert("TRADE://TERMINAL Commands:\n:chart <symbol> - Load asset (e.g. :chart btc, :chart bbca)\n:tf <1m|5m|15m|1h|1d> - Set timeframe\n:buy <size> - Place Long\n:sell <size> - Place Short\n:edit - Toggle Grid Edit\n:preset - Reset Layout\n:sound - Toggle Audio\n:tape - Toggle Ticker");
+      alert("WHY://TERMINAL Commands:\n:chart <symbol> - Load asset (e.g. :chart btc, :chart bbca)\n:portal <name> - Filter news portal (e.g. :portal kontan)\n:screen <type> - Filter screener (e.g. :screen rsi)\n:tf <1m|5m|15m|1h|1d> - Set timeframe\n:buy <size> - Place Long\n:sell <size> - Place Short\n:edit - Toggle Grid Edit\n:preset - Reset Layout\n:sound - Toggle Audio\n:tape - Toggle Ticker");
     } else if (cmd.startsWith(':chart ')) {
       const s = cmd.replace(':chart ', '').trim().toUpperCase();
-      const item = window.T_DESK.universe.find(u => u.sym.toUpperCase().startsWith(s));
+      const item = window.W_TERMINAL.universe.find(u => u.sym.toUpperCase().startsWith(s));
       if (item) setActiveAsset(item.sym);
+    } else if (cmd.startsWith(':portal ')) {
+      const p = cmd.replace(':portal ', '').trim().toUpperCase();
+      setPortalFilter(p);
     } else if (cmd.startsWith(':tf ')) {
       const tf = cmd.replace(':tf ', '').trim();
       setTimeframe(tf);
