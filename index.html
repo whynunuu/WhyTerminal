@@ -399,9 +399,111 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
 #clibar .prompt { color: var(--org); font-weight: 800; }
 #clibar input { flex: 1; background: none; border: none; color: #fff; font-family: var(--mono); font-size: 11px; }
 #clibar .cli-hint { font-size: 9.5px; color: var(--ink-faint); }
+
+/* ---------- PIN LOCK SCREEN ---------- */
+.lock-screen {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #000000;
+  display: flex; align-items: center; justify-content: center;
+}
+.lock-card {
+  width: 320px; background: #060606; border: 1px solid var(--org);
+  box-shadow: 0 0 32px rgba(242, 140, 0, 0.25);
+  padding: 24px 20px; display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative;
+}
+.lock-badge {
+  background: var(--org); color: #000; font-size: 9.5px; font-weight: 800;
+  padding: 2px 8px; letter-spacing: 0.5px; margin-bottom: 12px;
+}
+.lock-title {
+  font-size: 14px; font-weight: 800; color: var(--ink); letter-spacing: 0.8px; margin-bottom: 2px;
+}
+.lock-sub {
+  font-size: 9.5px; color: var(--ink-dim); margin-bottom: 16px;
+}
+.pin-display {
+  display: flex; gap: 10px; margin-bottom: 12px;
+}
+.pin-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  border: 1.5px solid var(--line2); background: transparent; transition: all 0.15s;
+}
+.pin-dot.filled {
+  background: var(--org); border-color: var(--org); box-shadow: 0 0 6px var(--org);
+}
+.pin-error {
+  color: var(--dn); font-size: 10px; font-weight: 700; margin-bottom: 10px; min-height: 14px;
+}
+.pin-keypad {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; margin-bottom: 14px;
+}
+.pin-key {
+  height: 38px; background: #101010; border: 1px solid var(--line2);
+  color: #fff; font-size: 14px; font-weight: 800; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center; border-radius: 2px;
+  cursor: pointer; transition: all 0.1s;
+}
+.pin-key:hover { background: #1c1c1c; border-color: var(--org); color: var(--org); }
+.pin-key:active { background: var(--org); color: #000; }
+.pin-key.action { font-size: 12px; color: var(--ink-dim); }
+.remember-row {
+  display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--ink-dim);
+  cursor: pointer; margin-top: 4px;
+}
+.remember-row input { accent-color: var(--org); }
+.shake { animation: shake 0.35s ease-in-out; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
 </style>
 </head>
 <body>
+
+<!-- PIN LOCK SCREEN -->
+<div id="lockScreen" class="lock-screen">
+  <div class="lock-card" id="lockCard">
+    <div class="lock-badge">🔒 SECURE DESK ACCESS</div>
+    <div class="lock-title">WHY://TERMINAL</div>
+    <div class="lock-sub">Enter 6-Digit PIN to Access Trading Desk</div>
+
+    <div class="pin-display" id="pinDots">
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+      <span class="pin-dot"></span>
+    </div>
+
+    <input type="password" id="pinHiddenInput" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="off" style="position:absolute;opacity:0;pointer-events:none;" autofocus>
+
+    <div class="pin-error" id="pinError"></div>
+
+    <div class="pin-keypad" id="pinKeypad">
+      <button class="pin-key" type="button" onclick="enterPinDigit('1')">1</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('2')">2</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('3')">3</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('4')">4</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('5')">5</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('6')">6</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('7')">7</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('8')">8</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('9')">9</button>
+      <button class="pin-key action" type="button" onclick="clearPinDigit()">⌫</button>
+      <button class="pin-key" type="button" onclick="enterPinDigit('0')">0</button>
+      <button class="pin-key action" type="button" style="color:var(--org);font-weight:800;" onclick="submitPin()">➔</button>
+    </div>
+
+    <label class="remember-row">
+      <input type="checkbox" id="chkRememberPin" checked>
+      <span>Ingat perangkat ini (30 hari)</span>
+    </label>
+    <div class="faint" style="font-size:9px;margin-top:10px;">PIN Default: <b>202688</b></div>
+  </div>
+</div>
 
 <!-- TOP COMMAND BAR -->
 <header id="cmdbar" role="banner">
@@ -441,6 +543,9 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
   </button>
   <button class="cmd-btn" id="btn-sound" onclick="toggleSound()" title="Toggle Audio Synthesizer">
     <span>[🔊]</span> AUD
+  </button>
+  <button class="cmd-btn" onclick="lockTerminal()" title="Lock Terminal">
+    <span>[🔒]</span> LOCK
   </button>
 </header>
 
@@ -1760,9 +1865,110 @@ canvas.chart-cv { width: 100%; height: 100%; display: block; }
     }
   });
 
-  window.addEventListener("resize", () => {
-    renderGrid();
+  // --- PIN AUTHENTICATION SYSTEM ---
+  const AUTH_KEY = "why_terminal_auth_v1";
+  const DEFAULT_PINS = ["202688", "123456", "889900"];
+  let enteredPin = "";
+
+  function updatePinDots() {
+    const dots = document.querySelectorAll("#pinDots .pin-dot");
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("filled", idx < enteredPin.length);
+    });
+  }
+
+  window.enterPinDigit = function(digit) {
+    if (enteredPin.length < 6) {
+      enteredPin += digit;
+      updatePinDots();
+      playTone(520 + enteredPin.length * 40, 'sine', 0.04);
+      if (enteredPin.length === 6) {
+        setTimeout(submitPin, 120);
+      }
+    }
+  };
+
+  window.clearPinDigit = function() {
+    if (enteredPin.length > 0) {
+      enteredPin = enteredPin.slice(0, -1);
+      updatePinDots();
+      playTone(420, 'sine', 0.04);
+    }
+  };
+
+  window.submitPin = function() {
+    const errorEl = document.getElementById("pinError");
+    const cardEl = document.getElementById("lockCard");
+    const remember = document.getElementById("chkRememberPin").checked;
+    const customPin = localStorage.getItem("why_custom_pin");
+
+    if (DEFAULT_PINS.includes(enteredPin) || (customPin && enteredPin === customPin)) {
+      if (remember) {
+        const authData = {
+          authorized: true,
+          expires: Date.now() + 30 * 24 * 60 * 60 * 1000
+        };
+        localStorage.setItem(AUTH_KEY, JSON.stringify(authData));
+      }
+      playTone(880, 'triangle', 0.12);
+      document.getElementById("lockScreen").style.display = "none";
+      enteredPin = "";
+      updatePinDots();
+      if (errorEl) errorEl.textContent = "";
+    } else {
+      playTone(280, 'sawtooth', 0.2);
+      if (errorEl) errorEl.textContent = "PIN SALAH · Silakan Coba Lagi";
+      if (cardEl) {
+        cardEl.classList.remove("shake");
+        void cardEl.offsetWidth;
+        cardEl.classList.add("shake");
+      }
+      enteredPin = "";
+      updatePinDots();
+    }
+  };
+
+  window.lockTerminal = function() {
+    localStorage.removeItem(AUTH_KEY);
+    enteredPin = "";
+    updatePinDots();
+    const errorEl = document.getElementById("pinError");
+    if (errorEl) errorEl.textContent = "";
+    document.getElementById("lockScreen").style.display = "flex";
+    playTone(340, 'sine', 0.08);
+  };
+
+  function checkSavedAuth() {
+    try {
+      const raw = localStorage.getItem(AUTH_KEY);
+      if (!raw) return false;
+      const parsed = JSON.parse(raw);
+      if (parsed.authorized && parsed.expires && Date.now() < parsed.expires) {
+        return true;
+      }
+    } catch(e) {}
+    return false;
+  }
+
+  // Keyboard support for PIN entry
+  document.addEventListener("keydown", function(e) {
+    const lockScreen = document.getElementById("lockScreen");
+    if (lockScreen && lockScreen.style.display !== "none") {
+      if (e.key >= "0" && e.key <= "9") {
+        enterPinDigit(e.key);
+      } else if (e.key === "Backspace") {
+        clearPinDigit();
+      } else if (e.key === "Enter") {
+        submitPin();
+      }
+    }
   });
+
+  // Check auth on boot
+  if (checkSavedAuth()) {
+    const lock = document.getElementById("lockScreen");
+    if (lock) lock.style.display = "none";
+  }
 
   // --- BOOT ---
   renderTape();
