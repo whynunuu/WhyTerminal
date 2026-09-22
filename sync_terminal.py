@@ -82,14 +82,19 @@ def format_vol(num):
     return str(int(num))
 
 def fetch_binance_asset(symbol, quote_name, asset_name, cat, dp=2):
-    t_url = f"https://api.binance.com/api/v3/ticker/24hr?symbol={symbol}"
-    k_url = f"https://api.binance.com/api/v3/klines?symbol={symbol}&interval=1d&limit=25"
-    
-    t_data = fetch_json(t_url)
-    k_data = fetch_json(k_url)
+    # Try data-api.binance.vision first (unblocked globally), then api.binance.com
+    t_data = fetch_json(f"https://data-api.binance.vision/api/v3/ticker/24hr?symbol={symbol}", timeout=6)
+    if not t_data:
+        t_data = fetch_json(f"https://api.binance.com/api/v3/ticker/24hr?symbol={symbol}", timeout=6)
+
+    k_data = fetch_json(f"https://data-api.binance.vision/api/v3/klines?symbol={symbol}&interval=1d&limit=25", timeout=6)
+    if not k_data:
+        k_data = fetch_json(f"https://api.binance.com/api/v3/klines?symbol={symbol}&interval=1d&limit=25", timeout=6)
 
     if not t_data or 'lastPrice' not in t_data:
-        return None
+        # Fallback to Yahoo Finance crypto quote
+        y_sym = f"{symbol.replace('USDT', '')}-USD"
+        return fetch_yahoo_asset(y_sym, quote_name, asset_name, cat, dp)
 
     last = float(t_data.get('lastPrice', 0))
     chg = float(t_data.get('priceChange', 0))
