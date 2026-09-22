@@ -410,6 +410,33 @@ a { color: var(--cyan); text-decoration: none; }
 .session-open { background: rgba(0, 193, 118, 0.2); color: var(--up); border: 1px solid var(--up); }
 .session-closed { background: rgba(255, 77, 79, 0.15); color: var(--dn); border: 1px solid var(--dn); }
 
+/* ON-CHAIN WHALE TRACKER STYLING */
+.whale-kpi-bar {
+  display: flex; gap: 12px; align-items: center; padding: 6px 10px;
+  background: #080808; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+}
+.whale-kpi-item { display: flex; flex-direction: column; gap: 1px; }
+.whale-kpi-label { font-size: 8px; color: var(--ink-dim); letter-spacing: 0.5px; }
+.whale-kpi-val { font-size: 11px; font-weight: 800; font-family: var(--mono); }
+.whale-addr-mono { font-family: var(--mono); font-size: 9.5px; color: var(--ink-dim); letter-spacing: 0.2px; }
+.whale-copy-btn {
+  background: #151515; border: 1px solid var(--line2); color: var(--ink-dim);
+  font-size: 8px; padding: 1px 4px; cursor: pointer; border-radius: 1px; margin-left: 4px;
+  transition: all 0.1s;
+}
+.whale-copy-btn:hover { background: var(--org); color: #000; border-color: var(--org); }
+.whale-supply-track {
+  width: 48px; height: 4px; background: #1a1a1a; border-radius: 1px;
+  overflow: hidden; display: inline-block; vertical-align: middle; margin-left: 4px;
+}
+.whale-supply-fill { height: 100%; background: var(--org); }
+.pill-cluster-exch { background: rgba(242, 140, 0, 0.2); color: #F28C00; border: 1px solid #F28C00; }
+.pill-cluster-gov { background: rgba(255, 77, 79, 0.2); color: #FF4D4F; border: 1px solid #FF4D4F; }
+.pill-cluster-etf { background: rgba(0, 193, 118, 0.2); color: #00C176; border: 1px solid #00C176; }
+.pill-cluster-sc { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+.pill-cluster-dormant { background: rgba(138, 138, 138, 0.2); color: #aaa; border: 1px solid #555; }
+.pill-cluster-priv { background: rgba(178, 136, 255, 0.2); color: #B288FF; border: 1px solid #B288FF; }
+
 /* ---------- INSPECTOR DRAWER ---------- */
 #inspector {
   position: fixed; top: var(--cmdh); right: -430px; width: 430px;
@@ -718,6 +745,54 @@ a { color: var(--cyan); text-decoration: none; }
       { time: "Pekan Ini", event: "Speeches by 8 Federal Reserve Officials (Rate Guidance)", actual: "-", forecast: "Policy Direction", previous: "25 bps Hike", impact: "HIGH" },
       { time: "27 Sept", event: "US Core PCE Price Index YoY (Fed Target)", actual: "-", forecast: "2.6%", previous: "2.6%", impact: "HIGH" }
     ],
+    activeWhaleChain: "BTC",
+    whaleSearch: "",
+    whaleWallets: {
+      btc: [
+        { rank: 1, entity: "Binance Cold Storage #1", category: "EXCHANGE", cluster: "exch", address: "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", balance: 248597.13, usdVal: 21399650000, pctSupply: 1.25, status: "Cold Storage", flow: 1250.0, explorerUrl: "https://mempool.space/address/34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", notes: "Dompet cold storage cadangan utama bursa Binance global, diamankan dengan skema multisig institusional." },
+        { rank: 2, entity: "Bitfinex Cold Wallet", category: "EXCHANGE", cluster: "exch", address: "bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97", balance: 178010.88, usdVal: 15323600000, pctSupply: 0.90, status: "Cold Storage", flow: 0.0, explorerUrl: "https://mempool.space/address/bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97", notes: "Alamat Bech32 native SegWit terbesar di dunia, menyimpan cadangan jangka panjang bursa Bitfinex." },
+        { rank: 3, entity: "Robinhood Custody (Jump)", category: "BROKERAGE", cluster: "exch", address: "bc1ql49ydapnjafl5t2cp9zqpjwe6pdgmxy98859v2", balance: 140560.10, usdVal: 12099800000, pctSupply: 0.71, status: "Active Accumulation", flow: 320.5, explorerUrl: "https://mempool.space/address/bc1ql49ydapnjafl5t2cp9zqpjwe6pdgmxy98859v2", notes: "Kustodi ritel broker Robinhood yang dikelola bersama mitra market maker Jump Trading." },
+        { rank: 4, entity: "US Govt (Silk Road DOJ)", category: "GOVERNMENT", cluster: "gov", address: "bc1qazcm763858nkj2dj986etajv6wxfsl50ydrgpg", balance: 94643.04, usdVal: 8147100000, pctSupply: 0.48, status: "Gov Custody (DOJ)", flow: 0.0, explorerUrl: "https://mempool.space/address/bc1qazcm763858nkj2dj986etajv6wxfsl50ydrgpg", notes: "Sitaan Departemen Kehakiman AS dari kasus peretasan dan penyitaan pasar gelap Silk Road." },
+        { rank: 5, entity: "Mt. Gox Hack (2011 Whale)", category: "DORMANT", cluster: "dormant", address: "1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF", balance: 79957.26, usdVal: 6882900000, pctSupply: 0.40, status: "Dormant (15 yrs)", flow: 0.0, explorerUrl: "https://mempool.space/address/1FeexV6bAHb8ybZjqQMjJrcCrHGW9sb6uF", notes: "Salah satu alamat tertua dan paling misterius di blockchain, tidak pernah disentuh sejak Maret 2011." },
+        { rank: 6, entity: "HTX / Huobi Cold Storage", category: "EXCHANGE", cluster: "exch", address: "1LdRcdxfbSnmCYYNdeYpUnztiYzVfBEQeC", balance: 69370.15, usdVal: 5971500000, pctSupply: 0.35, status: "Cold Storage", flow: -150.0, explorerUrl: "https://mempool.space/address/1LdRcdxfbSnmCYYNdeYpUnztiYzVfBEQeC", notes: "Klaster cadangan utama Huobi Global/HTX, mencakup saldo likuiditas pengguna Asia-Pasifik." },
+        { rank: 7, entity: "Binance Cold Storage #2", category: "EXCHANGE", cluster: "exch", address: "bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6", balance: 68200.00, usdVal: 5870800000, pctSupply: 0.34, status: "Cold Storage", flow: 0.0, explorerUrl: "https://mempool.space/address/bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6", notes: "Dompet sekunder Binance yang digunakan untuk penyeimbangan cadangan berkala proof-of-reserves." },
+        { rank: 8, entity: "BlackRock IBIT Custody (Coinbase)", category: "INSTITUTIONAL", cluster: "etf", address: "bc1q7cyrfmck2ffu2ud3rn5l5a8yv6f0chkp0zpemf", balance: 62400.00, usdVal: 5371500000, pctSupply: 0.32, status: "Active ETF Inflow", flow: 4500.0, explorerUrl: "https://mempool.space/address/bc1q7cyrfmck2ffu2ud3rn5l5a8yv6f0chkp0zpemf", notes: "Alamat kustodi terverifikasi untuk iShares Bitcoin Trust (BlackRock) yang dikelola Coinbase Custody Trust." },
+        { rank: 9, entity: "Anonymous Mega Whale (2011)", category: "INDIVIDUAL", cluster: "priv", address: "1AC4fTSBmkgaj9mgfvYYxmBLiKnK6ke5N6", balance: 51830.36, usdVal: 4461700000, pctSupply: 0.26, status: "Dormant (14 yrs)", flow: 0.0, explorerUrl: "https://mempool.space/address/1AC4fTSBmkgaj9mgfvYYxmBLiKnK6ke5N6", notes: "Paus bitcoin generasi awal era Satoshi, menerima koin pada harga di bawah $10 per keping." },
+        { rank: 10, entity: "Bittrex Legacy Cold Wallet", category: "EXCHANGE", cluster: "exch", address: "12ib7dApVFvg82TXKycWBNpN8kFyiAN1dr", balance: 48512.44, usdVal: 4176100000, pctSupply: 0.24, status: "Cold Storage", flow: 0.0, explorerUrl: "https://mempool.space/address/12ib7dApVFvg82TXKycWBNpN8kFyiAN1dr", notes: "Dompet penyimpanan dingin bursa Bittrex peninggalan era pasar perdana AS." },
+        { rank: 11, entity: "Fidelity FBTC Custody", category: "INSTITUTIONAL", cluster: "etf", address: "bc1qjasf9z3wt05sqn94hgpk4x95x97ucl8d92q9zk", balance: 43800.00, usdVal: 3770400000, pctSupply: 0.22, status: "Active ETF Inflow", flow: 1800.0, explorerUrl: "https://mempool.space/address/bc1qjasf9z3wt05sqn94hgpk4x95x97ucl8d92q9zk", notes: "Kustodi mandiri Fidelity Digital Assets untuk dana kelolaan Fidelity Wise Origin Bitcoin Fund." },
+        { rank: 12, entity: "Unknown Billionaire Whale", category: "INDIVIDUAL", cluster: "priv", address: "12tkqA9xSo9jUGnmsbtokhmUqgNX9pkjBo", balance: 40170.00, usdVal: 3457900000, pctSupply: 0.20, status: "Active Buy Wall", flow: 650.0, explorerUrl: "https://mempool.space/address/12tkqA9xSo9jUGnmsbtokhmUqgNX9pkjBo", notes: "Paus misterius yang rutin melakukan akumulasi dolar berkala (DCA) dalam jumlah masif." },
+        { rank: 13, entity: "Bitstamp Cold Storage", category: "EXCHANGE", cluster: "exch", address: "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r", balance: 36810.00, usdVal: 3168700000, pctSupply: 0.19, status: "Cold Storage", flow: -40.0, explorerUrl: "https://mempool.space/address/3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r", notes: "Cadangan brankas offline Bitstamp, salah satu bursa kripto berlisensi Eropa tertua." },
+        { rank: 14, entity: "Kraken Cold Storage", category: "EXCHANGE", cluster: "exch", address: "bc1q5p2k8snvcvf3m07fh7v9y6d9f8m0v992f9kqaz", balance: 34500.00, usdVal: 2969800000, pctSupply: 0.17, status: "Cold Storage", flow: 110.0, explorerUrl: "https://mempool.space/address/bc1q5p2k8snvcvf3m07fh7v9y6d9f8m0v992f9kqaz", notes: "Alamat brankas multi-signature Kraken Financial berlokasi di yurisdiksi AS." },
+        { rank: 15, entity: "Dormant Whale (2014 Vintage)", category: "INDIVIDUAL", cluster: "dormant", address: "14rE7nhhwRPvnc4n57z3qGmn79vKeMjcq2", balance: 32400.00, usdVal: 2789100000, pctSupply: 0.16, status: "Dormant (12 yrs)", flow: 0.0, explorerUrl: "https://mempool.space/address/14rE7nhhwRPvnc4n57z3qGmn79vKeMjcq2", notes: "Paus era pra-halving kedua yang tidak pernah melakukan transaksi keluar sejak awal tahun 2014." },
+        { rank: 16, entity: "US Govt (Bitfinex Hack Seized)", category: "GOVERNMENT", cluster: "gov", address: "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4", balance: 28700.00, usdVal: 2470600000, pctSupply: 0.14, status: "Gov Custody", flow: 0.0, explorerUrl: "https://mempool.space/address/bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4", notes: "Koin hasil sitaan otoritas federal AS dari kasus pencucian uang peretasan Bitfinex tahun 2016." },
+        { rank: 17, entity: "Coincheck Cold Wallet", category: "EXCHANGE", cluster: "exch", address: "38UmuUCffmrneUbcvOgsB2t21teDejUCwa", balance: 27900.00, usdVal: 2401700000, pctSupply: 0.14, status: "Cold Storage", flow: -25.0, explorerUrl: "https://mempool.space/address/38UmuUCffmrneUbcvOgsB2t21teDejUCwa", notes: "Kustodi bursa berlisensi JFSA Jepang Coincheck di bawah pengawasan Monex Group." },
+        { rank: 18, entity: "Accumulation Mega-Whale #3", category: "INDIVIDUAL", cluster: "priv", address: "1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ", balance: 26100.00, usdVal: 2246800000, pctSupply: 0.13, status: "Active Buy Wall", flow: 950.0, explorerUrl: "https://mempool.space/address/1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ", notes: "Dikenal di kalangan analis on-chain sebagai dompet pembuat tembok likuiditas beli saat terjadi dip." },
+        { rank: 19, entity: "Coinbase Prime Custody #1", category: "INSTITUTIONAL", cluster: "etf", address: "3Cbq7aT1tY8kNxvgbZRX3EpTWzQ26mv5Gg", balance: 25400.00, usdVal: 2186500000, pctSupply: 0.13, status: "Institutional Cold", flow: 210.0, explorerUrl: "https://mempool.space/address/3Cbq7aT1tY8kNxvgbZRX3EpTWzQ26mv5Gg", notes: "Brankas penyimpanan primer Coinbase Institutional melayani korporasi publik dan family office." },
+        { rank: 20, entity: "Genesis Block (Satoshi Nakamoto)", category: "GENESIS", cluster: "dormant", address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", balance: 100.85, usdVal: 8681000, pctSupply: 0.01, status: "Immortal Genesis", flow: 0.12, explorerUrl: "https://mempool.space/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", notes: "Alamat Blok 0 Bitcoin (3 Jan 2009). Hadiah 50 BTC pertama tidak dapat dibelanjakan akibat kode awal, rutin menerima donasi dari komunitas." }
+      ],
+      eth: [
+        { rank: 1, entity: "Beacon Deposit Contract (PoS)", category: "STAKING", cluster: "sc", address: "0x00000000219ab540356cbb839cbe05303d7705fa", balance: 34250000.0, usdVal: 94012000000, pctSupply: 28.50, status: "Consensus Lock", flow: 42000.0, explorerUrl: "https://etherscan.io/address/0x00000000219ab540356cbb839cbe05303d7705fa", notes: "Smart contract konsensus Proof-of-Stake Ethereum resmi yang mengunci seluruh validator aktif global." },
+        { rank: 2, entity: "Wrapped Ether (WETH Contract)", category: "DEFI", cluster: "sc", address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", balance: 3150000.0, usdVal: 8646450000, pctSupply: 2.62, status: "Smart Contract", flow: -5100.0, explorerUrl: "https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", notes: "Kontrak WETH standar ERC-20 yang mendasari seluruh likuiditas bursa terdesentralisasi (Uniswap, Curve)." },
+        { rank: 3, entity: "Binance Cold Storage #1", category: "EXCHANGE", cluster: "exch", address: "0xda9df2326a1f599bb0019652f150204f7b6070a7", balance: 1980000.0, usdVal: 5434900000, pctSupply: 1.65, status: "Cold Storage", flow: 0.0, explorerUrl: "https://etherscan.io/address/0xda9df2326a1f599bb0019652f150204f7b6070a7", notes: "Brankas penyimpanan dingin Ethereum terbesar milik Binance, diverifikasi pada audit bukti cadangan (PoR)." },
+        { rank: 4, entity: "Binance Cold Storage #2", category: "EXCHANGE", cluster: "exch", address: "0x28c6c06298d514db089934071355e5743bf21d60", balance: 1450000.0, usdVal: 3980100000, pctSupply: 1.21, status: "Active Cluster", flow: 8400.0, explorerUrl: "https://etherscan.io/address/0x28c6c06298d514db089934071355e5743bf21d60", notes: "Dompet operasional penyeimbang transaksi deposit dan penarikan internal bursa Binance." },
+        { rank: 5, entity: "Binance Cold Storage #8", category: "EXCHANGE", cluster: "exch", address: "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8", balance: 1120000.0, usdVal: 3074300000, pctSupply: 0.93, status: "Cold Storage", flow: 0.0, explorerUrl: "https://etherscan.io/address/0xbe0eb53f46cd790cd13851d5eff43d12404d33e8", notes: "Klaster cadangan brankas aman jangka panjang untuk jaminan likuiditas akun institusional." },
+        { rank: 6, entity: "Robinhood Custody", category: "BROKERAGE", cluster: "exch", address: "0xa621743f878f7734a7fb4be399993ea956a93547", balance: 920000.0, usdVal: 2525300000, pctSupply: 0.77, status: "Retail Custody", flow: 1200.0, explorerUrl: "https://etherscan.io/address/0xa621743f878f7734a7fb4be399993ea956a93547", notes: "Alamat kustodi terpusat yang menampung kepemilikan aset kripto nasabah aplikasi Robinhood US." },
+        { rank: 7, entity: "Arbitrum One Bridge Gateway", category: "BRIDGE", cluster: "sc", address: "0x40b3876ab035e36757193d7f8c104bc386685a37", balance: 850000.0, usdVal: 2333150000, pctSupply: 0.71, status: "Rollup Bridge", flow: 3400.0, explorerUrl: "https://etherscan.io/address/0x40b3876ab035e36757193d7f8c104bc386685a37", notes: "Jembatan rollup Layer-2 Arbitrum One resmi, mengunci ETH di Layer-1 untuk pencetakan di L2." },
+        { rank: 8, entity: "Kraken Cold Storage", category: "EXCHANGE", cluster: "exch", address: "0x5a52e96bacdabb82fd05763e25335261b170fbfc", balance: 780000.0, usdVal: 2141000000, pctSupply: 0.65, status: "Cold Storage", flow: 0.0, explorerUrl: "https://etherscan.io/address/0x5a52e96bacdabb82fd05763e25335261b170fbfc", notes: "Dompet brankas luring bursa Kraken di bawah skema multi-tanda tangan perangkat keras." },
+        { rank: 9, entity: "Lido: stETH Liquid Staking", category: "STAKING", cluster: "sc", address: "0xae7ab96520de3a18e5e111b5eaab095312d7fe84", balance: 710000.0, usdVal: 1948850000, pctSupply: 0.59, status: "Liquid Staking Pool", flow: 6800.0, explorerUrl: "https://etherscan.io/address/0xae7ab96520de3a18e5e111b5eaab095312d7fe84", notes: "Pool likuiditas staking terdesentralisasi Lido DAO terbesar untuk token derivatif stETH." },
+        { rank: 10, entity: "Bitfinex Cold Wallet", category: "EXCHANGE", cluster: "exch", address: "0x8315177ab297ba92a06054ce80a67ed4dbd7ed3a", balance: 650000.0, usdVal: 1784180000, pctSupply: 0.54, status: "Cold Storage", flow: -800.0, explorerUrl: "https://etherscan.io/address/0x8315177ab297ba92a06054ce80a67ed4dbd7ed3a", notes: "Dompet cadangan dingin Bitfinex iFinex Group untuk penyimpanan saldo utama nasabah." },
+        { rank: 11, entity: "Binance Hot Wallet #6", category: "EXCHANGE", cluster: "exch", address: "0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503", balance: 590000.0, usdVal: 1619480000, pctSupply: 0.49, status: "Active Hot Wallet", flow: -4300.0, explorerUrl: "https://etherscan.io/address/0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503", notes: "Dompet operasional panas volume tinggi untuk pemenuhan antrean withdraw pengguna Binance." },
+        { rank: 12, entity: "Optimism (OP) Portal Bridge", category: "BRIDGE", cluster: "sc", address: "0x99c9fc46f92e8a1c0dec1b1747d010903e884be1", balance: 540000.0, usdVal: 1482240000, pctSupply: 0.45, status: "Rollup Bridge", flow: 1500.0, explorerUrl: "https://etherscan.io/address/0x99c9fc46f92e8a1c0dec1b1747d010903e884be1", notes: "Jembatan penghubung Layer-2 Optimism Superchain yang mengamankan transfer cross-chain." },
+        { rank: 13, entity: "Robinhood Hot Wallet #2", category: "BROKERAGE", cluster: "exch", address: "0x1b3cb81e51011b549d78bf720b0d924ac783bf61", balance: 480000.0, usdVal: 1317550000, pctSupply: 0.40, status: "Active Hot Wallet", flow: 2100.0, explorerUrl: "https://etherscan.io/address/0x1b3cb81e51011b549d78bf720b0d924ac783bf61", notes: "Dompet sekunder Robinhood yang menangani rute likuiditas harian ritel di AS." },
+        { rank: 14, entity: "Wrapped Lido wstETH Contract", category: "DEFI", cluster: "sc", address: "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0", balance: 450000.0, usdVal: 1235200000, pctSupply: 0.37, status: "DeFi Collateral", flow: -900.0, explorerUrl: "https://etherscan.io/address/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0", notes: "Smart contract token wstETH tanpa rebase yang banyak diagunkan di protokol pinjaman Aave dan MakerDAO." },
+        { rank: 15, entity: "vitalik.eth (Vitalik Buterin)", category: "FOUNDER", cluster: "priv", address: "0xd8da6bf26964af9d7eed9e03e53415d37aa96045", balance: 240000.0, usdVal: 658770000, pctSupply: 0.20, status: "Public Identity", flow: 0.0, explorerUrl: "https://etherscan.io/address/0xd8da6bf26964af9d7eed9e03e53415d37aa96045", notes: "Alamat publik resmi milik co-founder Ethereum Vitalik Buterin, sering berinteraksi dengan kontrak donasi ekosistem." },
+        { rank: 16, entity: "Binance Hot Wallet #1", category: "EXCHANGE", cluster: "exch", address: "0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be", balance: 390000.0, usdVal: 1070500000, pctSupply: 0.32, status: "Active Hot Wallet", flow: 3200.0, explorerUrl: "https://etherscan.io/address/0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be", notes: "Alamat dompet panas generasi pertama Binance yang masih aktif digunakan untuk transfer berkecepatan tinggi." },
+        { rank: 17, entity: "Coinbase Cold Storage (ETH #1)", category: "INSTITUTIONAL", cluster: "etf", address: "0xb38e8c17e38363af6ebdcb3dae12e02435807920", balance: 350000.0, usdVal: 960710000, pctSupply: 0.29, status: "Institutional Cold", flow: 1400.0, explorerUrl: "https://etherscan.io/address/0xb38e8c17e38363af6ebdcb3dae12e02435807920", notes: "Kustodi brankas Coinbase Custody untuk penyedia ETF Ethereum Spot institusional AS." },
+        { rank: 18, entity: "1inch Aggregator Router v5", category: "DEFI", cluster: "sc", address: "0x1111111254fb6c44bac0bed2854e76f90643097d", balance: 310000.0, usdVal: 850910000, pctSupply: 0.26, status: "DEX Protocol", flow: -750.0, explorerUrl: "https://etherscan.io/address/0x1111111254fb6c44bac0bed2854e76f90643097d", notes: "Kontrak pintar agregator DEX 1inch untuk eksekusi swap multijalur terefisiensi gas." },
+        { rank: 19, entity: "Poloniex Cold Storage", category: "EXCHANGE", cluster: "exch", address: "0x267be1c1d684f7404374fd1a738e068295eb7bce", balance: 280000.0, usdVal: 768570000, pctSupply: 0.23, status: "Cold Storage", flow: 0.0, explorerUrl: "https://etherscan.io/address/0x267be1c1d684f7404374fd1a738e068295eb7bce", notes: "Dompet brankas offline bursa Poloniex peninggalan era awal perdagangan altcoin global." },
+        { rank: 20, entity: "Bitstamp Cold Storage (ETH)", category: "EXCHANGE", cluster: "exch", address: "0x71660c4005ba85c37ccec55d0c4493e66fe775d3", balance: 250000.0, usdVal: 686220000, pctSupply: 0.21, status: "Cold Storage", flow: 50.0, explorerUrl: "https://etherscan.io/address/0x71660c4005ba85c37ccec55d0c4493e66fe775d3", notes: "Cadangan brankas aman Ethereum bursa Bitstamp yang teregulasi di Luksemburg & Uni Eropa." }
+      ]
+    },
     defaultLayout: [
       { id: "chart", x: 0, y: 0, w: 7.5, h: 14 },
       { id: "priceheatmap", x: 7.5, y: 0, w: 4.5, h: 7 },
@@ -725,7 +800,8 @@ a { color: var(--cyan); text-decoration: none; }
       { id: "watchlist", x: 0, y: 14, w: 4, h: 7 },
       { id: "screener", x: 4, y: 14, w: 4, h: 7 },
       { id: "sessions", x: 8, y: 14, w: 4, h: 7 },
-      { id: "heatmap", x: 0, y: 21, w: 12, h: 5 }
+      { id: "heatmap", x: 0, y: 21, w: 12, h: 5 },
+      { id: "whales", x: 0, y: 26, w: 12, h: 8 }
     ]
   };
 
@@ -1128,6 +1204,43 @@ a { color: var(--cyan); text-decoration: none; }
           </div>
         `;
       }
+    },
+
+    // 09. ON-CHAIN WHALE TRACKER (TOP 20 RICHEST WALLETS)
+    whales: {
+      num: "09",
+      title: "ON-CHAIN WHALE TRACKER · TOP 20 RICHEST WALLETS",
+      render(body) {
+        const activeChain = window.W_TERMINAL.activeWhaleChain || 'BTC';
+        body.innerHTML = `
+          <div class="w-toolbar">
+            <span class="faint" style="font-size:9px;">CHAIN:</span>
+            <button class="tb-btn ${activeChain === 'BTC' ? 'active' : ''}" onclick="setWhaleChain('BTC', this)">BITCOIN (BTC)</button>
+            <button class="tb-btn ${activeChain === 'ETH' ? 'active' : ''}" onclick="setWhaleChain('ETH', this)">ETHEREUM (ETH)</button>
+            <input type="text" class="search-input" id="whale-search-input" placeholder="> filter entity, address, cluster..." style="width:220px;margin-left:8px;" oninput="filterWhaleTable(this.value)">
+            <span class="faint" style="margin-left:auto;font-size:9px;" id="whale-chain-stat">LIVE ON-CHAIN ARCHIVE · 20 LARGEST KNOWN BALANCES</span>
+          </div>
+          <div class="whale-kpi-bar" id="whale-kpi-bar"></div>
+          <div style="flex:1;overflow:auto;">
+            <table class="terminal-tbl">
+              <thead>
+                <tr>
+                  <th style="width:36px;text-align:center;">#</th>
+                  <th>ENTITY & CLUSTER</th>
+                  <th>ON-CHAIN ADDRESS</th>
+                  <th style="text-align:right;">HOLDINGS</th>
+                  <th style="text-align:right;">EST. VALUE (USD)</th>
+                  <th style="text-align:right;">% SUPPLY</th>
+                  <th style="text-align:center;">STATUS / 7D FLOW</th>
+                  <th style="text-align:center;width:110px;">ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="whale-tbody"></tbody>
+            </table>
+          </div>
+        `;
+        renderWhaleRows();
+      }
     }
   };
 
@@ -1235,6 +1348,188 @@ a { color: var(--cyan); text-decoration: none; }
     renderScreenerRows(type);
     playTone(660, 'sine', 0.04);
   };
+
+  // --- ON-CHAIN WHALE TRACKER CONTROLLER ---
+  const fmtUsd = (n) => {
+    if (n >= 1e9) return "$" + (n / 1e9).toFixed(2) + "B";
+    if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
+    if (n >= 1e3) return "$" + (n / 1e3).toFixed(2) + "K";
+    return "$" + Number(n || 0).toFixed(2);
+  };
+
+  const truncateAddr = (addr) => {
+    if (!addr || addr.length <= 16) return addr;
+    return addr.slice(0, 8) + "..." + addr.slice(-8);
+  };
+
+  function renderWhaleRows() {
+    const tbody = document.getElementById("whale-tbody");
+    const kpiBar = document.getElementById("whale-kpi-bar");
+    const statEl = document.getElementById("whale-chain-stat");
+    if (!tbody) return;
+
+    const chain = (window.W_TERMINAL.activeWhaleChain || 'BTC').toLowerCase();
+    const isBtc = chain === 'btc';
+    const ticker = isBtc ? 'BTC' : 'ETH';
+    const fullList = (window.W_TERMINAL.whaleWallets && window.W_TERMINAL.whaleWallets[chain]) || [];
+    
+    // Calculate aggregate metrics
+    const totalCoins = fullList.reduce((acc, cur) => acc + cur.balance, 0);
+    const totalUsd = fullList.reduce((acc, cur) => acc + cur.usdVal, 0);
+    const totalSupplyPct = fullList.reduce((acc, cur) => acc + cur.pctSupply, 0);
+    const topHolder = fullList[0] ? fullList[0].entity : '-';
+    const netFlow7d = fullList.reduce((acc, cur) => acc + (cur.flow || 0), 0);
+
+    if (kpiBar) {
+      kpiBar.innerHTML = `
+        <div class="whale-kpi-item">
+          <span class="whale-kpi-label">TOP 20 COMBINED HOLDINGS</span>
+          <span class="whale-kpi-val org">${fmtNum(totalCoins, isBtc ? 2 : 0)} ${ticker}</span>
+        </div>
+        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
+          <span class="whale-kpi-label">ESTIMATED ASSET VALUE</span>
+          <span class="whale-kpi-val num">${fmtUsd(totalUsd)}</span>
+        </div>
+        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
+          <span class="whale-kpi-label">% CIRCULATING SUPPLY</span>
+          <span class="whale-kpi-val cy">${totalSupplyPct.toFixed(2)}%</span>
+        </div>
+        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
+          <span class="whale-kpi-label">LARGEST SINGLE HOLDER</span>
+          <span class="whale-kpi-val" style="color:#fff;">${topHolder}</span>
+        </div>
+        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;margin-left:auto;">
+          <span class="whale-kpi-label">AGGREGATE 7D NET FLOW</span>
+          <span class="whale-kpi-val ${netFlow7d > 0 ? 'up' : (netFlow7d < 0 ? 'dn' : 'faint')}">
+            ${netFlow7d > 0 ? '+' : ''}${fmtNum(netFlow7d, 1)} ${ticker}
+          </span>
+        </div>
+      `;
+    }
+
+    if (statEl) {
+      statEl.textContent = `LIVE ON-CHAIN ARCHIVE · 20 LARGEST KNOWN ${ticker} WALLETS`;
+    }
+
+    const query = (window.W_TERMINAL.whaleSearch || '').toLowerCase().trim();
+    let displayList = fullList;
+    if (query) {
+      displayList = fullList.filter(w => 
+        w.entity.toLowerCase().includes(query) ||
+        w.address.toLowerCase().includes(query) ||
+        w.category.toLowerCase().includes(query) ||
+        w.status.toLowerCase().includes(query) ||
+        (w.notes && w.notes.toLowerCase().includes(query))
+      );
+    }
+
+    if (displayList.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--ink-dim);">No whale addresses matching filter "${query}".</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = displayList.map(w => {
+      const clusterClass = `pill-cluster-${w.cluster || 'exch'}`;
+      const flowBadge = w.flow > 0 
+        ? `<span class="up bold">+${fmtNum(w.flow, 1)}</span>`
+        : (w.flow < 0 ? `<span class="dn bold">${fmtNum(w.flow, 1)}</span>` : `<span class="faint">0.0</span>`);
+      
+      const safeData = JSON.stringify(w).replace(/"/g, '&quot;');
+      const maxPct = isBtc ? 2.0 : 30.0;
+      const barWidth = Math.min(100, Math.max(4, (w.pctSupply / maxPct) * 100));
+
+      return `
+        <tr onclick="openInspector('wallet', ${safeData})">
+          <td style="text-align:center;" class="faint mono">${String(w.rank).padStart(2, '0')}</td>
+          <td>
+            <div style="font-weight:700;color:#fff;">${w.entity}</div>
+            <div style="display:flex;gap:4px;margin-top:2px;align-items:center;">
+              <span class="pill ${clusterClass}" style="font-size:8px;padding:0 4px;">${w.category}</span>
+              <span class="faint" style="font-size:8.5px;">${w.status}</span>
+            </div>
+          </td>
+          <td>
+            <div style="display:flex;align-items:center;">
+              <span class="whale-addr-mono" title="${w.address}">${truncateAddr(w.address)}</span>
+              <button class="whale-copy-btn" title="Copy full address" onclick="event.stopPropagation();copyWalletAddr('${w.address}', this)">COPY</button>
+            </div>
+          </td>
+          <td style="text-align:right;">
+            <div class="num bold org">${fmtNum(w.balance, isBtc ? 2 : 0)} <span style="font-size:8.5px;color:var(--ink-dim);">${ticker}</span></div>
+          </td>
+          <td style="text-align:right;">
+            <div class="num bold" style="color:#e0e0e0;">${fmtUsd(w.usdVal)}</div>
+          </td>
+          <td style="text-align:right;">
+            <span class="num cy bold">${w.pctSupply.toFixed(2)}%</span>
+            <span class="whale-supply-track">
+              <div class="whale-supply-fill" style="width:${barWidth}%;"></div>
+            </span>
+          </td>
+          <td style="text-align:center;">
+            <div>${flowBadge}</div>
+            <div class="faint" style="font-size:8px;">7D NET FLOW</div>
+          </td>
+          <td style="text-align:center;" onclick="event.stopPropagation()">
+            <div style="display:flex;gap:4px;justify-content:center;">
+              <button class="tb-btn" style="padding:2px 6px;" onclick="openInspector('wallet', ${safeData})">INSPECT</button>
+              <a href="${w.explorerUrl}" target="_blank" rel="noopener noreferrer" class="tb-btn" style="padding:2px 6px;text-decoration:none;display:inline-block;" title="Open in block explorer">↗</a>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join("");
+  }
+
+  window.setWhaleChain = function(chain, btn) {
+    document.querySelectorAll("#widget-whales .w-toolbar button").forEach(b => b.classList.remove("active"));
+    if (btn) btn.classList.add("active");
+    window.W_TERMINAL.activeWhaleChain = chain;
+    renderWhaleRows();
+    playTone(720, 'sine', 0.04);
+  };
+
+  window.filterWhaleTable = function(q) {
+    window.W_TERMINAL.whaleSearch = q || '';
+    renderWhaleRows();
+  };
+
+  window.copyWalletAddr = function(addr, btn) {
+    const handleSuccess = () => {
+      const origText = btn.textContent;
+      btn.textContent = "✓ COPIED";
+      btn.style.color = "var(--up)";
+      btn.style.borderColor = "var(--up)";
+      playTone(880, 'sine', 0.05);
+      setTimeout(() => {
+        btn.textContent = origText;
+        btn.style.color = "";
+        btn.style.borderColor = "";
+      }, 1500);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(addr).then(handleSuccess).catch(() => {
+        fallbackCopy(addr, btn, handleSuccess);
+      });
+    } else {
+      fallbackCopy(addr, btn, handleSuccess);
+    }
+  };
+
+  function fallbackCopy(text, btn, cb) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      cb();
+    } catch(e) {}
+    document.body.removeChild(ta);
+  }
 
   // =========================================================================
   // LIVE REAL-TIME MARKET DATA & TRIPLE STACKED CHARTS (GC, NQ, BTC)
@@ -1953,6 +2248,42 @@ a { color: var(--cyan); text-decoration: none; }
           </div>
         </div>
       `;
+    } else if (type === 'wallet') {
+      const w = data;
+      const chain = (window.W_TERMINAL.activeWhaleChain || 'BTC').toUpperCase();
+      title.textContent = `> ON-CHAIN WHALE INTEL · ${w.entity}`;
+      body.innerHTML = `
+        <div class="ins-sec">
+          <div class="ins-sec-title">WHALE IDENTITY & CLUSTER</div>
+          <div style="font-size:13px;font-weight:800;color:var(--org);margin-bottom:6px;">${w.entity}</div>
+          <div class="ins-row"><span class="k">Rank</span><span class="v org bold">#${w.rank} Largest Address</span></div>
+          <div class="ins-row"><span class="k">Chain</span><span class="v cy bold">${chain} Blockchain</span></div>
+          <div class="ins-row"><span class="k">Entity Category</span><span class="v"><span class="pill pill-cluster-${w.cluster || 'exch'}">${w.category}</span></span></div>
+          <div class="ins-row"><span class="k">Cluster Status</span><span class="v">${w.status}</span></div>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">ON-CHAIN HOLDINGS & VALUE</div>
+          <div class="ins-row"><span class="k">Current Balance</span><span class="v num bold org">${fmtNum(w.balance, chain === 'BTC' ? 2 : 0)} ${chain}</span></div>
+          <div class="ins-row"><span class="k">Estimated USD Value</span><span class="v num bold">${fmtUsd(w.usdVal)}</span></div>
+          <div class="ins-row"><span class="k">% of Circulating Supply</span><span class="v num cy bold">${w.pctSupply.toFixed(2)}%</span></div>
+          <div class="ins-row"><span class="k">7D Net Flow</span><span class="v num ${w.flow > 0 ? 'up' : (w.flow < 0 ? 'dn' : 'faint')}">${w.flow > 0 ? '+' : ''}${fmtNum(w.flow, 1)} ${chain}</span></div>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">PUBLIC ADDRESS TELEMETRY</div>
+          <div style="background:#090909;border:1px solid var(--line);padding:8px;border-radius:2px;margin:6px 0;">
+            <div style="font-size:8px;color:var(--ink-dim);margin-bottom:4px;">RAW HEX / BECH32 ADDRESS</div>
+            <div class="whale-addr-mono" style="word-break:break-all;font-size:10.5px;color:#fff;">${w.address}</div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <button class="tb-btn" style="flex:1;padding:5px;" onclick="copyWalletAddr('${w.address}', this)">COPY FULL ADDRESS</button>
+            <a href="${w.explorerUrl}" target="_blank" rel="noopener noreferrer" class="tb-btn" style="flex:1;padding:5px;text-align:center;text-decoration:none;" title="Verify on official block explorer">OPEN IN EXPLORER ↗</a>
+          </div>
+        </div>
+        <div class="ins-sec">
+          <div class="ins-sec-title">INTELLIGENCE & FORENSIC NOTES</div>
+          <p style="color:var(--ink);line-height:1.5;font-size:10px;">${w.notes || 'No security incidents or flagged activities noted on this address.'}</p>
+        </div>
+      `;
     } else {
       const item = data;
       title.textContent = `> ASSET TELEMETRY · ${item.sym}`;
@@ -1999,6 +2330,9 @@ a { color: var(--cyan); text-decoration: none; }
       try {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.some(x => x.id === 'priceheatmap')) {
+          if (!parsed.some(x => x.id === 'whales')) {
+            parsed.push({ id: "whales", x: 0, y: 26, w: 12, h: 8 });
+          }
           return parsed;
         }
       } catch(e) {}
@@ -2097,6 +2431,7 @@ a { color: var(--cyan); text-decoration: none; }
         if (item.id === 'chart') drawAllStackedCharts();
         if (item.id === 'priceheatmap') updatePriceHeatmap();
         if (item.id === 'heatmap') drawTradingTreemap();
+        if (item.id === 'whales') renderWhaleRows();
       };
     };
   }
