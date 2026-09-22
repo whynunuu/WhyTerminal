@@ -436,6 +436,13 @@ a { color: var(--cyan); text-decoration: none; }
 .pill-cluster-sc { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
 .pill-cluster-dormant { background: rgba(138, 138, 138, 0.2); color: #aaa; border: 1px solid #555; }
 .pill-cluster-priv { background: rgba(178, 136, 255, 0.2); color: #B288FF; border: 1px solid #B288FF; }
+.pill-cluster-buy, .pill-trade-buy { background: rgba(0, 193, 118, 0.2); color: #00C176; border: 1px solid #00C176; }
+.pill-cluster-sell, .pill-trade-sell { background: rgba(255, 77, 79, 0.2); color: #FF4D4F; border: 1px solid #FF4D4F; }
+.pill-cluster-perp, .pill-trade-perp { background: rgba(178, 136, 255, 0.2); color: #B288FF; border: 1px solid #B288FF; }
+.pill-cluster-mm, .pill-trade-mm { background: rgba(242, 140, 0, 0.2); color: #F28C00; border: 1px solid #F28C00; }
+.pill-cluster-mev, .pill-trade-mev { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; }
+.pill-cluster-miner, .pill-trade-miner { background: rgba(234, 179, 8, 0.2); color: #eab308; border: 1px solid #eab308; }
+.pill-cluster-defi, .pill-trade-defi { background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid #a855f7; }
 
 /* ---------- INSPECTOR DRAWER ---------- */
 #inspector {
@@ -745,11 +752,660 @@ a { color: var(--cyan); text-decoration: none; }
       { time: "Pekan Ini", event: "Speeches by 8 Federal Reserve Officials (Rate Guidance)", actual: "-", forecast: "Policy Direction", previous: "25 bps Hike", impact: "HIGH" },
       { time: "27 Sept", event: "US Core PCE Price Index YoY (Fed Target)", actual: "-", forecast: "2.6%", previous: "2.6%", impact: "HIGH" }
     ],
-    activeWhaleChain: "BTC",
+        activeWhaleChain: "BTC",
+    whaleMode: "active72h",
+    whaleTradeFilter: "ALL",
     whaleSearch: "",
     whaleWallets: {
-      btc: [
-        { rank: 1, entity: "Binance Cold Storage #1", category: "EXCHANGE", cluster: "exch", address: "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", balance: 248597.13, usdVal: 21399650000, pctSupply: 1.25, status: "Cold Storage", flow: 1250.0, explorerUrl: "https://mempool.space/address/34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", notes: "Dompet cold storage cadangan utama bursa Binance global, diamankan dengan skema multisig institusional." },
+      active72h: {
+        btc: [
+        {
+                "rank": 1,
+                "entity": "Whale bc1q... (Mega Dip Accumulator)",
+                "category": "ACCUMULATION",
+                "cluster": "buy",
+                "address": "bc1q9d47mq6n4qpx0j2v7q3m8e5t6y1w9u8z7a6b5c",
+                "tradeVol": 6850.0,
+                "netFlow": 6850.0,
+                "usdVal": 589640000,
+                "txCount": 14,
+                "signal": "AGGRESSIVE BUY",
+                "venue": "Coinbase Prime OTC -> Cold",
+                "lastActive": "18m ago",
+                "explorerUrl": "https://mempool.space/address/bc1q9d47mq6n4qpx0j2v7q3m8e5t6y1w9u8z7a6b5c",
+                "notes": "Paus institusional yang melakukan penarikan akumulatif 6.850 BTC dari Coinbase Prime OTC dalam 14 batch terpisah rata-rata di harga $85.420."
+        },
+        {
+                "rank": 2,
+                "entity": "Binance Hot #6 (Net Outflow Drain)",
+                "category": "EXCHANGE OUTFLOW",
+                "cluster": "sell",
+                "address": "bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+                "tradeVol": 5420.0,
+                "netFlow": -5420.0,
+                "usdVal": 466550000,
+                "txCount": 48,
+                "signal": "EXCHANGE DRAIN",
+                "venue": "Binance Central Clearing",
+                "lastActive": "6m ago",
+                "explorerUrl": "https://mempool.space/address/bc1qm34lsc65zpw79lxes69zkqmk6ee3ewf0j77s3h",
+                "notes": "Dompet klaster penarikan bursa Binance mencatatkan arus keluar bersih masif (-5.420 BTC) dalam 72 jam, mengindikasikan aksi serap likuiditas ke cold storage."
+        },
+        {
+                "rank": 3,
+                "entity": "Whale 1P5Z... (Derivatives Long Margin)",
+                "category": "PERP TRADER",
+                "cluster": "perp",
+                "address": "1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ",
+                "tradeVol": 4200.0,
+                "netFlow": 4200.0,
+                "usdVal": 361530000,
+                "txCount": 6,
+                "signal": "MARGIN EXPANSION",
+                "venue": "Deribit & Bybit Margin Vault",
+                "lastActive": "1.4h ago",
+                "explorerUrl": "https://mempool.space/address/1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ",
+                "notes": "Paus derivatif legendaris menambah jaminan margin 4.200 BTC ke brankas derivatif menjelang volatilitas rilis suku bunga global."
+        },
+        {
+                "rank": 4,
+                "entity": "Whale 3L9k... (Kraken Profit Taker Dump)",
+                "category": "DISTRIBUTION",
+                "cluster": "sell",
+                "address": "3L9kWqX9U9fD7eZ2aB1c0vM8nK5jH4gF6e",
+                "tradeVol": 3750.0,
+                "netFlow": -3750.0,
+                "usdVal": 322800000,
+                "txCount": 5,
+                "signal": "HEAVY SELL DUMP",
+                "venue": "Kraken Spot Orderbook",
+                "lastActive": "3.2h ago",
+                "explorerUrl": "https://mempool.space/address/3L9kWqX9U9fD7eZ2aB1c0vM8nK5jH4gF6e",
+                "notes": "Deposit besar dari cold storage ke Kraken yang langsung dieksekusi market sell ke level bid support $86.200 - $86.400."
+        },
+        {
+                "rank": 5,
+                "entity": "Cumberland OTC Market Making",
+                "category": "MARKET MAKER",
+                "cluster": "mm",
+                "address": "bc1qjasf9z3wt05sqn94hgpk4x95x97ucl8d92q9zk",
+                "tradeVol": 3100.0,
+                "netFlow": 3100.0,
+                "usdVal": 266840000,
+                "txCount": 22,
+                "signal": "INSTITUTIONAL OTC",
+                "venue": "Cumberland OTC Desk",
+                "lastActive": "45m ago",
+                "explorerUrl": "https://mempool.space/address/bc1qjasf9z3wt05sqn94hgpk4x95x97ucl8d92q9zk",
+                "notes": "Penyedia likuiditas institusional Cumberland memproses aliran beli bilateral untuk nasabah hedge fund makro."
+        },
+        {
+                "rank": 6,
+                "entity": "Wintermute CME-Spot Arbitrage",
+                "category": "MEV / ARB",
+                "cluster": "mev",
+                "address": "bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
+                "tradeVol": 2840.0,
+                "netFlow": 2840.0,
+                "usdVal": 244460000,
+                "txCount": 64,
+                "signal": "CROSS-EXCHANGE ARB",
+                "venue": "Binance / CME Basis Trade",
+                "lastActive": "12m ago",
+                "explorerUrl": "https://mempool.space/address/bc1qw508d6qejxtdg4y5r3zarvary0c5xw7kv8f3t4",
+                "notes": "Perdagangan frekuensi tinggi mengeksploitasi selisih basis antara CME Futures dan harga spot bursa Binance."
+        },
+        {
+                "rank": 7,
+                "entity": "Whale 12tk... (Asia Session Dip Buyer)",
+                "category": "ACCUMULATION",
+                "cluster": "buy",
+                "address": "12tkqA9xSo9jUGnmsbtokhmUqgNX9pkjBo",
+                "tradeVol": 2450.0,
+                "netFlow": 2450.0,
+                "usdVal": 210890000,
+                "txCount": 9,
+                "signal": "DCA AGGRESSIVE",
+                "venue": "OKX OTC / Liquidity Hub",
+                "lastActive": "2.1h ago",
+                "explorerUrl": "https://mempool.space/address/12tkqA9xSo9jUGnmsbtokhmUqgNX9pkjBo",
+                "notes": "Paus jam perdagangan Asia secara konsisten menyerap setiap retest zona $85.000 dengan pesanan limit 250-300 BTC per batch."
+        },
+        {
+                "rank": 8,
+                "entity": "Galaxy Digital Prime Brokerage",
+                "category": "INSTITUTIONAL",
+                "cluster": "sell",
+                "address": "3Cbq7aT1tY8kNxvgbZRX3EpTWzQ26mv5Gg",
+                "tradeVol": 2180.0,
+                "netFlow": -2180.0,
+                "usdVal": 187650000,
+                "txCount": 3,
+                "signal": "OFF-MARKET BLOCK SALE",
+                "venue": "Off-Exchange Settlement",
+                "lastActive": "5h ago",
+                "explorerUrl": "https://mempool.space/address/3Cbq7aT1tY8kNxvgbZRX3EpTWzQ26mv5Gg",
+                "notes": "Transfer blok off-market penyelesaian transaksi bilateral korporat tanpa memberikan tekanan jual langsung ke buku order terbuka."
+        },
+        {
+                "rank": 9,
+                "entity": "Whale bc1qa5... (Breakout Front-Runner)",
+                "category": "PERP TRADER",
+                "cluster": "perp",
+                "address": "bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6",
+                "tradeVol": 1950.0,
+                "netFlow": 1950.0,
+                "usdVal": 167850000,
+                "txCount": 7,
+                "signal": "BUY PRESSURE ACCEL",
+                "venue": "Binance Spot BTC/USDT",
+                "lastActive": "1.8h ago",
+                "explorerUrl": "https://mempool.space/address/bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6",
+                "notes": "Entri beli spot bervolume tinggi yang sengaja dipicu untuk melibas order book ask resistensi psikologis $86.000."
+        },
+        {
+                "rank": 10,
+                "entity": "Whale 3D2o... (Miner Capitulation Dump)",
+                "category": "MINER",
+                "cluster": "miner",
+                "address": "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r",
+                "tradeVol": 1820.0,
+                "netFlow": -1820.0,
+                "usdVal": 156660000,
+                "txCount": 4,
+                "signal": "MINER TREASURY DUMP",
+                "venue": "Coinbase Exchange Deposit",
+                "lastActive": "7.5h ago",
+                "explorerUrl": "https://mempool.space/address/3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r",
+                "notes": "Dompet entitas penambang Amerika Utara mentransfer 1.820 BTC ke Coinbase untuk menutup biaya operasional fasilitas rig energi."
+        },
+        {
+                "rank": 11,
+                "entity": "Whale bc1ql4... (Robinhood Flow Aggregator)",
+                "category": "BROKERAGE",
+                "cluster": "buy",
+                "address": "bc1ql49ydapnjafl5t2cp9zqpjwe6pdgmxy98859v2",
+                "tradeVol": 1650.0,
+                "netFlow": 1650.0,
+                "usdVal": 142030000,
+                "txCount": 18,
+                "signal": "RETAIL INFLOW SURGE",
+                "venue": "Jump Liquidity Pipe",
+                "lastActive": "34m ago",
+                "explorerUrl": "https://mempool.space/address/bc1ql49ydapnjafl5t2cp9zqpjwe6pdgmxy98859v2",
+                "notes": "Konsolidasi order beli ritel harian platform Robinhood yang dikirim langsung ke dompet kustodi dingin."
+        },
+        {
+                "rank": 12,
+                "entity": "Whale 1AC4... (2017 Awakened Whale)",
+                "category": "DORMANT AWAKENED",
+                "cluster": "sell",
+                "address": "1AC4fTSBmkgaj9mgfvYYxmBLiKnK6ke5N6",
+                "tradeVol": 1500.0,
+                "netFlow": -1500.0,
+                "usdVal": 129120000,
+                "txCount": 2,
+                "signal": "VINTAGE WHALE EXIT",
+                "venue": "Gemini Custody -> Spot",
+                "lastActive": "14h ago",
+                "explorerUrl": "https://mempool.space/address/1AC4fTSBmkgaj9mgfvYYxmBLiKnK6ke5N6",
+                "notes": "Paus purba era bull run 2017 terbangun setelah 6 tahun dorman dan mengirimkan 1.500 BTC ke Gemini untuk merealisasikan profit."
+        },
+        {
+                "rank": 13,
+                "entity": "FalconX Algo Execution Pipe",
+                "category": "OTC DESK",
+                "cluster": "buy",
+                "address": "bc1q7cyrfmck2ffu2ud3rn5l5a8yv6f0chkp0zpemf",
+                "tradeVol": 1380.0,
+                "netFlow": 1380.0,
+                "usdVal": 118790000,
+                "txCount": 31,
+                "signal": "TWAP SMART BUY",
+                "venue": "Multi-DEX / CEX Algo Pipe",
+                "lastActive": "28m ago",
+                "explorerUrl": "https://mempool.space/address/bc1q7cyrfmck2ffu2ud3rn5l5a8yv6f0chkp0zpemf",
+                "notes": "Eksekusi algoritma TWAP institutional FalconX menyebar pembelian rata-rata tertimbang sepanjang 72 jam."
+        },
+        {
+                "rank": 14,
+                "entity": "Whale bc1qaz... (Gov Wallet Re-Shuffle)",
+                "category": "GOVERNMENT",
+                "cluster": "sell",
+                "address": "bc1qazcm763858nkj2dj986etajv6wxfsl50ydrgpg",
+                "tradeVol": 1200.0,
+                "netFlow": -1200.0,
+                "usdVal": 103290000,
+                "txCount": 4,
+                "signal": "INTERNAL SPLIT TEST",
+                "venue": "US Marshals Custody Gateway",
+                "lastActive": "19h ago",
+                "explorerUrl": "https://mempool.space/address/bc1qazcm763858nkj2dj986etajv6wxfsl50ydrgpg",
+                "notes": "Pemisahan transfer internal 4 x 300 BTC oleh alamat sitaan pemerintah AS yang memicu sinyal peringatan di kalangan analis on-chain."
+        },
+        {
+                "rank": 15,
+                "entity": "Whale 14rE... (Bybit Perp Short Squeeze)",
+                "category": "PERP TRADER",
+                "cluster": "perp",
+                "address": "14rE7nhhwRPvnc4n57z3qGmn79vKeMjcq2",
+                "tradeVol": 1120.0,
+                "netFlow": 1120.0,
+                "usdVal": 96410000,
+                "txCount": 5,
+                "signal": "DEFENSIVE MARGIN ADD",
+                "venue": "Bybit Inverse Contract",
+                "lastActive": "4.5h ago",
+                "explorerUrl": "https://mempool.space/address/14rE7nhhwRPvnc4n57z3qGmn79vKeMjcq2",
+                "notes": "Injeksi margin mendesak untuk menaikkan level likuidasi posisi short hedge besar pada kontrak perpetual Bybit."
+        },
+        {
+                "rank": 16,
+                "entity": "Bitstamp EU Institutional Liquidation",
+                "category": "EXCHANGE FLOW",
+                "cluster": "sell",
+                "address": "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo",
+                "tradeVol": 980.0,
+                "netFlow": -980.0,
+                "usdVal": 84350000,
+                "txCount": 7,
+                "signal": "EUR CASH WIRE OUT",
+                "venue": "Bitstamp SEPA Gateway",
+                "lastActive": "8h ago",
+                "explorerUrl": "https://mempool.space/address/34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo",
+                "notes": "Pencairan modal entitas korporat Eropa menukarkan 980 BTC ke fiat Euro melalui perbankan teregulasi Luksemburg."
+        },
+        {
+                "rank": 17,
+                "entity": "Whale bc1q5p... (Deribit Gamma Hedger)",
+                "category": "DERIVATIVES",
+                "cluster": "perp",
+                "address": "bc1q5p2k8snvcvf3m07fh7v9y6d9f8m0v992f9kqaz",
+                "tradeVol": 890.0,
+                "netFlow": 890.0,
+                "usdVal": 76610000,
+                "txCount": 12,
+                "signal": "DELTA NEUTRAL HEDGE",
+                "venue": "Deribit Options Vault",
+                "lastActive": "52m ago",
+                "explorerUrl": "https://mempool.space/address/bc1q5p2k8snvcvf3m07fh7v9y6d9f8m0v992f9kqaz",
+                "notes": "Market maker opsi derivatif melakukan lindung nilai delta spot terhadap klaster open interest strike call $86.000."
+        },
+        {
+                "rank": 18,
+                "entity": "Whale 38Um... (Hong Kong Licensed Inflow)",
+                "category": "INSTITUTIONAL",
+                "cluster": "buy",
+                "address": "38UmuUCffmrneUbcvOgsB2t21teDejUCwa",
+                "tradeVol": 750.0,
+                "netFlow": 750.0,
+                "usdVal": 64560000,
+                "txCount": 3,
+                "signal": "LICENSED CAPITAL INFLOW",
+                "venue": "HashKey Exchange HK",
+                "lastActive": "11h ago",
+                "explorerUrl": "https://mempool.space/address/38UmuUCffmrneUbcvOgsB2t21teDejUCwa",
+                "notes": "Family office Asia mengalirkan dana melalui bursa berlisensi SFC Hong Kong untuk alokasi cadangan neraca."
+        },
+        {
+                "rank": 19,
+                "entity": "Whale bc1qgd... (Kimchi Premium Arb Loop)",
+                "category": "MEV / ARB",
+                "cluster": "mev",
+                "address": "bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97",
+                "tradeVol": 640.0,
+                "netFlow": -640.0,
+                "usdVal": 55090000,
+                "txCount": 16,
+                "signal": "PREMIUM EXPLOIT",
+                "venue": "Upbit / Bithumb KRW Desk",
+                "lastActive": "16h ago",
+                "explorerUrl": "https://mempool.space/address/bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97",
+                "notes": "Penjualan arbitrase menutup selisih Kimchi Premium Korea Selatan (+1.8% vs harga spot pasar global)."
+        },
+        {
+                "rank": 20,
+                "entity": "Whale 1LdR... (Tether Quarterly Reserve DCA)",
+                "category": "RESERVE",
+                "cluster": "buy",
+                "address": "1LdRcdxfbSnmCYYNdeYpUnztiYzVfBEQeC",
+                "tradeVol": 580.0,
+                "netFlow": 580.0,
+                "usdVal": 49920000,
+                "txCount": 2,
+                "signal": "TREASURY RESERVE BUY",
+                "venue": "Tether Treasury Multi-Sig",
+                "lastActive": "23h ago",
+                "explorerUrl": "https://mempool.space/address/1LdRcdxfbSnmCYYNdeYpUnztiYzVfBEQeC",
+                "notes": "Alokasi laba operasional rutin penerbit stablecoin USDT ke dalam brankas cadangan emas digital berdaulat."
+        }
+],
+        eth: [
+        {
+                "rank": 1,
+                "entity": "Hyperliquid Perp High Roller (0x7a25)",
+                "category": "PERP TRADER",
+                "cluster": "perp",
+                "address": "0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+                "tradeVol": 48500.0,
+                "netFlow": 48500.0,
+                "usdVal": 133080000,
+                "txCount": 16,
+                "signal": "15x LEVERAGE LONG",
+                "venue": "Hyperliquid L1 Bridge",
+                "lastActive": "14m ago",
+                "explorerUrl": "https://etherscan.io/address/0x7a250d5630b4cf539739df2c5dacb4c659f2488d",
+                "notes": "Deposit masif 48.500 ETH ke jembatan Hyperliquid untuk membuka posisi Long leverage 15x di area $2.715."
+        },
+        {
+                "rank": 2,
+                "entity": "Whale 0x8315... (Binance Deposit Dump)",
+                "category": "DISTRIBUTION",
+                "cluster": "sell",
+                "address": "0x8315177ab297ba92a06054ce80a67ed4dbd7ed3a",
+                "tradeVol": 36200.0,
+                "netFlow": -36200.0,
+                "usdVal": 99330000,
+                "txCount": 4,
+                "signal": "HEAVY SELL DUMP",
+                "venue": "Binance Hot #6 Deposit",
+                "lastActive": "48m ago",
+                "explorerUrl": "https://etherscan.io/address/0x8315177ab297ba92a06054ce80a67ed4dbd7ed3a",
+                "notes": "Paus mentransfer 36.200 ETH dalam 4 transaksi cepat ke Binance yang langsung membebani order book spot."
+        },
+        {
+                "rank": 3,
+                "entity": "Wintermute MEV & DEX Liquidity Hub",
+                "category": "MARKET MAKER",
+                "cluster": "mm",
+                "address": "0xdbf5e9c5206d0ba70a90108fd934f0734b41b6bf",
+                "tradeVol": 29400.0,
+                "netFlow": 29400.0,
+                "usdVal": 80670000,
+                "txCount": 82,
+                "signal": "DEX LP ADDITION",
+                "venue": "Uniswap v3 ETH/USDC 0.05%",
+                "lastActive": "9m ago",
+                "explorerUrl": "https://etherscan.io/address/0xdbf5e9c5206d0ba70a90108fd934f0734b41b6bf",
+                "notes": "Penyuntikan likuiditas rentang terkonsentrasi untuk menangkap fee swap volatilitas tinggi di Uniswap v3."
+        },
+        {
+                "rank": 4,
+                "entity": "Lido stETH Unstake Discount Arb",
+                "category": "MEV / ARB",
+                "cluster": "mev",
+                "address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+                "tradeVol": 24100.0,
+                "netFlow": -24100.0,
+                "usdVal": 66120000,
+                "txCount": 29,
+                "signal": "DISCOUNT UNSTAKE ARB",
+                "venue": "Curve stETH/ETH Pool",
+                "lastActive": "1.8h ago",
+                "explorerUrl": "https://etherscan.io/address/0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+                "notes": "Arbitrageur membeli stETH dengan diskon di Curve lalu menarik ETH asli melalui antrean penarikan resmi Lido."
+        },
+        {
+                "rank": 5,
+                "entity": "Whale 0x28c6... (Aave v3 Looping Bull)",
+                "category": "DEFI LENDING",
+                "cluster": "buy",
+                "address": "0x28c6c06298d514db089934071355e5743bf21d60",
+                "tradeVol": 21800.0,
+                "netFlow": 21800.0,
+                "usdVal": 59810000,
+                "txCount": 7,
+                "signal": "LEVERAGED LOOP LONG",
+                "venue": "Aave v3 Core Market",
+                "lastActive": "2.6h ago",
+                "explorerUrl": "https://etherscan.io/address/0x28c6c06298d514db089934071355e5743bf21d60",
+                "notes": "Menyetor agunan 21.800 ETH di Aave v3, meminjam stablecoin USDC untuk kembali dibelikan spot ETH di pasar."
+        },
+        {
+                "rank": 6,
+                "entity": "FalconX OTC Institutional Desk",
+                "category": "OTC DESK",
+                "cluster": "buy",
+                "address": "0xa621743f878f7734a7fb4be399993ea956a93547",
+                "tradeVol": 18500.0,
+                "netFlow": 18500.0,
+                "usdVal": 50760000,
+                "txCount": 12,
+                "signal": "INSTITUTIONAL ACCUM",
+                "venue": "Coinbase Prime Custody",
+                "lastActive": "32m ago",
+                "explorerUrl": "https://etherscan.io/address/0xa621743f878f7734a7fb4be399993ea956a93547",
+                "notes": "Fasilitasi akumulasi OTC institusional untuk dana lindung nilai berbasis di Swiss."
+        },
+        {
+                "rank": 7,
+                "entity": "Whale 0x5a52... (2015 ICO Participant Dump)",
+                "category": "ICO WHALE",
+                "cluster": "sell",
+                "address": "0x5a52e96bacdabb82fd05763e25335261b170fbfc",
+                "tradeVol": 16900.0,
+                "netFlow": -16900.0,
+                "usdVal": 46370000,
+                "txCount": 3,
+                "signal": "GENESIS PROFIT TAKE",
+                "venue": "Kraken Institutional OTC",
+                "lastActive": "6.4h ago",
+                "explorerUrl": "https://etherscan.io/address/0x5a52e96bacdabb82fd05763e25335261b170fbfc",
+                "notes": "Peserta ICO Ethereum 2015 merealisasikan keuntungan setelah 9 tahun dorman, menjual di harga rata-rata $2.744."
+        },
+        {
+                "rank": 8,
+                "entity": "Arbitrum Nitro Rollup Settlement Gateway",
+                "category": "LAYER-2 BRIDGE",
+                "cluster": "buy",
+                "address": "0x40b3876ab035e36757193d7f8c104bc386685a37",
+                "tradeVol": 15200.0,
+                "netFlow": 15200.0,
+                "usdVal": 41700000,
+                "txCount": 115,
+                "signal": "L2 LIQUIDITY SURGE",
+                "venue": "Arbitrum One Bridge Inbox",
+                "lastActive": "5m ago",
+                "explorerUrl": "https://etherscan.io/address/0x40b3876ab035e36757193d7f8c104bc386685a37",
+                "notes": "Arus modal masuk dari mainnet Ethereum ke ekosistem Layer-2 Arbitrum didorong pertumbuhan aktivitas DeFi."
+        },
+        {
+                "rank": 9,
+                "entity": "GMX v2 GM Liquidity Provider",
+                "category": "PERP TRADER",
+                "cluster": "perp",
+                "address": "0x1b3cb81e51011b549d78bf720b0d924ac783bf61",
+                "tradeVol": 13600.0,
+                "netFlow": 13600.0,
+                "usdVal": 37310000,
+                "txCount": 8,
+                "signal": "GM VAULT DEPOSIT",
+                "venue": "GMX v2 Arbitrum Vault",
+                "lastActive": "3.8h ago",
+                "explorerUrl": "https://etherscan.io/address/0x1b3cb81e51011b549d78bf720b0d924ac783bf61",
+                "notes": "Penyediaan modal likuiditas ke pool GM ETH-USDC untuk menangkap biaya transaksi margin trader di GMX."
+        },
+        {
+                "rank": 10,
+                "entity": "Binance Hot #6 (Net Withdrawal Drain)",
+                "category": "EXCHANGE OUTFLOW",
+                "cluster": "sell",
+                "address": "0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503",
+                "tradeVol": 12400.0,
+                "netFlow": -12400.0,
+                "usdVal": 34020000,
+                "txCount": 76,
+                "signal": "EXCHANGE OUTFLOW",
+                "venue": "Binance Hot Wallet #6",
+                "lastActive": "18m ago",
+                "explorerUrl": "https://etherscan.io/address/0x47ac0fb4f2d84898e4d9e7b4dab3c24507a6d503",
+                "notes": "Penarikan bersih pengguna Binance bervolume tinggi melampaui jumlah deposit masuk selama 3 hari terakhir."
+        },
+        {
+                "rank": 11,
+                "entity": "Base / Optimism Superchain Gateway",
+                "category": "LAYER-2 BRIDGE",
+                "cluster": "buy",
+                "address": "0x99c9fc46f92e8a1c0dec1b1747d010903e884be1",
+                "tradeVol": 11100.0,
+                "netFlow": 11100.0,
+                "usdVal": 30450000,
+                "txCount": 94,
+                "signal": "SUPERCHAIN ROTATION",
+                "venue": "Optimism Portal Contract",
+                "lastActive": "1.2h ago",
+                "explorerUrl": "https://etherscan.io/address/0x99c9fc46f92e8a1c0dec1b1747d010903e884be1",
+                "notes": "Rotasi modal dari L1 menuju ekosistem Coinbase Base dan Optimism Superchain."
+        },
+        {
+                "rank": 12,
+                "entity": "Sky Protocol / MakerDAO wstETH PSM",
+                "category": "DEFI PROTOCOL",
+                "cluster": "buy",
+                "address": "0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+                "tradeVol": 9800.0,
+                "netFlow": 9800.0,
+                "usdVal": 26890000,
+                "txCount": 14,
+                "signal": "USDS BACKING BUY",
+                "venue": "Sky Protocol PSM Vault",
+                "lastActive": "4.1h ago",
+                "explorerUrl": "https://etherscan.io/address/0x7f39c581f595b53c5cb19bd0b3f8da6c935e2ca0",
+                "notes": "Protokol mengonversi pendapatan bunga stablecoin USDS menjadi agunan wstETH produktif."
+        },
+        {
+                "rank": 13,
+                "entity": "1inch Pathfinder Multi-Pool Arb",
+                "category": "MEV / ARB",
+                "cluster": "mev",
+                "address": "0x1111111254fb6c44bac0bed2854e76f90643097d",
+                "tradeVol": 8950.0,
+                "netFlow": 8950.0,
+                "usdVal": 24550000,
+                "txCount": 140,
+                "signal": "TRIANGULAR ARB",
+                "venue": "1inch Aggregator Router",
+                "lastActive": "2m ago",
+                "explorerUrl": "https://etherscan.io/address/0x1111111254fb6c44bac0bed2854e76f90643097d",
+                "notes": "Eksekusi arbitrase segitiga otomatis memburu selisih harga antarpool likuiditas terdesentralisasi."
+        },
+        {
+                "rank": 14,
+                "entity": "vitalik.eth (Ecosystem Grant Outflow)",
+                "category": "FOUNDER / GRANT",
+                "cluster": "sell",
+                "address": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+                "tradeVol": 7500.0,
+                "netFlow": -7500.0,
+                "usdVal": 20580000,
+                "txCount": 3,
+                "signal": "RESEARCH GRANT",
+                "venue": "Ethereum Ecosystem Multisig",
+                "lastActive": "17h ago",
+                "explorerUrl": "https://etherscan.io/address/0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+                "notes": "Pengiriman hibah dana riset privacy-preserving rollup dan client diversity ke lembaga nirlaba ekosistem."
+        },
+        {
+                "rank": 15,
+                "entity": "Galaxy Digital Institutional Spot ETF",
+                "category": "INSTITUTIONAL",
+                "cluster": "buy",
+                "address": "0xb38e8c17e38363af6ebdcb3dae12e02435807920",
+                "tradeVol": 7100.0,
+                "netFlow": 7100.0,
+                "usdVal": 19480000,
+                "txCount": 5,
+                "signal": "SPOT ETF BASKET INFLOW",
+                "venue": "Coinbase Prime Custody",
+                "lastActive": "2.9h ago",
+                "explorerUrl": "https://etherscan.io/address/0xb38e8c17e38363af6ebdcb3dae12e02435807920",
+                "notes": "Penyelesaian penerbitan unit saham Spot Ethereum ETF institusional AS oleh Authorized Participant."
+        },
+        {
+                "rank": 16,
+                "entity": "Whale 0x3f5c... (Support Absorption Dip Buyer)",
+                "category": "ACCUMULATION",
+                "cluster": "buy",
+                "address": "0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be",
+                "tradeVol": 6400.0,
+                "netFlow": 6400.0,
+                "usdVal": 17560000,
+                "txCount": 8,
+                "signal": "LIMIT BUY ABSORB",
+                "venue": "Binance Spot ETH/USDT",
+                "lastActive": "55m ago",
+                "explorerUrl": "https://etherscan.io/address/0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be",
+                "notes": "Menempatkan order beli limit besar di level support $2.720, menyerap tekanan jual ritel."
+        },
+        {
+                "rank": 17,
+                "entity": "Whale 0x267b... (Curve crvUSD Liquidator)",
+                "category": "LIQUIDATION ARB",
+                "cluster": "sell",
+                "address": "0x267be1c1d684f7404374fd1a738e068295eb7bce",
+                "tradeVol": 5850.0,
+                "netFlow": -5850.0,
+                "usdVal": 16050000,
+                "txCount": 11,
+                "signal": "SOFT LIQUIDATION SELL",
+                "venue": "Curve LLAMMA Controller",
+                "lastActive": "8.2h ago",
+                "explorerUrl": "https://etherscan.io/address/0x267be1c1d684f7404374fd1a738e068295eb7bce",
+                "notes": "Bot likuidasi otomatis mengeksekusi konversi agunan pinjaman crvUSD saat harga menyentuh batas risiko."
+        },
+        {
+                "rank": 18,
+                "entity": "Whale 0x7166... (Euler v2 Lending Yield Depo)",
+                "category": "DEFI LENDING",
+                "cluster": "buy",
+                "address": "0x71660c4005ba85c37ccec55d0c4493e66fe775d3",
+                "tradeVol": 5200.0,
+                "netFlow": 5200.0,
+                "usdVal": 14260000,
+                "txCount": 4,
+                "signal": "YIELD FARM DEPOSIT",
+                "venue": "Euler v2 Modular Vault",
+                "lastActive": "14h ago",
+                "explorerUrl": "https://etherscan.io/address/0x71660c4005ba85c37ccec55d0c4493e66fe775d3",
+                "notes": "Memindahkan 5.200 ETH ke brankas peminjaman isolated Euler v2 untuk mengunci imbal hasil 4.8% APY."
+        },
+        {
+                "rank": 19,
+                "entity": "Cumberland ETH Options Two-Sided Quote",
+                "category": "MARKET MAKER",
+                "cluster": "mm",
+                "address": "0xbe0eb53f46cd790cd13851d5eff43d12404d33e8",
+                "tradeVol": 4750.0,
+                "netFlow": 4750.0,
+                "usdVal": 13030000,
+                "txCount": 38,
+                "signal": "OPTIONS LIQUIDITY PROV",
+                "venue": "Deribit & CME Pools",
+                "lastActive": "1.5h ago",
+                "explorerUrl": "https://etherscan.io/address/0xbe0eb53f46cd790cd13851d5eff43d12404d33e8",
+                "notes": "Penyesuaian kuotasi order book derivatif dua sisi mengamankan spread pasar menjelang penutupan opsi Jumat."
+        },
+        {
+                "rank": 20,
+                "entity": "Whale 0xda9d... (Symbiotic & EigenLayer Whale)",
+                "category": "RESTAKING",
+                "cluster": "buy",
+                "address": "0xda9df2326a1f599bb0019652f150204f7b6070a7",
+                "tradeVol": 4200.0,
+                "netFlow": 4200.0,
+                "usdVal": 11520000,
+                "txCount": 3,
+                "signal": "RESTAKE CAPITAL LOCK",
+                "venue": "EigenLayer / Symbiotic Vault",
+                "lastActive": "21h ago",
+                "explorerUrl": "https://etherscan.io/address/0xda9df2326a1f599bb0019652f150204f7b6070a7",
+                "notes": "Mengunci 4.200 ETH ke protokol restaking untuk memvalidasi layanan AVS terdistribusi dengan reward ganda."
+        }
+]
+      },
+      holdings: {
+        btc: [
+          { rank: 1, entity: "Binance Cold Storage #1", category: "EXCHANGE", cluster: "exch", address: "34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", balance: 248597.13, usdVal: 21399650000, pctSupply: 1.25, status: "Cold Storage", flow: 1250.0, explorerUrl: "https://mempool.space/address/34xp4vRoCGJym3xR7yCVPFHoCNxv4Twseo", notes: "Dompet cold storage cadangan utama bursa Binance global, diamankan dengan skema multisig institusional." },
         { rank: 2, entity: "Bitfinex Cold Wallet", category: "EXCHANGE", cluster: "exch", address: "bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97", balance: 178010.88, usdVal: 15323600000, pctSupply: 0.90, status: "Cold Storage", flow: 0.0, explorerUrl: "https://mempool.space/address/bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97", notes: "Alamat Bech32 native SegWit terbesar di dunia, menyimpan cadangan jangka panjang bursa Bitfinex." },
         { rank: 3, entity: "Robinhood Custody (Jump)", category: "BROKERAGE", cluster: "exch", address: "bc1ql49ydapnjafl5t2cp9zqpjwe6pdgmxy98859v2", balance: 140560.10, usdVal: 12099800000, pctSupply: 0.71, status: "Active Accumulation", flow: 320.5, explorerUrl: "https://mempool.space/address/bc1ql49ydapnjafl5t2cp9zqpjwe6pdgmxy98859v2", notes: "Kustodi ritel broker Robinhood yang dikelola bersama mitra market maker Jump Trading." },
         { rank: 4, entity: "US Govt (Silk Road DOJ)", category: "GOVERNMENT", cluster: "gov", address: "bc1qazcm763858nkj2dj986etajv6wxfsl50ydrgpg", balance: 94643.04, usdVal: 8147100000, pctSupply: 0.48, status: "Gov Custody (DOJ)", flow: 0.0, explorerUrl: "https://mempool.space/address/bc1qazcm763858nkj2dj986etajv6wxfsl50ydrgpg", notes: "Sitaan Departemen Kehakiman AS dari kasus peretasan dan penyitaan pasar gelap Silk Road." },
@@ -769,9 +1425,9 @@ a { color: var(--cyan); text-decoration: none; }
         { rank: 18, entity: "Accumulation Mega-Whale #3", category: "INDIVIDUAL", cluster: "priv", address: "1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ", balance: 26100.00, usdVal: 2246800000, pctSupply: 0.13, status: "Active Buy Wall", flow: 950.0, explorerUrl: "https://mempool.space/address/1P5ZEDWTKTFGxQjZphgWPQUpe554WKDfHQ", notes: "Dikenal di kalangan analis on-chain sebagai dompet pembuat tembok likuiditas beli saat terjadi dip." },
         { rank: 19, entity: "Coinbase Prime Custody #1", category: "INSTITUTIONAL", cluster: "etf", address: "3Cbq7aT1tY8kNxvgbZRX3EpTWzQ26mv5Gg", balance: 25400.00, usdVal: 2186500000, pctSupply: 0.13, status: "Institutional Cold", flow: 210.0, explorerUrl: "https://mempool.space/address/3Cbq7aT1tY8kNxvgbZRX3EpTWzQ26mv5Gg", notes: "Brankas penyimpanan primer Coinbase Institutional melayani korporasi publik dan family office." },
         { rank: 20, entity: "Genesis Block (Satoshi Nakamoto)", category: "GENESIS", cluster: "dormant", address: "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", balance: 100.85, usdVal: 8681000, pctSupply: 0.01, status: "Immortal Genesis", flow: 0.12, explorerUrl: "https://mempool.space/address/1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa", notes: "Alamat Blok 0 Bitcoin (3 Jan 2009). Hadiah 50 BTC pertama tidak dapat dibelanjakan akibat kode awal, rutin menerima donasi dari komunitas." }
-      ],
-      eth: [
-        { rank: 1, entity: "Beacon Deposit Contract (PoS)", category: "STAKING", cluster: "sc", address: "0x00000000219ab540356cbb839cbe05303d7705fa", balance: 34250000.0, usdVal: 94012000000, pctSupply: 28.50, status: "Consensus Lock", flow: 42000.0, explorerUrl: "https://etherscan.io/address/0x00000000219ab540356cbb839cbe05303d7705fa", notes: "Smart contract konsensus Proof-of-Stake Ethereum resmi yang mengunci seluruh validator aktif global." },
+        ],
+        eth: [
+          { rank: 1, entity: "Beacon Deposit Contract (PoS)", category: "STAKING", cluster: "sc", address: "0x00000000219ab540356cbb839cbe05303d7705fa", balance: 34250000.0, usdVal: 94012000000, pctSupply: 28.50, status: "Consensus Lock", flow: 42000.0, explorerUrl: "https://etherscan.io/address/0x00000000219ab540356cbb839cbe05303d7705fa", notes: "Smart contract konsensus Proof-of-Stake Ethereum resmi yang mengunci seluruh validator aktif global." },
         { rank: 2, entity: "Wrapped Ether (WETH Contract)", category: "DEFI", cluster: "sc", address: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", balance: 3150000.0, usdVal: 8646450000, pctSupply: 2.62, status: "Smart Contract", flow: -5100.0, explorerUrl: "https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2", notes: "Kontrak WETH standar ERC-20 yang mendasari seluruh likuiditas bursa terdesentralisasi (Uniswap, Curve)." },
         { rank: 3, entity: "Binance Cold Storage #1", category: "EXCHANGE", cluster: "exch", address: "0xda9df2326a1f599bb0019652f150204f7b6070a7", balance: 1980000.0, usdVal: 5434900000, pctSupply: 1.65, status: "Cold Storage", flow: 0.0, explorerUrl: "https://etherscan.io/address/0xda9df2326a1f599bb0019652f150204f7b6070a7", notes: "Brankas penyimpanan dingin Ethereum terbesar milik Binance, diverifikasi pada audit bukti cadangan (PoR)." },
         { rank: 4, entity: "Binance Cold Storage #2", category: "EXCHANGE", cluster: "exch", address: "0x28c6c06298d514db089934071355e5743bf21d60", balance: 1450000.0, usdVal: 3980100000, pctSupply: 1.21, status: "Active Cluster", flow: 8400.0, explorerUrl: "https://etherscan.io/address/0x28c6c06298d514db089934071355e5743bf21d60", notes: "Dompet operasional penyeimbang transaksi deposit dan penarikan internal bursa Binance." },
@@ -791,7 +1447,8 @@ a { color: var(--cyan); text-decoration: none; }
         { rank: 18, entity: "1inch Aggregator Router v5", category: "DEFI", cluster: "sc", address: "0x1111111254fb6c44bac0bed2854e76f90643097d", balance: 310000.0, usdVal: 850910000, pctSupply: 0.26, status: "DEX Protocol", flow: -750.0, explorerUrl: "https://etherscan.io/address/0x1111111254fb6c44bac0bed2854e76f90643097d", notes: "Kontrak pintar agregator DEX 1inch untuk eksekusi swap multijalur terefisiensi gas." },
         { rank: 19, entity: "Poloniex Cold Storage", category: "EXCHANGE", cluster: "exch", address: "0x267be1c1d684f7404374fd1a738e068295eb7bce", balance: 280000.0, usdVal: 768570000, pctSupply: 0.23, status: "Cold Storage", flow: 0.0, explorerUrl: "https://etherscan.io/address/0x267be1c1d684f7404374fd1a738e068295eb7bce", notes: "Dompet brankas offline bursa Poloniex peninggalan era awal perdagangan altcoin global." },
         { rank: 20, entity: "Bitstamp Cold Storage (ETH)", category: "EXCHANGE", cluster: "exch", address: "0x71660c4005ba85c37ccec55d0c4493e66fe775d3", balance: 250000.0, usdVal: 686220000, pctSupply: 0.21, status: "Cold Storage", flow: 50.0, explorerUrl: "https://etherscan.io/address/0x71660c4005ba85c37ccec55d0c4493e66fe775d3", notes: "Cadangan brankas aman Ethereum bursa Bitstamp yang teregulasi di Luksemburg & Uni Eropa." }
-      ]
+        ]
+      }
     },
     defaultLayout: [
       { id: "chart", x: 0, y: 0, w: 7.5, h: 14 },
@@ -1206,40 +1863,12 @@ a { color: var(--cyan); text-decoration: none; }
       }
     },
 
-    // 09. ON-CHAIN WHALE TRACKER (TOP 20 RICHEST WALLETS)
+    // 09. ON-CHAIN WHALE TRACKER (72H ACTIVE TRADES & SMART MONEY)
     whales: {
       num: "09",
-      title: "ON-CHAIN WHALE TRACKER · TOP 20 RICHEST WALLETS",
+      title: "ON-CHAIN WHALE TRACKER · 72H ACTIVE TRADES & SMART MONEY FLOWS",
       render(body) {
-        const activeChain = window.W_TERMINAL.activeWhaleChain || 'BTC';
-        body.innerHTML = `
-          <div class="w-toolbar">
-            <span class="faint" style="font-size:9px;">CHAIN:</span>
-            <button class="tb-btn ${activeChain === 'BTC' ? 'active' : ''}" onclick="setWhaleChain('BTC', this)">BITCOIN (BTC)</button>
-            <button class="tb-btn ${activeChain === 'ETH' ? 'active' : ''}" onclick="setWhaleChain('ETH', this)">ETHEREUM (ETH)</button>
-            <input type="text" class="search-input" id="whale-search-input" placeholder="> filter entity, address, cluster..." style="width:220px;margin-left:8px;" oninput="filterWhaleTable(this.value)">
-            <span class="faint" style="margin-left:auto;font-size:9px;" id="whale-chain-stat">LIVE ON-CHAIN ARCHIVE · 20 LARGEST KNOWN BALANCES</span>
-          </div>
-          <div class="whale-kpi-bar" id="whale-kpi-bar"></div>
-          <div style="flex:1;overflow:auto;">
-            <table class="terminal-tbl">
-              <thead>
-                <tr>
-                  <th style="width:36px;text-align:center;">#</th>
-                  <th>ENTITY & CLUSTER</th>
-                  <th>ON-CHAIN ADDRESS</th>
-                  <th style="text-align:right;">HOLDINGS</th>
-                  <th style="text-align:right;">EST. VALUE (USD)</th>
-                  <th style="text-align:right;">% SUPPLY</th>
-                  <th style="text-align:center;">STATUS / 7D FLOW</th>
-                  <th style="text-align:center;width:110px;">ACTION</th>
-                </tr>
-              </thead>
-              <tbody id="whale-tbody"></tbody>
-            </table>
-          </div>
-        `;
-        renderWhaleRows();
+        renderWhaleWidgetBody(body);
       }
     }
   };
@@ -1349,7 +1978,7 @@ a { color: var(--cyan); text-decoration: none; }
     playTone(660, 'sine', 0.04);
   };
 
-  // --- ON-CHAIN WHALE TRACKER CONTROLLER ---
+  // --- ON-CHAIN WHALE TRACKER CONTROLLER (72H ACTIVE TRADING ENGINE) ---
   const fmtUsd = (n) => {
     if (n >= 1e9) return "$" + (n / 1e9).toFixed(2) + "B";
     if (n >= 1e6) return "$" + (n / 1e6).toFixed(2) + "M";
@@ -1362,131 +1991,325 @@ a { color: var(--cyan); text-decoration: none; }
     return addr.slice(0, 8) + "..." + addr.slice(-8);
   };
 
+  function renderWhaleWidgetBody(body) {
+    if (!body) body = document.getElementById("body-whales");
+    if (!body) return;
+
+    const chain = window.W_TERMINAL.activeWhaleChain || 'BTC';
+    const mode = window.W_TERMINAL.whaleMode || 'active72h';
+    const filter = window.W_TERMINAL.whaleTradeFilter || 'ALL';
+
+    body.innerHTML = `
+      <div class="w-toolbar" style="flex-wrap:wrap;gap:4px;padding:4px 6px;">
+        <span class="faint" style="font-size:9px;">CHAIN:</span>
+        <button class="tb-btn ${chain === 'BTC' ? 'active' : ''}" onclick="setWhaleChain('BTC', this)">BITCOIN (BTC)</button>
+        <button class="tb-btn ${chain === 'ETH' ? 'active' : ''}" onclick="setWhaleChain('ETH', this)">ETHEREUM (ETH)</button>
+
+        <span style="color:var(--line);margin:0 4px;">|</span>
+
+        <span class="faint" style="font-size:9px;">VIEW:</span>
+        <button class="tb-btn ${mode === 'active72h' ? 'active' : ''}" onclick="setWhaleMode('active72h', this)">⚡ 72H ACTIVE TRADES (3 DAYS)</button>
+        <button class="tb-btn ${mode === 'holdings' ? 'active' : ''}" onclick="setWhaleMode('holdings', this)">🏛️ ALL-TIME HOLDINGS</button>
+
+        ${mode === 'active72h' ? `
+          <span style="color:var(--line);margin:0 4px;">|</span>
+          <span class="faint" style="font-size:9px;">FLOW:</span>
+          <button class="tb-btn ${filter === 'ALL' ? 'active' : ''}" onclick="setWhaleTradeFilter('ALL', this)">ALL</button>
+          <button class="tb-btn ${filter === 'BUY' ? 'active' : ''}" onclick="setWhaleTradeFilter('BUY', this)">BUY / INFLOW 🟢</button>
+          <button class="tb-btn ${filter === 'SELL' ? 'active' : ''}" onclick="setWhaleTradeFilter('SELL', this)">SELL / DUMP 🔴</button>
+          <button class="tb-btn ${filter === 'PERP' ? 'active' : ''}" onclick="setWhaleTradeFilter('PERP', this)">PERP / MM ⚡</button>
+        ` : ''}
+
+        <input type="text" class="search-input" id="whale-search-input" value="${window.W_TERMINAL.whaleSearch || ''}" placeholder="> search entity / address / route..." style="width:170px;margin-left:auto;" oninput="filterWhaleTable(this.value)">
+      </div>
+      <div class="whale-kpi-bar" id="whale-kpi-bar"></div>
+      <div style="flex:1;overflow:auto;">
+        <table class="terminal-tbl">
+          <thead id="whale-thead"></thead>
+          <tbody id="whale-tbody"></tbody>
+        </table>
+      </div>
+    `;
+    renderWhaleRows();
+  }
+
   function renderWhaleRows() {
+    const thead = document.getElementById("whale-thead");
     const tbody = document.getElementById("whale-tbody");
     const kpiBar = document.getElementById("whale-kpi-bar");
-    const statEl = document.getElementById("whale-chain-stat");
-    if (!tbody) return;
+    if (!tbody || !thead) return;
 
-    const chain = (window.W_TERMINAL.activeWhaleChain || 'BTC').toLowerCase();
-    const isBtc = chain === 'btc';
+    const chainKey = (window.W_TERMINAL.activeWhaleChain || 'BTC').toLowerCase();
+    const isBtc = chainKey === 'btc';
     const ticker = isBtc ? 'BTC' : 'ETH';
-    const fullList = (window.W_TERMINAL.whaleWallets && window.W_TERMINAL.whaleWallets[chain]) || [];
-    
-    // Calculate aggregate metrics
-    const totalCoins = fullList.reduce((acc, cur) => acc + cur.balance, 0);
-    const totalUsd = fullList.reduce((acc, cur) => acc + cur.usdVal, 0);
-    const totalSupplyPct = fullList.reduce((acc, cur) => acc + cur.pctSupply, 0);
-    const topHolder = fullList[0] ? fullList[0].entity : '-';
-    const netFlow7d = fullList.reduce((acc, cur) => acc + (cur.flow || 0), 0);
-
-    if (kpiBar) {
-      kpiBar.innerHTML = `
-        <div class="whale-kpi-item">
-          <span class="whale-kpi-label">TOP 20 COMBINED HOLDINGS</span>
-          <span class="whale-kpi-val org">${fmtNum(totalCoins, isBtc ? 2 : 0)} ${ticker}</span>
-        </div>
-        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
-          <span class="whale-kpi-label">ESTIMATED ASSET VALUE</span>
-          <span class="whale-kpi-val num">${fmtUsd(totalUsd)}</span>
-        </div>
-        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
-          <span class="whale-kpi-label">% CIRCULATING SUPPLY</span>
-          <span class="whale-kpi-val cy">${totalSupplyPct.toFixed(2)}%</span>
-        </div>
-        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
-          <span class="whale-kpi-label">LARGEST SINGLE HOLDER</span>
-          <span class="whale-kpi-val" style="color:#fff;">${topHolder}</span>
-        </div>
-        <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;margin-left:auto;">
-          <span class="whale-kpi-label">AGGREGATE 7D NET FLOW</span>
-          <span class="whale-kpi-val ${netFlow7d > 0 ? 'up' : (netFlow7d < 0 ? 'dn' : 'faint')}">
-            ${netFlow7d > 0 ? '+' : ''}${fmtNum(netFlow7d, 1)} ${ticker}
-          </span>
-        </div>
-      `;
-    }
-
-    if (statEl) {
-      statEl.textContent = `LIVE ON-CHAIN ARCHIVE · 20 LARGEST KNOWN ${ticker} WALLETS`;
-    }
-
+    const mode = window.W_TERMINAL.whaleMode || 'active72h';
+    const filter = window.W_TERMINAL.whaleTradeFilter || 'ALL';
     const query = (window.W_TERMINAL.whaleSearch || '').toLowerCase().trim();
-    let displayList = fullList;
-    if (query) {
-      displayList = fullList.filter(w => 
-        w.entity.toLowerCase().includes(query) ||
-        w.address.toLowerCase().includes(query) ||
-        w.category.toLowerCase().includes(query) ||
-        w.status.toLowerCase().includes(query) ||
-        (w.notes && w.notes.toLowerCase().includes(query))
-      );
-    }
 
-    if (displayList.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--ink-dim);">No whale addresses matching filter "${query}".</td></tr>`;
-      return;
-    }
+    const modeData = (window.W_TERMINAL.whaleWallets && window.W_TERMINAL.whaleWallets[mode]) || {};
+    const fullList = modeData[chainKey] || [];
 
-    tbody.innerHTML = displayList.map(w => {
-      const clusterClass = `pill-cluster-${w.cluster || 'exch'}`;
-      const flowBadge = w.flow > 0 
-        ? `<span class="up bold">+${fmtNum(w.flow, 1)}</span>`
-        : (w.flow < 0 ? `<span class="dn bold">${fmtNum(w.flow, 1)}</span>` : `<span class="faint">0.0</span>`);
-      
-      const safeData = JSON.stringify(w).replace(/"/g, '&quot;');
-      const maxPct = isBtc ? 2.0 : 30.0;
-      const barWidth = Math.min(100, Math.max(4, (w.pctSupply / maxPct) * 100));
+    if (mode === 'active72h') {
+      // --- 72H ACTIVE TRADING FLOW MODE ---
+      const totalTraded = fullList.reduce((acc, cur) => acc + (cur.tradeVol || 0), 0);
+      const totalUsd = fullList.reduce((acc, cur) => acc + (cur.usdVal || 0), 0);
+      const buyList = fullList.filter(w => w.netFlow > 0);
+      const sellList = fullList.filter(w => w.netFlow < 0);
+      const totalBuy = buyList.reduce((acc, cur) => acc + cur.tradeVol, 0);
+      const totalSell = sellList.reduce((acc, cur) => acc + cur.tradeVol, 0);
+      const buyPct = totalTraded > 0 ? ((totalBuy / totalTraded) * 100).toFixed(1) : '50.0';
 
-      return `
-        <tr onclick="openInspector('wallet', ${safeData})">
-          <td style="text-align:center;" class="faint mono">${String(w.rank).padStart(2, '0')}</td>
-          <td>
-            <div style="font-weight:700;color:#fff;">${w.entity}</div>
-            <div style="display:flex;gap:4px;margin-top:2px;align-items:center;">
-              <span class="pill ${clusterClass}" style="font-size:8px;padding:0 4px;">${w.category}</span>
-              <span class="faint" style="font-size:8.5px;">${w.status}</span>
-            </div>
-          </td>
-          <td>
-            <div style="display:flex;align-items:center;">
-              <span class="whale-addr-mono" title="${w.address}">${truncateAddr(w.address)}</span>
-              <button class="whale-copy-btn" title="Copy full address" onclick="event.stopPropagation();copyWalletAddr('${w.address}', this)">COPY</button>
-            </div>
-          </td>
-          <td style="text-align:right;">
-            <div class="num bold org">${fmtNum(w.balance, isBtc ? 2 : 0)} <span style="font-size:8.5px;color:var(--ink-dim);">${ticker}</span></div>
-          </td>
-          <td style="text-align:right;">
-            <div class="num bold" style="color:#e0e0e0;">${fmtUsd(w.usdVal)}</div>
-          </td>
-          <td style="text-align:right;">
-            <span class="num cy bold">${w.pctSupply.toFixed(2)}%</span>
-            <span class="whale-supply-track">
-              <div class="whale-supply-fill" style="width:${barWidth}%;"></div>
+      if (kpiBar) {
+        kpiBar.innerHTML = `
+          <div class="whale-kpi-item">
+            <span class="whale-kpi-label">72H AGGREGATE TRADE VOL</span>
+            <span class="whale-kpi-val org">${fmtNum(totalTraded, isBtc ? 1 : 0)} ${ticker} (${fmtUsd(totalUsd)})</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:10px;">
+            <span class="whale-kpi-label">72H NET BUY INFLOW</span>
+            <span class="whale-kpi-val up">+${fmtNum(totalBuy, isBtc ? 1 : 0)} ${ticker}</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:10px;">
+            <span class="whale-kpi-label">72H NET SELL DUMP</span>
+            <span class="whale-kpi-val dn">-${fmtNum(totalSell, isBtc ? 1 : 0)} ${ticker}</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:10px;">
+            <span class="whale-kpi-label">SMART MONEY SENTIMENT</span>
+            <span class="whale-kpi-val ${Number(buyPct) >= 50 ? 'up' : 'dn'}">
+              ${Number(buyPct) >= 50 ? '🟢' : '🔴'} ${buyPct}% NET ${Number(buyPct) >= 50 ? 'ACCUMULATION' : 'DISTRIBUTION'}
             </span>
-          </td>
-          <td style="text-align:center;">
-            <div>${flowBadge}</div>
-            <div class="faint" style="font-size:8px;">7D NET FLOW</div>
-          </td>
-          <td style="text-align:center;" onclick="event.stopPropagation()">
-            <div style="display:flex;gap:4px;justify-content:center;">
-              <button class="tb-btn" style="padding:2px 6px;" onclick="openInspector('wallet', ${safeData})">INSPECT</button>
-              <a href="${w.explorerUrl}" target="_blank" rel="noopener noreferrer" class="tb-btn" style="padding:2px 6px;text-decoration:none;display:inline-block;" title="Open in block explorer">↗</a>
-            </div>
-          </td>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:10px;margin-left:auto;">
+            <span class="whale-kpi-label">MONITORING WINDOW</span>
+            <span class="whale-kpi-val faint" style="font-size:9.5px;">LAST 72H (20 - 22 SEPT 2026)</span>
+          </div>
+        `;
+      }
+
+      thead.innerHTML = `
+        <tr>
+          <th style="width:36px;text-align:center;">#</th>
+          <th>TRADING ENTITY & STRATEGY</th>
+          <th>ON-CHAIN ADDRESS</th>
+          <th style="text-align:right;">72H NET TRADE FLOW</th>
+          <th style="text-align:right;">EST. USD VALUE</th>
+          <th style="text-align:center;">TRADE SIGNAL / INTENT</th>
+          <th style="text-align:left;">PRIMARY VENUE / ROUTE</th>
+          <th style="text-align:center;">LAST ACTIVE</th>
+          <th style="text-align:center;width:95px;">ACTION</th>
         </tr>
       `;
-    }).join("");
+
+      let displayList = fullList;
+      if (filter === 'BUY') displayList = displayList.filter(w => w.netFlow > 0);
+      else if (filter === 'SELL') displayList = displayList.filter(w => w.netFlow < 0);
+      else if (filter === 'PERP') displayList = displayList.filter(w => w.cluster === 'perp' || w.cluster === 'mm');
+
+      if (query) {
+        displayList = displayList.filter(w =>
+          w.entity.toLowerCase().includes(query) ||
+          w.address.toLowerCase().includes(query) ||
+          w.category.toLowerCase().includes(query) ||
+          w.signal.toLowerCase().includes(query) ||
+          w.venue.toLowerCase().includes(query) ||
+          (w.notes && w.notes.toLowerCase().includes(query))
+        );
+      }
+
+      if (displayList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--ink-dim);">No active trade wallets matching filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = displayList.map(w => {
+        const clusterClass = `pill-cluster-${w.cluster || 'buy'}`;
+        const isBuy = w.netFlow >= 0;
+        const flowSign = isBuy ? '+' : '';
+        const safeData = JSON.stringify(w).replace(/"/g, '&quot;');
+
+        return `
+          <tr onclick="openInspector('wallet', ${safeData})">
+            <td style="text-align:center;" class="faint mono">${String(w.rank).padStart(2, '0')}</td>
+            <td>
+              <div style="font-weight:700;color:#fff;">${w.entity}</div>
+              <div style="display:flex;gap:4px;margin-top:2px;align-items:center;">
+                <span class="pill ${clusterClass}" style="font-size:8px;padding:0 4px;">${w.category}</span>
+                <span class="faint mono" style="font-size:8.5px;">${w.txCount} txs (72h)</span>
+              </div>
+            </td>
+            <td>
+              <div style="display:flex;align-items:center;">
+                <span class="whale-addr-mono" title="${w.address}">${truncateAddr(w.address)}</span>
+                <button class="whale-copy-btn" title="Copy address" onclick="event.stopPropagation();copyWalletAddr('${w.address}', this)">COPY</button>
+              </div>
+            </td>
+            <td style="text-align:right;">
+              <div class="num bold ${isBuy ? 'up' : 'dn'}">${flowSign}${fmtNum(w.netFlow, isBtc ? 2 : 0)} <span style="font-size:8.5px;color:var(--ink-dim);">${ticker}</span></div>
+            </td>
+            <td style="text-align:right;">
+              <div class="num bold" style="color:#e0e0e0;">${fmtUsd(w.usdVal)}</div>
+            </td>
+            <td style="text-align:center;">
+              <span class="pill ${clusterClass}" style="font-weight:800;font-size:8.5px;letter-spacing:0.3px;">${w.signal}</span>
+            </td>
+            <td style="text-align:left;">
+              <div class="faint" style="font-size:9.5px;color:#bbb;">${w.venue}</div>
+            </td>
+            <td style="text-align:center;">
+              <span class="mono bold org" style="font-size:9.5px;">${w.lastActive}</span>
+            </td>
+            <td style="text-align:center;" onclick="event.stopPropagation()">
+              <div style="display:flex;gap:4px;justify-content:center;">
+                <button class="tb-btn" style="padding:2px 6px;" onclick="openInspector('wallet', ${safeData})">INSPECT</button>
+                <a href="${w.explorerUrl}" target="_blank" rel="noopener noreferrer" class="tb-btn" style="padding:2px 6px;text-decoration:none;display:inline-block;" title="Open in block explorer">↗</a>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+    } else {
+      // --- ALL-TIME HOLDINGS MODE ---
+      const totalCoins = fullList.reduce((acc, cur) => acc + cur.balance, 0);
+      const totalUsd = fullList.reduce((acc, cur) => acc + cur.usdVal, 0);
+      const totalSupplyPct = fullList.reduce((acc, cur) => acc + cur.pctSupply, 0);
+      const topHolder = fullList[0] ? fullList[0].entity : '-';
+      const netFlow7d = fullList.reduce((acc, cur) => acc + (cur.flow || 0), 0);
+
+      if (kpiBar) {
+        kpiBar.innerHTML = `
+          <div class="whale-kpi-item">
+            <span class="whale-kpi-label">TOP 20 COMBINED HOLDINGS</span>
+            <span class="whale-kpi-val org">${fmtNum(totalCoins, isBtc ? 2 : 0)} ${ticker}</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
+            <span class="whale-kpi-label">ESTIMATED ASSET VALUE</span>
+            <span class="whale-kpi-val num">${fmtUsd(totalUsd)}</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
+            <span class="whale-kpi-label">% CIRCULATING SUPPLY</span>
+            <span class="whale-kpi-val cy">${totalSupplyPct.toFixed(2)}%</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;">
+            <span class="whale-kpi-label">LARGEST SINGLE HOLDER</span>
+            <span class="whale-kpi-val" style="color:#fff;">${topHolder}</span>
+          </div>
+          <div class="whale-kpi-item" style="border-left:1px solid var(--line);padding-left:12px;margin-left:auto;">
+            <span class="whale-kpi-label">AGGREGATE 7D NET FLOW</span>
+            <span class="whale-kpi-val ${netFlow7d > 0 ? 'up' : (netFlow7d < 0 ? 'dn' : 'faint')}">
+              ${netFlow7d > 0 ? '+' : ''}${fmtNum(netFlow7d, 1)} ${ticker}
+            </span>
+          </div>
+        `;
+      }
+
+      thead.innerHTML = `
+        <tr>
+          <th style="width:36px;text-align:center;">#</th>
+          <th>ENTITY & CLUSTER</th>
+          <th>ON-CHAIN ADDRESS</th>
+          <th style="text-align:right;">HOLDINGS</th>
+          <th style="text-align:right;">EST. VALUE (USD)</th>
+          <th style="text-align:right;">% SUPPLY</th>
+          <th style="text-align:center;">STATUS / 7D FLOW</th>
+          <th style="text-align:center;width:95px;">ACTION</th>
+        </tr>
+      `;
+
+      let displayList = fullList;
+      if (query) {
+        displayList = displayList.filter(w =>
+          w.entity.toLowerCase().includes(query) ||
+          w.address.toLowerCase().includes(query) ||
+          w.category.toLowerCase().includes(query) ||
+          w.status.toLowerCase().includes(query) ||
+          (w.notes && w.notes.toLowerCase().includes(query))
+        );
+      }
+
+      if (displayList.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--ink-dim);">No whale addresses matching filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = displayList.map(w => {
+        const clusterClass = `pill-cluster-${w.cluster || 'exch'}`;
+        const flowBadge = w.flow > 0 
+          ? `<span class="up bold">+${fmtNum(w.flow, 1)}</span>`
+          : (w.flow < 0 ? `<span class="dn bold">${fmtNum(w.flow, 1)}</span>` : `<span class="faint">0.0</span>`);
+        
+        const safeData = JSON.stringify(w).replace(/"/g, '&quot;');
+        const maxPct = isBtc ? 2.0 : 30.0;
+        const barWidth = Math.min(100, Math.max(4, (w.pctSupply / maxPct) * 100));
+
+        return `
+          <tr onclick="openInspector('wallet', ${safeData})">
+            <td style="text-align:center;" class="faint mono">${String(w.rank).padStart(2, '0')}</td>
+            <td>
+              <div style="font-weight:700;color:#fff;">${w.entity}</div>
+              <div style="display:flex;gap:4px;margin-top:2px;align-items:center;">
+                <span class="pill ${clusterClass}" style="font-size:8px;padding:0 4px;">${w.category}</span>
+                <span class="faint" style="font-size:8.5px;">${w.status}</span>
+              </div>
+            </td>
+            <td>
+              <div style="display:flex;align-items:center;">
+                <span class="whale-addr-mono" title="${w.address}">${truncateAddr(w.address)}</span>
+                <button class="whale-copy-btn" title="Copy full address" onclick="event.stopPropagation();copyWalletAddr('${w.address}', this)">COPY</button>
+              </div>
+            </td>
+            <td style="text-align:right;">
+              <div class="num bold org">${fmtNum(w.balance, isBtc ? 2 : 0)} <span style="font-size:8.5px;color:var(--ink-dim);">${ticker}</span></div>
+            </td>
+            <td style="text-align:right;">
+              <div class="num bold" style="color:#e0e0e0;">${fmtUsd(w.usdVal)}</div>
+            </td>
+            <td style="text-align:right;">
+              <span class="num cy bold">${w.pctSupply.toFixed(2)}%</span>
+              <span class="whale-supply-track">
+                <div class="whale-supply-fill" style="width:${barWidth}%;"></div>
+              </span>
+            </td>
+            <td style="text-align:center;">
+              <div>${flowBadge}</div>
+              <div class="faint" style="font-size:8px;">7D NET FLOW</div>
+            </td>
+            <td style="text-align:center;" onclick="event.stopPropagation()">
+              <div style="display:flex;gap:4px;justify-content:center;">
+                <button class="tb-btn" style="padding:2px 6px;" onclick="openInspector('wallet', ${safeData})">INSPECT</button>
+                <a href="${w.explorerUrl}" target="_blank" rel="noopener noreferrer" class="tb-btn" style="padding:2px 6px;text-decoration:none;display:inline-block;" title="Open in block explorer">↗</a>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
   }
 
   window.setWhaleChain = function(chain, btn) {
-    document.querySelectorAll("#widget-whales .w-toolbar button").forEach(b => b.classList.remove("active"));
-    if (btn) btn.classList.add("active");
     window.W_TERMINAL.activeWhaleChain = chain;
-    renderWhaleRows();
+    const body = document.getElementById("body-whales");
+    if (body) renderWhaleWidgetBody(body);
     playTone(720, 'sine', 0.04);
+  };
+
+  window.setWhaleMode = function(mode, btn) {
+    window.W_TERMINAL.whaleMode = mode;
+    const body = document.getElementById("body-whales");
+    if (body) renderWhaleWidgetBody(body);
+    playTone(660, 'sine', 0.04);
+  };
+
+  window.setWhaleTradeFilter = function(filter, btn) {
+    window.W_TERMINAL.whaleTradeFilter = filter;
+    document.querySelectorAll("#widget-whales .w-toolbar button").forEach(b => {
+      const txt = b.textContent.trim();
+      if (txt === 'ALL' || txt.startsWith('BUY') || txt.startsWith('SELL') || txt.startsWith('PERP')) {
+        b.classList.toggle("active", txt.startsWith(filter) || (filter === 'ALL' && txt === 'ALL'));
+      }
+    });
+    renderWhaleRows();
+    playTone(700, 'sine', 0.03);
   };
 
   window.filterWhaleTable = function(q) {
@@ -2251,27 +3074,43 @@ a { color: var(--cyan); text-decoration: none; }
     } else if (type === 'wallet') {
       const w = data;
       const chain = (window.W_TERMINAL.activeWhaleChain || 'BTC').toUpperCase();
-      title.textContent = `> ON-CHAIN WHALE INTEL · ${w.entity}`;
+      const isTrade = w.tradeVol !== undefined;
+
+      title.textContent = isTrade 
+        ? `> ON-CHAIN TRADE INTEL · ${w.entity}`
+        : `> ON-CHAIN WHALE INTEL · ${w.entity}`;
+
       body.innerHTML = `
         <div class="ins-sec">
           <div class="ins-sec-title">WHALE IDENTITY & CLUSTER</div>
           <div style="font-size:13px;font-weight:800;color:var(--org);margin-bottom:6px;">${w.entity}</div>
-          <div class="ins-row"><span class="k">Rank</span><span class="v org bold">#${w.rank} Largest Address</span></div>
-          <div class="ins-row"><span class="k">Chain</span><span class="v cy bold">${chain} Blockchain</span></div>
-          <div class="ins-row"><span class="k">Entity Category</span><span class="v"><span class="pill pill-cluster-${w.cluster || 'exch'}">${w.category}</span></span></div>
-          <div class="ins-row"><span class="k">Cluster Status</span><span class="v">${w.status}</span></div>
+          <div class="ins-row"><span class="k">Rank</span><span class="v org bold">#${w.rank} Largest Active Volume</span></div>
+          <div class="ins-row"><span class="k">Blockchain</span><span class="v cy bold">${chain} Network</span></div>
+          <div class="ins-row"><span class="k">Entity Strategy</span><span class="v"><span class="pill pill-cluster-${w.cluster || 'buy'}">${w.category}</span></span></div>
+          ${isTrade ? `<div class="ins-row"><span class="k">Trade Signal</span><span class="v up bold">${w.signal}</span></div>` : `<div class="ins-row"><span class="k">Cluster Status</span><span class="v">${w.status}</span></div>`}
         </div>
+
         <div class="ins-sec">
-          <div class="ins-sec-title">ON-CHAIN HOLDINGS & VALUE</div>
-          <div class="ins-row"><span class="k">Current Balance</span><span class="v num bold org">${fmtNum(w.balance, chain === 'BTC' ? 2 : 0)} ${chain}</span></div>
-          <div class="ins-row"><span class="k">Estimated USD Value</span><span class="v num bold">${fmtUsd(w.usdVal)}</span></div>
-          <div class="ins-row"><span class="k">% of Circulating Supply</span><span class="v num cy bold">${w.pctSupply.toFixed(2)}%</span></div>
-          <div class="ins-row"><span class="k">7D Net Flow</span><span class="v num ${w.flow > 0 ? 'up' : (w.flow < 0 ? 'dn' : 'faint')}">${w.flow > 0 ? '+' : ''}${fmtNum(w.flow, 1)} ${chain}</span></div>
+          <div class="ins-sec-title">${isTrade ? '72-HOUR ACTIVE TRADING TELEMETRY' : 'ON-CHAIN HOLDINGS & VALUE'}</div>
+          ${isTrade ? `
+            <div class="ins-row"><span class="k">72H Net Flow</span><span class="v num bold ${w.netFlow >= 0 ? 'up' : 'dn'}">${w.netFlow >= 0 ? '+' : ''}${fmtNum(w.netFlow, chain === 'BTC' ? 2 : 0)} ${chain}</span></div>
+            <div class="ins-row"><span class="k">72H Traded Volume</span><span class="v num org bold">${fmtNum(w.tradeVol, chain === 'BTC' ? 2 : 0)} ${chain}</span></div>
+            <div class="ins-row"><span class="k">Estimated USD Value</span><span class="v num bold">${fmtUsd(w.usdVal)}</span></div>
+            <div class="ins-row"><span class="k">Execution Route</span><span class="v cy">${w.venue}</span></div>
+            <div class="ins-row"><span class="k">72H Tx Activity</span><span class="v mono">${w.txCount} on-chain tranches</span></div>
+            <div class="ins-row"><span class="k">Last Transaction</span><span class="v org mono bold">${w.lastActive} (22 Sept 2026)</span></div>
+          ` : `
+            <div class="ins-row"><span class="k">Current Balance</span><span class="v num bold org">${fmtNum(w.balance, chain === 'BTC' ? 2 : 0)} ${chain}</span></div>
+            <div class="ins-row"><span class="k">Estimated USD Value</span><span class="v num bold">${fmtUsd(w.usdVal)}</span></div>
+            <div class="ins-row"><span class="k">% of Circulating Supply</span><span class="v num cy bold">${w.pctSupply.toFixed(2)}%</span></div>
+            <div class="ins-row"><span class="k">7D Net Flow</span><span class="v num ${w.flow > 0 ? 'up' : (w.flow < 0 ? 'dn' : 'faint')}">${w.flow > 0 ? '+' : ''}${fmtNum(w.flow, 1)} ${chain}</span></div>
+          `}
         </div>
+
         <div class="ins-sec">
           <div class="ins-sec-title">PUBLIC ADDRESS TELEMETRY</div>
           <div style="background:#090909;border:1px solid var(--line);padding:8px;border-radius:2px;margin:6px 0;">
-            <div style="font-size:8px;color:var(--ink-dim);margin-bottom:4px;">RAW HEX / BECH32 ADDRESS</div>
+            <div style="font-size:8px;color:var(--ink-dim);margin-bottom:4px;">RAW ON-CHAIN ADDRESS</div>
             <div class="whale-addr-mono" style="word-break:break-all;font-size:10.5px;color:#fff;">${w.address}</div>
           </div>
           <div style="display:flex;gap:6px;margin-top:8px;">
@@ -2279,6 +3118,7 @@ a { color: var(--cyan); text-decoration: none; }
             <a href="${w.explorerUrl}" target="_blank" rel="noopener noreferrer" class="tb-btn" style="flex:1;padding:5px;text-align:center;text-decoration:none;" title="Verify on official block explorer">OPEN IN EXPLORER ↗</a>
           </div>
         </div>
+
         <div class="ins-sec">
           <div class="ins-sec-title">INTELLIGENCE & FORENSIC NOTES</div>
           <p style="color:var(--ink);line-height:1.5;font-size:10px;">${w.notes || 'No security incidents or flagged activities noted on this address.'}</p>
